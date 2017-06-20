@@ -27,11 +27,15 @@ public class BaseStat {
 
     public void RemoveStatBonus(StatBonus statBonus)
     {
-        this.BaseAdditives.Remove(statBonus);
+        //this.BaseAdditives.Remove(statBonus);
+        // in final this will also need to check more detailed removing :: proper buff(relevent to item/potion etc) from correct stat
+        this.BaseAdditives.Remove(BaseAdditives.Find(x => x.BonusValue == statBonus.BonusValue));
     }
 
     public int GetCalculatedStatValue()
     {
+        this.FinalValue = 0;
+        // check base value and add relevent buffs
         this.BaseAdditives.ForEach(x => this.FinalValue += x.BonusValue);
         FinalValue += BaseValue;
         return FinalValue;
@@ -41,15 +45,14 @@ public class BaseStat {
 }
 
 
-
-
-
 public class StatBonus
 {
     public int BonusValue { get; set; }
 
     public StatBonus(int bonusValue)
     {
+        // this will need overloads for 2 buff types
+        // timed buff(from consumables/status effects) & permanent buff (from equipped objects)
         this.BonusValue = bonusValue;
         Debug.Log("new stat bonus activated");
     }
