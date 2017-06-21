@@ -21,6 +21,8 @@ public class PlayerWeaponController : MonoBehaviour {
     {
         if (EquippedWeapon != null)
         {
+            //// !! should refactor this out to a remove weapon method RemoveWeapon(){}
+
             //   GetComponent<CharachterStats>
             // remove buffs from previous weapon
             charachterStats.RemoveStatBonus(EquippedWeapon.GetComponent<IWeapon>().Stats);
@@ -31,7 +33,7 @@ public class PlayerWeaponController : MonoBehaviour {
         // hand is now empty :)
 
         // instance of weapon generated at players hand
-        EquippedWeapon = (GameObject)Instantiate(Resources.Load<GameObject>("Weapon/" + itemToEquip.ObjectSlug), playerHand.transform.position, playerHand.transform.rotation);
+        EquippedWeapon = (GameObject)Instantiate(Resources.Load<GameObject>("Weapons/" + itemToEquip.ObjectSlug), playerHand.transform.position, playerHand.transform.rotation);
 
         // extract weapon info
         equippfedWeaponData = EquippedWeapon.GetComponent<IWeapon>();
@@ -43,7 +45,7 @@ public class PlayerWeaponController : MonoBehaviour {
         EquippedWeapon.transform.SetParent(playerHand.transform);
         charachterStats.AddStatBonus(itemToEquip.Stats);
 
-        Debug.Log(equippfedWeaponData.Stats);
+        Debug.Log(equippfedWeaponData.Stats[0].BaseValue);
 
     }
 
