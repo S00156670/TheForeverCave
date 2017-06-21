@@ -16,6 +16,14 @@ public class PlayerWeaponController : MonoBehaviour {
         charachterStats = GetComponent<CharachterStats>();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            PerformAttack();
+        }
+    } 
+
     //equip 
     public void EquipWeapon(Item itemToEquip)
     {
@@ -57,7 +65,7 @@ public class PlayerWeaponController : MonoBehaviour {
     }
 
     // return to inventory
-    // drop
+    // drop/break
 
 
 

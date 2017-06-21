@@ -22,6 +22,13 @@ public class InventoryController : MonoBehaviour {
         {
             playerWeaponController.EquipWeapon(sword);
         }
+
+
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    playerWeaponController.PerformAttack();
+        //}
+
     }
 
 }
