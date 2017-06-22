@@ -8,4 +8,6 @@ public interface IWeapon {
 
     void PerformAttack();
 
+    void PerformSpecialAttack();
+
 }

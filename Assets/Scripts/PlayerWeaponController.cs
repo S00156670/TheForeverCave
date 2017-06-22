@@ -18,9 +18,20 @@ public class PlayerWeaponController : MonoBehaviour {
 
     void Update()
     {
+        // attack button combos
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            //if (Input.GetKeyDown(KeyCode.X))
+            //{
+            //    PerformSpecialAttack();
+            //}
+            //else
+            PerformAttack();
+        }
+
         if (Input.GetKeyDown(KeyCode.X))
         {
-            PerformAttack();
+            PerformSpecialAttack();
         }
     } 
 
@@ -62,6 +73,12 @@ public class PlayerWeaponController : MonoBehaviour {
     {
         //   EquippedWeapon.GetComponent<IWeapon>().PerformAttack();
         equippfedWeaponData.PerformAttack();
+    }
+
+    public void PerformSpecialAttack()
+    {
+
+        equippfedWeaponData.PerformSpecialAttack();
     }
 
     // return to inventory
