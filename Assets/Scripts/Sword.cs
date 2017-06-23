@@ -22,8 +22,13 @@ public class Sword : MonoBehaviour , IWeapon {
 
     public void PerformSpecialAttack()
     {
-        anim.SetTrigger("Base_Attack"); // temp 
+        anim.SetTrigger("Base_Attack"); // temp, add 2nd animation later
         Debug.Log(this.name + " special attack has triggered");
+    }
+
+    // check for weapon collision collision
+    /*private*/ void OnTriggerEnter(Collider other)
+    {
     }
 
     //   // Use this for initialization
