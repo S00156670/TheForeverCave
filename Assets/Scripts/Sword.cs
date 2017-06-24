@@ -30,6 +30,12 @@ public class Sword : MonoBehaviour , IWeapon {
     /*private*/ void OnTriggerEnter(Collider other)
     {
         Debug.Log(this.name + " hit : " + other.name +" " + other.ToString());
+
+        if (other.tag == "Enemy")
+        {
+
+        }
+
     }
 
     //   // Use this for initialization
