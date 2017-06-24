@@ -29,6 +29,7 @@ public class Sword : MonoBehaviour , IWeapon {
     // check for weapon collision collision
     /*private*/ void OnTriggerEnter(Collider other)
     {
+        Debug.Log(this.name + " hit : " + other.name +" " + other.ToString());
     }
 
     //   // Use this for initialization
