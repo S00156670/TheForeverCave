@@ -5,7 +5,7 @@ using System;
 public class Enemy : MonoBehaviour , IEnemy {
 
     public float  power, toughness , maxHealth;
-    private float currentHealth;
+    public float currentHealth;
 
 
     public void PerformAttack()
