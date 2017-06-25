@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour , IEnemy {
    
         currentHealth = currentHealth - amount;
 
+        Debug.Log(this.name + " revieved " +  amount + " damage");
+
         if (currentHealth <= 0)
             die();
 

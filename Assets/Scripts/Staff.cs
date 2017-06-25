@@ -3,12 +3,12 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class Sword : MonoBehaviour , IWeapon {
+public class Staff : MonoBehaviour , IWeapon {
     public List<BaseStat> Stats { get; set; }
 
     private Animator anim;
 
-
+        
     private void Start()
     {
         anim = GetComponent<Animator>();
