@@ -3,21 +3,32 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class Staff : MonoBehaviour , IWeapon {
+public class Staff : MonoBehaviour , IWeapon , IProjectileWeapon {
     public List<BaseStat> Stats { get; set; }
+
+    public Transform ProjectileSpawn { get; set; }
+
+    Fireball fireball;
 
     private Animator anim;
 
         
     private void Start()
     {
+        fireball = Resources.Load<Fireball>("Weapons/Projectiles/fireball");
         anim = GetComponent<Animator>();
     }
 
     public void PerformAttack()
     {
+
+
+
         anim.SetTrigger("Base_Attack");
         Debug.Log(this.name + " attack has triggered" );
+
+   //     CastProjectile();
+
     }
 
     public void PerformSpecialAttack()
@@ -26,20 +37,14 @@ public class Staff : MonoBehaviour , IWeapon {
         Debug.Log(this.name + " special attack has triggered");
     }
 
-    // check for weapon collision collision
-    /*private*/ void OnTriggerEnter(Collider other)
+
+
+    public void CastProjectile()
     {
-        Debug.Log(this.name + " hit : " + other.name +" " + other.ToString());
-
-        if (other.tag == "Enemy")
-        {
-            // this will need to be better and make sure its getting the right stat
-            // currently just damage of sword but should be plus player melee skill
-           //this.parent()...?
-
-            other.GetComponent<IEnemy>().TakeDamage(Stats[0].GetCalculatedStatValue()); 
-        }
-
+        // for arrows will need to make rotation same as player rotation
+        Fireball fireballInstance = (Fireball)Instantiate(fireball, ProjectileSpawn.position, transform.rotation);
+        fireballInstance.Direction = ProjectileSpawn.forward;
+        // get foreward vector of projectile spawn
     }
 
     //   // Use this for initialization

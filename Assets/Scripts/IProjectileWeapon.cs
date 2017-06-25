@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IProjectileWeapon : MonoBehaviour {
+public interface IProjectileWeapon {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    Transform ProjectileSpawn { get; set; }
+
+    void CastProjectile();
+
 }
