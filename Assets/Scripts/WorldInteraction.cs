@@ -29,9 +29,11 @@ public class WorldInteraction : MonoBehaviour
 
     void GetInteraction()
     {
-        // set up ray
+        // set up ray for click
         Ray interactionRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit interactionInfo;
+
+
 
         if (Physics.Raycast(interactionRay, out interactionInfo, Mathf.Infinity))
         {   // itterate a temporary copy of interacted object
@@ -40,6 +42,12 @@ public class WorldInteraction : MonoBehaviour
             if (interactedObject.tag == "Interactible Object")
             {
              //   Debug.Log("interaction  click");
+                interactedObject.GetComponent<Interactable>().MoveToInteraction(playerAgent);
+
+            }
+            else if (interactedObject.tag == "Enemy")
+            {
+                   Debug.Log("enemy click");
                 interactedObject.GetComponent<Interactable>().MoveToInteraction(playerAgent);
 
             }

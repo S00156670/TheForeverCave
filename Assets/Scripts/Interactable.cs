@@ -5,11 +5,16 @@ public class Interactable : MonoBehaviour {
 
     [HideInInspector]
 
+
     public NavMeshAgent playerAgent;
     private bool hasInteracted;
+    bool IsEnemy;
+
 
     public virtual void MoveToInteraction(NavMeshAgent playerAgent)
     {
+        IsEnemy = gameObject.tag == "Enemy";
+
         hasInteracted = false;
         // get the reference for this instance of interaction
         this.playerAgent = playerAgent;
@@ -21,6 +26,8 @@ public class Interactable : MonoBehaviour {
      //   Interact();
 
     }
+
+
 
     public virtual void Interact()
     {
@@ -40,9 +47,20 @@ public class Interactable : MonoBehaviour {
         {// distance between player agent and destination
             if (playerAgent.remainingDistance < playerAgent.stoppingDistance)
             {
-                Interact();
+                if (!IsEnemy)
+                {Interact(); }    
+
+                EnsureLookDirection();
                 hasInteracted = true;
             }
         }
     }
+    void EnsureLookDirection()
+    {
+        playerAgent.updateRotation = false;
+        Vector3 lookDirection = new Vector3(transform.position.x , playerAgent.transform.position.y , transform.position.z);
+        playerAgent.transform.LookAt(lookDirection);
+        playerAgent.updateRotation = true;
+    }
+
 }
