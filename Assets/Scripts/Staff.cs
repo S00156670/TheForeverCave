@@ -41,19 +41,13 @@ public class Staff : MonoBehaviour , IWeapon , IProjectileWeapon {
 
     public void CastProjectile()
     {
+        Debug.Log("Generating projectile");
         // for arrows will need to make rotation same as player rotation
         Fireball fireballInstance = (Fireball)Instantiate(fireball, ProjectileSpawn.position, transform.rotation);
-        fireballInstance.Direction = ProjectileSpawn.forward;
         // get foreward vector of projectile spawn
+        fireballInstance.Direction = ProjectileSpawn.forward;
+
     }
 
-    //   // Use this for initialization
-    //   void Start () {
 
-    //}
-
-    //// Update is called once per frame
-    //void Update () {
-
-    //}
 }
