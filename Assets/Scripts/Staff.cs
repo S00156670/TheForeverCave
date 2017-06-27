@@ -44,7 +44,7 @@ public class Staff : MonoBehaviour , IWeapon , IProjectileWeapon {
         Debug.Log("Generating projectile");
         // for arrows will need to make rotation same as player rotation
         Fireball fireballInstance = (Fireball)Instantiate(fireball, ProjectileSpawn.position, transform.rotation);
-        // get foreward vector of projectile spawn
+        // get foreward vector of projectile spawn point
         fireballInstance.Direction = ProjectileSpawn.forward;
 
     }

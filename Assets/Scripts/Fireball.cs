@@ -14,7 +14,7 @@ public class Fireball : MonoBehaviour {
     {
 
         spawnPosition = transform.position;
-        Range = 200f;
+        Range = 20f;
         Damage = 8;
 
         // 50f can be replaced later by a speed value
@@ -25,6 +25,7 @@ public class Fireball : MonoBehaviour {
     {
         if (Vector3.Distance(spawnPosition, transform.position) > Range)
         {
+            Debug.Log("Fireball fizzeling out");
             Extinguish();
         }
     }
@@ -37,6 +38,10 @@ public class Fireball : MonoBehaviour {
         {
             other.transform.GetComponent<IEnemy>().TakeDamage(Damage);
             Debug.Log("Fireball damage = " + Damage);
+        }
+        else
+        {
+            Debug.Log("Fireball hit not registered as valid enemy");
         }
         
 

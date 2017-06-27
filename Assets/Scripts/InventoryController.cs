@@ -15,7 +15,7 @@ public class InventoryController : MonoBehaviour {
         swordStats.Add(new BaseStat(6, "Power","Your Power Level"));
 
         // temp sword/staff slug swap
-        sword = new Item(swordStats,"staff");
+        sword = new Item(swordStats, "staff");
     }
 
     private void Update()

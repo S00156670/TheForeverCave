@@ -48,8 +48,8 @@ public class WorldInteraction : MonoBehaviour
             else if (interactedObject.tag == "Enemy")
             {
                    Debug.Log("enemy click");
+                // should get<Enemy>()?
                 interactedObject.GetComponent<Interactable>().MoveToInteraction(playerAgent);
-
             }
             else
             {
