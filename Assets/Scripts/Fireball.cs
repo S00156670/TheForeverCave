@@ -14,11 +14,11 @@ public class Fireball : MonoBehaviour {
     {
 
         spawnPosition = transform.position;
-        Range = 20f;
+        Range = 200f;
         Damage = 8;
 
         // 50f can be replaced later by a speed value
-        GetComponent<Rigidbody>().AddForce(Direction * 50f);
+        GetComponent<Rigidbody>().AddForce(Direction * 10f);
     }
 
     private void Update()
@@ -31,16 +31,21 @@ public class Fireball : MonoBehaviour {
 
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log("Fireball hit");
+
         if (other.transform.tag == "Enemy")
         {
             other.transform.GetComponent<IEnemy>().TakeDamage(Damage);
+            Debug.Log("Fireball damage = " + Damage);
         }
+        
 
         Extinguish();
     }
 
     void Extinguish()
     {
+        Debug.Log("Fireball extinguished");
         Destroy(gameObject);
     }
 }
