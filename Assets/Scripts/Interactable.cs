@@ -57,12 +57,20 @@ public class Interactable : MonoBehaviour {
         {// distance between player agent and destination
             if (playerAgent.remainingDistance < playerAgent.stoppingDistance)
             {
+
+
+
                 if (!IsEnemy)
                 {
                     Interact();
-                }    
+                }
+                //else
+                //    player auto-attack    
+
+
 
                 EnsureLookDirection();
+
                 hasInteracted = true;
             }
         }

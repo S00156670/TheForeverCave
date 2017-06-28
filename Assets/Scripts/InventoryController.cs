@@ -7,6 +7,8 @@ public class InventoryController : MonoBehaviour {
     public PlayerWeaponController playerWeaponController;
     public Item sword;
 
+    public Item potion;
+
     private void Start()
     {
         playerWeaponController = GetComponent<PlayerWeaponController>();
@@ -16,6 +18,9 @@ public class InventoryController : MonoBehaviour {
 
         // temp sword/staff slug swap
         sword = new Item(swordStats, "staff");
+
+        potion = new Item(new List<BaseStat>(), "potion_test","drink this to test potipn drinking","Drink","PotionTest",false);
+
     }
 
     private void Update()
@@ -23,7 +28,7 @@ public class InventoryController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Z))
         {
 
-            sword.ObjectSlug = "sword";
+       //     sword.ObjectSlug = "sword";
 
             playerWeaponController.EquipWeapon(sword);
         }
