@@ -2,9 +2,12 @@
 using System.Collections;
 using System;
 
-public class Enemy : MonoBehaviour , IEnemy {
+//public class Enemy : MonoBehaviour , IEnemy {
 
-    public float  power, toughness , maxHealth;
+    public class Enemy : Interactable, IEnemy
+    {
+
+        public float  power, toughness , maxHealth;
     public float currentHealth;
 
 

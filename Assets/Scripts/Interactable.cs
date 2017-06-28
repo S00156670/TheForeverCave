@@ -13,7 +13,17 @@ public class Interactable : MonoBehaviour {
 
     public virtual void MoveToInteraction(NavMeshAgent playerAgent)
     {
-        IsEnemy = gameObject.tag == "Enemy";
+        //  IsEnemy = gameObject.tag == "Enemy";
+
+        if (gameObject.tag == "Enemy")
+        {
+            IsEnemy = true;
+        }
+        else
+        {
+            IsEnemy = false;
+        }
+        
 
         hasInteracted = false;
         // get the reference for this instance of interaction
@@ -48,7 +58,9 @@ public class Interactable : MonoBehaviour {
             if (playerAgent.remainingDistance < playerAgent.stoppingDistance)
             {
                 if (!IsEnemy)
-                {Interact(); }    
+                {
+                    Interact();
+                }    
 
                 EnsureLookDirection();
                 hasInteracted = true;

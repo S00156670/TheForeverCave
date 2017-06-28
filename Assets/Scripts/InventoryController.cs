@@ -22,14 +22,31 @@ public class InventoryController : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
+
+            sword.ObjectSlug = "sword";
+
             playerWeaponController.EquipWeapon(sword);
         }
 
 
-        //if (Input.GetKeyDown(KeyCode.X))
+
+        //if (Input.GetKeyDown(KeyCode.Keypad1))
         //{
-        //    playerWeaponController.PerformAttack();
+
+        //    sword.ObjectSlug = "sword";
+
+        //    playerWeaponController.EquipWeapon(sword);
         //}
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+
+        //    sword.ObjectSlug = "staff";
+
+        //    playerWeaponController.EquipWeapon(sword);
+        //}
+
+
+
 
     }
 

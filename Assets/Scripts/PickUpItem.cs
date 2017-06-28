@@ -29,6 +29,7 @@ public class Consumable : PickUpItem
         Debug.Log("interacting with Consumable");
     }
 
+    private StatBonus ConsumableBuff;
 }
 
 public class Weapon : PickUpItem
