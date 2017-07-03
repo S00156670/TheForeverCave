@@ -47,18 +47,31 @@ public class ItemDatabase : MonoBehaviour {
         List<BaseStat> weaponStats = new List<BaseStat>();
         weaponStats.Add(new BaseStat(6, "Power", "Your Power Level"));
 
-     //   Item weapon = new Item(weaponStats, "sword");
+        Item currentItem = new Item(weaponStats, "sword");
+        currentItem.ItemType = Item.ItemTypes.Weapon;
 
+        Items.Add(currentItem);
 
+        currentItem.ObjectSlug = "staff";
 
-             Items.Add(new Item(weaponStats, "sword"));
-             Items.Add(new Item(weaponStats, "staff"));
+        Items.Add(currentItem);
+        //Items.Add(new Item(weaponStats, "sword"));
+        //Items.Add(new Item(weaponStats, "staff"));
 
 
         Debug.Log(" weapons added");
 
         // consumables
-        Items.Add(new Item(new List<BaseStat>(), "potion", "drink this to test potipn drinking", "Drink", "PotionTest", false));
+        currentItem = (new Item(new List<BaseStat>(), "potion", "drink this to test potipn drinking", Item.ItemTypes.Consumable , "Drink", "PotionTest", false));
+        currentItem.ItemType = Item.ItemTypes.Consumable;
+
+        Items.Add(currentItem);
+
+
+        // should work cleaner like this
+        //    Items.Add(new Item(new List<BaseStat>(), "potion", "drink this to test potipn drinking", Item.ItemTypes.Consumable, "Drink", "PotionTest", false));
+
+        // Items.Add(new Item(new List<BaseStat>(), "potion", "drink this to test potipn drinking", "Drink", "PotionTest", false));
 
         Debug.Log(" consumables added");
 
@@ -66,7 +79,7 @@ public class ItemDatabase : MonoBehaviour {
 
         foreach (Item i in Items)
         {
-            Debug.Log(" item added : " + i.ObjectSlug );
+            Debug.Log(" item added : " + i.ObjectSlug + " - " + i.ItemType);
 
         }
    

@@ -7,6 +7,8 @@ public class InventoryController : MonoBehaviour {
     public PlayerWeaponController playerWeaponController;
     public PlayerConsumableController playerConsumableController;
 
+    public List<Item> playerItems = new List<Item>();
+
     public static InventoryController instance { get; set; }
 
     //public Item sword;
@@ -38,6 +40,25 @@ public class InventoryController : MonoBehaviour {
 
         //potion = new Item(new List<BaseStat>(), "potion","drink this to test potipn drinking","Drink","PotionTest",false);
 
+    }
+
+    public void GiveItem(string itemSlug)
+    {
+        playerItems.Add(ItemDatabase.instance.GetItem(itemSlug));
+
+        Debug.Log(itemSlug + " added to player inventory");
+    }
+
+
+    public void EquipItem(Item itemToEquip)
+    {
+        playerWeaponController.EquipWeapon(itemToEquip);
+    }
+
+
+    public void ConsumeItem(Item itemToConsume)
+    {
+        playerConsumableController.ConsumeItem(itemToConsume);
     }
 
     ////test code for hardcoded items
