@@ -51,8 +51,7 @@ public class ItemDatabase : MonoBehaviour {
 
         Item currentItem = new Item(weaponStats, "sword");
         currentItem.ItemType = Item.ItemTypes.Weapon;
-
-       // currentItem.ItemName = "";
+        currentItem.ItemName = "sword";
 
  //       currentItem.ObjectSlug = "sword";
 
@@ -60,6 +59,7 @@ public class ItemDatabase : MonoBehaviour {
 
 
         currentItem = new Item(weaponStats, "staff");
+        currentItem.ItemName = "staff";
         //  currentItem.ObjectSlug = "staff";
 
         Items.Add(currentItem);
@@ -88,7 +88,7 @@ public class ItemDatabase : MonoBehaviour {
 
         foreach (Item i in Items)
         {
-            Debug.Log(" item added : " + i.ObjectSlug + " - " + i.ItemType);
+            Debug.Log("DB List, item added : " + i.ObjectSlug + " - " + i.ItemType);
 
         }
    

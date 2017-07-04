@@ -25,6 +25,19 @@ public class Item  {
     {
         Stats = stats;
         ObjectSlug = objectSlug;
+
+
+
+        if (this.ItemName == "")
+        {
+            this.ItemName = objectSlug;
+        }
+
+        if (this.Description == "")
+        {
+            this.Description = "this is a " + objectSlug + " and its all yours";
+        }
+
     }
 
     public Item(List<BaseStat> stats, string objectSlug, 
