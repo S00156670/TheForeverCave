@@ -9,16 +9,21 @@ public class InventoryUIItem : MonoBehaviour {
     public void SetItem(Item item)
     {
         this.item = item;
-        SetUpItemVAlues();
+        SetUpItemValues();
     }
 
-    void SetUpItemVAlues()
+    void SetUpItemValues()
     {
-        this.transform.FindChild("item_Name").GetComponent<Text>().text = item.ItemName;
+        this.transform.FindChild("Name").GetComponent<Text>().text = item.ItemName;
     }
 
-    public void OnSelectItemButton(Item item)
+    public void OnSelectItemButton()
     {
-        
+
+        Debug.Log("inventory item button clicked");
+        InventoryController.instance.SetItemDetails(item, GetComponent<Button>());
+
+
+
     }
 }

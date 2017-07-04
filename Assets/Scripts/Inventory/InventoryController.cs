@@ -33,6 +33,21 @@ public class InventoryController : MonoBehaviour {
         playerWeaponController = GetComponent<PlayerWeaponController>();
         playerConsumableController = GetComponent<PlayerConsumableController>();
 
+        Debug.Log("trying to add items to inventory");
+
+        // adding test items
+        GiveItem("sword");
+        Debug.Log("got sword");
+
+        GiveItem("staff");
+        Debug.Log("got staff");
+
+        //      GiveItem("potion");
+        GiveItem("potion");
+        GiveItem("potion");
+        GiveItem("potion");
+        Debug.Log("got potions");
+
 
         //// generating test hardcoded objects
         //List<BaseStat> swordStats = new List<BaseStat>();
@@ -47,9 +62,15 @@ public class InventoryController : MonoBehaviour {
 
     public void GiveItem(string itemSlug)
     {
-        playerItems.Add(ItemDatabase.instance.GetItem(itemSlug));
+        Item item = ItemDatabase.instance.GetItem(itemSlug);
+
+        //playerItems.Add(ItemDatabase.instance.GetItem(itemSlug));
+        playerItems.Add(item);
 
         Debug.Log(itemSlug + " added to player inventory");
+        Debug.Log(playerItems.Count + " items in inventory");
+
+       UIEventHandler.ItemAddedToInventory(item);
     }
 
     public void SetItemDetails(Item item , Button selectedButton)

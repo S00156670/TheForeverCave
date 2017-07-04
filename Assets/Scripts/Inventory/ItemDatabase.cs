@@ -13,7 +13,8 @@ public class ItemDatabase : MonoBehaviour {
     // private List<Item> Items { get; set; }
 
     // Use this for initialization
-    void Start () {
+    // awake happens faster than start
+    void Awake () {
 
         Debug.Log(" item list initialization");
 
@@ -45,16 +46,24 @@ public class ItemDatabase : MonoBehaviour {
         // weapons
 
         List<BaseStat> weaponStats = new List<BaseStat>();
+
         weaponStats.Add(new BaseStat(6, "Power", "Your Power Level"));
 
         Item currentItem = new Item(weaponStats, "sword");
         currentItem.ItemType = Item.ItemTypes.Weapon;
 
+       // currentItem.ItemName = "";
+
+ //       currentItem.ObjectSlug = "sword";
+
         Items.Add(currentItem);
 
-        currentItem.ObjectSlug = "staff";
+
+        currentItem = new Item(weaponStats, "staff");
+        //  currentItem.ObjectSlug = "staff";
 
         Items.Add(currentItem);
+
         //Items.Add(new Item(weaponStats, "sword"));
         //Items.Add(new Item(weaponStats, "staff"));
 
@@ -99,7 +108,7 @@ public class ItemDatabase : MonoBehaviour {
 
         }
 
-        Debug.Log("could not find item");
+        Debug.Log("could not find item : " + itemSlug);
         return null;
 
     }
