@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour {
 
     public PlayerWeaponController playerWeaponController;
     public PlayerConsumableController playerConsumableController;
+
+    public InventoryUIDetails inventoryDetailsPannel;
 
     public List<Item> playerItems = new List<Item>();
 
@@ -48,6 +51,12 @@ public class InventoryController : MonoBehaviour {
 
         Debug.Log(itemSlug + " added to player inventory");
     }
+
+    public void SetItemDetails(Item item , Button selectedButton)
+    {
+        inventoryDetailsPannel.SetItem(item, selectedButton);
+    }
+
 
 
     public void EquipItem(Item itemToEquip)
