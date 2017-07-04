@@ -27,6 +27,9 @@ public class InventoryUIDetails : MonoBehaviour {
 
     public void SetItem(Item item, Button selectedButton)
     {
+        // must clear listeners
+        // otherwise you wind up with a stack of listeners and things happen multiple times
+        itemInteractButton.onClick.RemoveAllListeners();
 
         this.item = item;
         selectedItemButton = selectedButton;
