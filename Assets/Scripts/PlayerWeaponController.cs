@@ -6,6 +6,8 @@ public class PlayerWeaponController : MonoBehaviour {
     public GameObject playerHand;
     public GameObject EquippedWeapon { get; set; }
 
+    public string currentWeaponSlug = "";
+
     Transform spawnProjectile;
 
     IWeapon equippfedWeaponData;
@@ -50,6 +52,9 @@ public class PlayerWeaponController : MonoBehaviour {
             //   GetComponent<CharachterStats>
             // remove buffs from previous weapon
             charachterStats.RemoveStatBonus(EquippedWeapon.GetComponent<IWeapon>().Stats);
+
+            //put weapon to inventory here or fron i
+
             // remove previous weapon from players hand
             Destroy(playerHand.transform.GetChild(0).gameObject);
 
@@ -57,7 +62,7 @@ public class PlayerWeaponController : MonoBehaviour {
         // hand is now empty :)
         }
 
-
+        currentWeaponSlug = itemToEquip.ObjectSlug;
 
         // instance of weapon generated at players hand
         EquippedWeapon = (GameObject)Instantiate(Resources.Load<GameObject>
@@ -87,6 +92,12 @@ public class PlayerWeaponController : MonoBehaviour {
         charachterStats.AddStatBonus(itemToEquip.Stats);
 
         Debug.Log(equippfedWeaponData.Stats[0].BaseValue);
+
+        foreach (var stat in equippfedWeaponData.Stats)
+        {
+           // print full debug of base and adjusted with stat names
+
+        }
 
     }
 
