@@ -22,11 +22,16 @@ public class InventoryUIDetails : MonoBehaviour {
 
         itemInteractButton = transform.FindChild("Button").GetComponent<Button>();
         itemInteractButtonText = itemInteractButton.transform.FindChild("Text").GetComponent<Text>();
+
+        gameObject.SetActive(false);
     }
 
 
     public void SetItem(Item item, Button selectedButton)
     {
+        // activate details pannel
+        gameObject.SetActive(true);
+
         // must clear listeners
         // otherwise you wind up with a stack of listeners and things happen multiple times
         itemInteractButton.onClick.RemoveAllListeners();
@@ -58,10 +63,10 @@ public class InventoryUIDetails : MonoBehaviour {
             Destroy(selectedItemButton.gameObject);
         }
 
-
-        ////. clear data ?
-        //item = null;
-
+        // clear data after use
+        item = null;
+        // deactivate deails pannel, may not be nesicary
+        gameObject.SetActive(false);
 
     }
 

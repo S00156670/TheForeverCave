@@ -53,13 +53,20 @@ public class ItemDatabase : MonoBehaviour {
         currentItem.ItemType = Item.ItemTypes.Weapon;
         currentItem.ItemName = "sword";
 
- //       currentItem.ObjectSlug = "sword";
+        currentItem.Description = "a sharp blade, good for cutting";
+        currentItem.ActionName = "Equip";
+
+        //       currentItem.ObjectSlug = "sword";
 
         Items.Add(currentItem);
 
 
         currentItem = new Item(weaponStats, "staff");
         currentItem.ItemName = "staff";
+
+        currentItem.Description = "a magic staff of conjuration";
+        currentItem.ActionName = "Equip";
+
         //  currentItem.ObjectSlug = "staff";
 
         Items.Add(currentItem);
