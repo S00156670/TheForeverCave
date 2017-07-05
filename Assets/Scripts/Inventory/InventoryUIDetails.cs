@@ -12,6 +12,7 @@ public class InventoryUIDetails : MonoBehaviour {
     Text itemDescriptionText;
     Text itemInteractButtonText;
 
+    public Text itemStatText;
 
     private void Start()
     {
@@ -31,6 +32,22 @@ public class InventoryUIDetails : MonoBehaviour {
     {
         // activate details pannel
         gameObject.SetActive(true);
+
+        itemStatText.text = "";
+
+        if (item.Stats != null)
+        {
+
+            foreach (BaseStat stat in item.Stats)
+            {
+                itemStatText.text += stat.StatName + " : " +  stat.BaseValue;
+            }
+
+        }
+
+
+
+
 
         // must clear listeners
         // otherwise you wind up with a stack of listeners and things happen multiple times
@@ -65,7 +82,7 @@ public class InventoryUIDetails : MonoBehaviour {
 
         // clear data after use
         item = null;
-        // deactivate deails pannel, may not be nesicary
+        // deactivate deails pannel (looks better this way)
         gameObject.SetActive(false);
 
     }
