@@ -37,10 +37,10 @@ public class InventoryUIDetails : MonoBehaviour {
 
         if (item.Stats != null)
         {
-
+            // should print each stat to new line
             foreach (BaseStat stat in item.Stats)
             {
-                itemStatText.text += stat.StatName + " : " +  stat.BaseValue;
+                itemStatText.text += stat.StatName + " : " +  stat.BaseValue + "\n";
             }
 
         }

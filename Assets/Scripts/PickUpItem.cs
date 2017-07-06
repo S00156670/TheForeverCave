@@ -1,13 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PickUpItem : Interactable
 {
+
+    public string pickUpSlug;
+
+    public List<BaseStat> Stats { get; set; }
+
+    public Transform ProjectileSpawn { get; set; }
 
     public override void Interact()
     {
         Debug.Log("interacting with pick-up Item");
     }
+
+    // public void FadeAway()
+    //{
+    //// maybe for some kinds of loot
+    //// or for dead bodies if you harvest bodies the body could be a kid of pick up itelf
+    //// would need a timer to work
+    //}
 
     //// Use this for initialization
     //void Start () {
@@ -16,37 +30,37 @@ public class PickUpItem : Interactable
 
     //// Update is called once per frame
     //void Update () {
-
+    ////check ofr collision here?
     //}
 }
 
 
-public class Consumable : PickUpItem
-{
+//public class Consumable : PickUpItem
+//{
 
-    public override void Interact()
-    {
-        Debug.Log("interacting with Consumable");
-    }
+//    public override void Interact()
+//    {
+//        Debug.Log("interacting with Consumable");
+//    }
 
-    private StatBonus ConsumableBuff;
-}
+//    private StatBonus ConsumableBuff;
+//}
 
-public class Weapon : PickUpItem
-{
+//public class Weapon : PickUpItem
+//{
 
-    public override void Interact()
-    {
-        Debug.Log("interacting with Weapon");
-    }
+//    public override void Interact()
+//    {
+//        Debug.Log("interacting with Weapon");
+//    }
 
-}
-public class Apperal : PickUpItem
-{
+//}
+//public class Apperal : PickUpItem
+//{
 
-    public override void Interact()
-    {
-        Debug.Log("interacting with Apperal");
-    }
+//    public override void Interact()
+//    {
+//        Debug.Log("interacting with Apperal");
+//    }
 
-}
+//}
