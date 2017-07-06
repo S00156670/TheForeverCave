@@ -27,6 +27,22 @@ public class CameraController : MonoBehaviour {
         if (Input.GetAxisRaw("Mouse ScrollWheel") != 0)
         {
 
+            // field of view effect cheats zoom without camera move
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            playerCamera.fieldOfView -= scroll * zoomSpeed;
+
+
+            // clamp field of view zoom
+            if ( playerCamera.fieldOfView < 20)
+            {
+                playerCamera.fieldOfView = 20;
+            }
+
+            if (playerCamera.fieldOfView > 100)
+            {
+                playerCamera.fieldOfView = 100;
+            }
+
         }
         // update position
         transform.position = new Vector3
