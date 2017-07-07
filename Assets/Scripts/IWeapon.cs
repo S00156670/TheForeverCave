@@ -8,6 +8,7 @@ public interface IWeapon {
 
     void PerformAttack();
 
+    // throw weapon? (right click) 
     void PerformSpecialAttack();
 
 }

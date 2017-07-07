@@ -8,3 +8,7 @@ public interface IProjectileWeapon {
     void CastProjectile();
 
 }
+
+
+
+
