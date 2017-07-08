@@ -2,16 +2,23 @@
 using System.Collections;
 using System;
 
+
+//using UnityEngine.AI;
+
+
 //public class Enemy : MonoBehaviour , IEnemy {
 
     public class Enemy : Interactable, IEnemy
     {
 
-        public float  power, toughness , maxHealth;
+    public LayerMask aggroLayerMask;
+    public float  power, toughness , maxHealth;
     public float currentHealth;
 
+    private NavMeshAgent navAgent;
     private CharachterStats charachterStats;
 
+    Collider[] aggroNavTargets;
 
     public void PerformAttack()
     {
@@ -33,6 +40,7 @@ using System;
     // Use this for initialization
     void Start () {
 
+        navAgent = GetComponent<NavMeshAgent>();
         charachterStats = new CharachterStats(9,10,2);
 
         currentHealth = maxHealth;
@@ -40,9 +48,21 @@ using System;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void FixedUpdate () {
+
+        // chech player range
+        //   Physics.OverlapSphere();
+
+        aggroNavTargets = Physics.OverlapSphere(transform.position, 10 /*line of sight*/, aggroLayerMask);
+
+        if (aggroNavTargets.Length > 0)
+        {
+            Debug.Log("enemy has spotted a player");
+
+        }
+
+
+    }
 
     public void die()
     {
