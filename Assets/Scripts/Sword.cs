@@ -8,6 +8,11 @@ public class Sword : MonoBehaviour , IWeapon {
 
     private Animator anim;
 
+    // 2 reasons for this
+     // - throw weapon
+     // - easier to share anim with ranged if this is present
+    void CastProjectile()
+    { }
 
     private void Start()
     {
@@ -37,7 +42,10 @@ public class Sword : MonoBehaviour , IWeapon {
             // currently just damage of sword but should be plus player melee skill
            //this.parent()...?
 
-            other.GetComponent<IEnemy>().TakeDamage(Stats[0].GetCalculatedStatValue()); 
+
+            other.GetComponent<IEnemy>().TakeDamage(Stats[0].GetCalculatedStatValue());
+        // this could work, why not?
+       //     other.GetComponent<IEnemy>().TakeDamage(Stats.GetStat(BaseStat.BaseStatType.Power).GetCalculatedStatValue);
         }
 
     }

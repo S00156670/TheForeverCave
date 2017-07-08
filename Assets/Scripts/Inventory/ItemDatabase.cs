@@ -28,8 +28,14 @@ public class ItemDatabase : MonoBehaviour {
             instance = this;
         }
 
+
+        // should change the name of this to buid item list
         BuildDatabase();
 
+        // then seperate method for if dungeon == true
+        // buildMonsterList()
+        // generate dungeon
+  
     }
 
 
@@ -47,7 +53,11 @@ public class ItemDatabase : MonoBehaviour {
 
         List<BaseStat> weaponStats = new List<BaseStat>();
 
-        weaponStats.Add(new BaseStat(6, "Power", "Your Power Level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Power, 6, "Power", "Your power level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.AttackSpeed, 6, "Attack Speed", "Your agility in combat"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 6, "Toughness", "Your defensive toughness"));
+
+
 
         Item currentItem = new Item(weaponStats, "sword");
         currentItem.ItemType = Item.ItemTypes.Weapon;

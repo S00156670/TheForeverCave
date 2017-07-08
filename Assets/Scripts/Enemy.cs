@@ -10,6 +10,8 @@ using System;
         public float  power, toughness , maxHealth;
     public float currentHealth;
 
+    private CharachterStats charachterStats;
+
 
     public void PerformAttack()
     {
@@ -30,6 +32,8 @@ using System;
 
     // Use this for initialization
     void Start () {
+
+        charachterStats = new CharachterStats(9,10,2);
 
         currentHealth = maxHealth;
 	
