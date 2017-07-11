@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
 
         charachterStats = new CharachterStats(5,5,5);
 

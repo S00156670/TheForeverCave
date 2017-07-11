@@ -62,7 +62,7 @@ using System;
 
         if (aggroNavTargets.Length > 0)
         {
-  //          Debug.Log("enemy has spotted a player");
+            //          Debug.Log("enemy has spotted a player");
             ChasePlayer(aggroNavTargets[0].GetComponent<Player>());
         }
 
@@ -72,6 +72,7 @@ using System;
      void ChasePlayer( Player targetPlayer)
     {
         this.player = targetPlayer;
+        navAgent.SetDestination(player.transform.position);
 
         // check if within attack range
         if (navAgent.remainingDistance <= navAgent.stoppingDistance)
@@ -80,7 +81,12 @@ using System;
             if (!IsInvoking("PerformAttack"))
             {
                 InvokeRepeating("PerformAttack", .5f, 2f);
+
             }
+        }
+        else
+        {
+            CancelInvoke("PerformAttack");
         }
 
         navAgent.SetDestination(player.transform.position);
