@@ -25,7 +25,7 @@ using System;
     public void PerformAttack()
     {
         player.TakeDamage(5);
-        throw new NotImplementedException();
+        Debug.Log(this.name + "is attacking player");
     }
 
     public void TakeDamage(int amount)
@@ -73,6 +73,12 @@ using System;
     {
         this.player = targetPlayer;
 
+        // check if within attack range
+        if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+        {
+            // hause method to be triggered arouns a specified amound of seconds
+            InvokeRepeating("PerformAttack", .5f, 2f);
+        }
 
         navAgent.SetDestination(player.transform.position);
     }
