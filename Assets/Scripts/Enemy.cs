@@ -62,7 +62,7 @@ using System;
 
         if (aggroNavTargets.Length > 0)
         {
-            Debug.Log("enemy has spotted a player");
+  //          Debug.Log("enemy has spotted a player");
             ChasePlayer(aggroNavTargets[0].GetComponent<Player>());
         }
 
@@ -76,8 +76,11 @@ using System;
         // check if within attack range
         if (navAgent.remainingDistance <= navAgent.stoppingDistance)
         {
-            // hause method to be triggered arouns a specified amound of seconds
-            InvokeRepeating("PerformAttack", .5f, 2f);
+            // cause method to be triggered around a specified amount of seconds
+            if (!IsInvoking("PerformAttack"))
+            {
+                InvokeRepeating("PerformAttack", .5f, 2f);
+            }
         }
 
         navAgent.SetDestination(player.transform.position);
