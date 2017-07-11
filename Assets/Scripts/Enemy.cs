@@ -20,8 +20,11 @@ using System;
 
     Collider[] aggroNavTargets;
 
+    Player player;
+
     public void PerformAttack()
     {
+        player.TakeDamage(5);
         throw new NotImplementedException();
     }
 
@@ -46,22 +49,32 @@ using System;
         currentHealth = maxHealth;
 	
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // FixedUpdate is called less often than update but still often enough for smooth play
+    void FixedUpdate () {
 
         // chech player range
         //   Physics.OverlapSphere();
 
-        aggroNavTargets = Physics.OverlapSphere(transform.position, 10 /*line of sight*/, aggroLayerMask);
+        aggroNavTargets = Physics.OverlapSphere(transform.position,
+                            /*line of sight*/10 ,
+                            aggroLayerMask);
 
         if (aggroNavTargets.Length > 0)
         {
             Debug.Log("enemy has spotted a player");
-
+            ChasePlayer(aggroNavTargets[0].GetComponent<Player>());
         }
 
 
+    }
+
+     void ChasePlayer( Player targetPlayer)
+    {
+        this.player = targetPlayer;
+
+
+        navAgent.SetDestination(player.transform.position);
     }
 
     public void die()
