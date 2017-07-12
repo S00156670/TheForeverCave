@@ -82,11 +82,11 @@ public class InventoryController : MonoBehaviour {
 
     public void EquipItem(Item itemToEquip)
     {
+        // return currently equipped to inventory
         if (playerWeaponController.EquippedWeapon != null)
         {
             GiveItem(playerWeaponController.currentWeaponSlug);
         }
-
 
         playerWeaponController.EquipWeapon(itemToEquip);
     }
