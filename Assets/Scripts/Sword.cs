@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class Sword : MonoBehaviour , IWeapon {
     public List<BaseStat> Stats { get; set; }
 
+    public int CurrentDamage { get; set; }
+
     private Animator anim;
 
     // 2 reasons for this
@@ -19,8 +21,9 @@ public class Sword : MonoBehaviour , IWeapon {
         anim = GetComponent<Animator>();
     }
 
-    public void PerformAttack()
+    public void PerformAttack(int damage)
     {
+        CurrentDamage = damage;
         anim.SetTrigger("Base_Attack");
         Debug.Log(this.name + " attack has triggered" );
     }
@@ -40,15 +43,13 @@ public class Sword : MonoBehaviour , IWeapon {
         {
             // this will need to be better and make sure its getting the right stat
             // currently just damage of sword but should be plus player melee skill
-           //this.parent()...?
-
-
-            other.GetComponent<IEnemy>().TakeDamage(Stats[0].GetCalculatedStatValue());
-        // this could work, why not?
-       //     other.GetComponent<IEnemy>().TakeDamage(Stats.GetStat(BaseStat.BaseStatType.Power).GetCalculatedStatValue);
+  //          other.GetComponent<IEnemy>().TakeDamage(Stats[0].GetCalculatedStatValue());
+            other.GetComponent<IEnemy>().TakeDamage(CurrentDamage);
         }
 
     }
+
+
 
     //   // Use this for initialization
     //   void Start () {

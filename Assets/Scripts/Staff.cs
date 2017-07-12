@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class Staff : MonoBehaviour , IWeapon , IProjectileWeapon {
     public List<BaseStat> Stats { get; set; }
 
+    public int CurrentDamage { get; set; }
+
     public Transform ProjectileSpawn { get; set; }
 
     Fireball fireball;
@@ -19,7 +21,7 @@ public class Staff : MonoBehaviour , IWeapon , IProjectileWeapon {
         anim = GetComponent<Animator>();
     }
 
-    public void PerformAttack()
+    public void PerformAttack(int damage)
     {
 
 
