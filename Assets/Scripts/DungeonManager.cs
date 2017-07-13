@@ -14,7 +14,9 @@ public class DungeonManager : MonoBehaviour {
 
     public GameObject ground { get; set; }
 
-    public float[,] levelMap;
+  //  public float[,] levelMap;
+
+    public List<Vector2> walkableArea;
 
     public int levelSize;
 
@@ -24,6 +26,8 @@ public class DungeonManager : MonoBehaviour {
     public Vector2 levelEnd;
 
     public List<Vector2> waypoints;
+
+
 
   //  Vector2 gridpoint;
 
@@ -78,27 +82,29 @@ public class DungeonManager : MonoBehaviour {
 
         int rand;
 
-        levelSize = levelStage + 12;
+        levelSize = levelStage * 20;
 
-        levelMap = new float[levelSize,levelSize];
+   //     levelMap = new float[levelSize,levelSize];
 
         // set all to zero
         //foreach (int x in levelMap)
         //{ x = 0; }
-        for (int x = 0; x < levelSize - 1; x++)
-        {
-            for (int y = 0; y < levelSize - 1; y++)
-            {
-                levelMap[x, y] = 0;
-            }
-        }
+        //////for (int x = 0; x < levelSize - 1; x++)
+        //////{
+        //////    for (int y = 0; y < levelSize - 1; y++)
+        //////    {
+        //////        //   levelMap[x, y] = 0;
+        //////        walkableArea.Add(new Vector2(x,y));
+        //////    }
+        //////}
 
         // enter = 1
         //levelMap[0, Random.Range(0, levelMap.GetLength.)] = 1;
 
         rand = UnityEngine.Random.Range(0, levelSize - 1);
         levelStart = new Vector2(0,rand);
-        levelMap[0, rand] = 1;
+        //        levelMap[0, rand] = 1;
+        walkableArea.Add(levelStart);
 
         //     levelStart = new Vector2(0, UnityEngine.Random.Range(0, levelSize));
         //      MapVector(levelStart) = 0;
@@ -109,7 +115,9 @@ public class DungeonManager : MonoBehaviour {
         //    levelMap[levelSize, UnityEngine.Random.Range(0, levelSize)] = 2;
         rand = UnityEngine.Random.Range(0, levelSize - 1);
         levelEnd = new Vector2(levelSize - 1, rand);
-        levelMap[levelSize - 1, rand] = 2;
+        walkableArea.Add(levelEnd);
+
+        //       levelMap[levelSize - 1, rand] = 2;
 
         // pathing waypoint = 4
         //        levelMap[UnityEngine.Random.Range(5, levelSize - 5), UnityEngine.Random.Range(5, levelSize - 5)] = 4;
@@ -119,7 +127,8 @@ public class DungeonManager : MonoBehaviour {
         rand = UnityEngine.Random.Range(5, levelSize - 5);
         way.y = rand;
 
-        levelMap[Convert.ToInt32(way.x), Convert.ToInt32(way.y)] = 4;
+        //    levelMap[Convert.ToInt32(way.x), Convert.ToInt32(way.y)] = 4;
+        walkableArea.Add(way);
 
         // connection tunnels
         // path = 3
@@ -143,13 +152,13 @@ public class DungeonManager : MonoBehaviour {
         // spawn
     }
 
-    private float  MapVector(Vector2 position)
-    {
-        int x = Convert.ToInt32(position.x);
-        int y = Convert.ToInt32(position.y);
+    //private float  MapVector(Vector2 position)
+    //{
+    //    int x = Convert.ToInt32(position.x);
+    //    int y = Convert.ToInt32(position.y);
 
-        return levelMap[x,y];
-    }
+    //    return levelMap[x,y];
+    //}
 
     // Update is called once per frame
     void Update ()
@@ -162,7 +171,8 @@ public class DungeonManager : MonoBehaviour {
     {
         foreach (Vector2 pathSection in GetPath( pathStart,  pathEnd))
         {
-            levelMap[Convert.ToInt32(pathSection.x), Convert.ToInt32(pathSection.y)] = 3;
+            //  levelMap[Convert.ToInt32(pathSection.x), Convert.ToInt32(pathSection.y)] = 3;
+            walkableArea.Add(pathSection);
         }
     }
 
@@ -171,7 +181,7 @@ public class DungeonManager : MonoBehaviour {
         List<Vector2> path = new List<Vector2>();
         Vector2 pathSection = pathStart;
 
-        // make more random
+        // must make more random
 
         while (pathSection != pathEnd)
         {
@@ -211,46 +221,45 @@ public class DungeonManager : MonoBehaviour {
         return path;
     }
 
-    public bool Check(int checkX, int checkY , int value)
-    {
-        if (levelMap[checkX, checkY] == value)
-            return true;
-        else
-            return false;
-    }
+    //public bool Check(int checkX, int checkY , int value)
+    //{
+    //    if (levelMap[checkX, checkY] == value)
+    //        return true;
+    //    else
+    //        return false;
+    //}
 
-    public bool CheckBeside(int checkX, int checkY, int value)
-    {
+    //public bool CheckBeside(int checkX, int checkY, int value)
+    //{
 
-        //Check(checkX - 1, checkY, value);
+    //    //Check(checkX - 1, checkY, value);
 
-        //Check(checkX + 1, checkY, value);
+    //    //Check(checkX + 1, checkY, value);
 
-        //Check(checkX, checkY - 1, value);
+    //    //Check(checkX, checkY - 1, value);
 
-        //Check(checkX, checkY + 1, value);
+    //    //Check(checkX, checkY + 1, value);
 
-        // good for culling with if value = 0 and checkbeside(xy0) == true then will not need to be part of level
+    //    // good for culling with if value = 0 and checkbeside(xy0) == true then will not need to be part of level
 
-        //if (Check(checkX - 1, checkY, value) &&
-        //    Check(checkX + 1, checkY, value) &&
-        //    Check(checkX, checkY - 1, value) &&
-        //    Check(checkX, checkY + 1, value))
-        //    return true;
-        //else
-        //    return false;
+    //    //if (Check(checkX - 1, checkY, value) &&
+    //    //    Check(checkX + 1, checkY, value) &&
+    //    //    Check(checkX, checkY - 1, value) &&
+    //    //    Check(checkX, checkY + 1, value))
+    //    //    return true;
+    //    //else
+    //    //    return false;
 
-        bool check = true;
-
-        foreach (Vector2 item in NeighbouringSections( checkX, checkY))
-        {
-            if (Check( checkX,  checkY,  value) == false)
-            {
-                check = false;
-            }
-        }
-        return check;
-    }
+    //    bool check = true;
+    //    foreach (Vector2 item in NeighbouringSections( checkX, checkY))
+    //    {
+    //        if (Check( checkX,  checkY,  value) == false)
+    //        {
+    //            check = false;
+    //        }
+    //    }
+    //    return check;
+    //}
 
     public List<Vector2> NeighbouringSections(int checkX, int checkY)
     {
