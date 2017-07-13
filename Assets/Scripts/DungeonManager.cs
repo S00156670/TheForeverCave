@@ -16,25 +16,42 @@ public class DungeonManager : MonoBehaviour {
 
   //  public float[,] levelMap;
 
-    public List<Vector2> walkableArea;
+    private List<Vector2> walkableArea;
 
-    public int levelSize;
+    private int levelSize;
 
     public int levelStage = 1;
 
-    public Vector2 levelStart;
-    public Vector2 levelEnd;
+    private Vector2 levelStart;
+    private Vector2 levelEnd;
 
-    public List<Vector2> waypoints;
+    private List<Vector2> waypoints;
 
 
+    ////public static DungeonManager instance { get; set; }
 
-  //  Vector2 gridpoint;
+
+    //  Vector2 gridpoint;
 
     // it will probably be simpler to take an object which already has a nav mesh, modify and then update than to generate full nav mesh on the fly
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+
+        ////// singelton
+        ////if (instance != null && instance != this)
+        ////{
+        ////    Destroy(gameObject);
+        ////    // there can only be only one
+        ////}
+        ////else
+        ////{
+        ////    instance = this;
+        ////}
+
+
+
         // advice?
         //https://docs.unity3d.com/ScriptReference/GameObject.CreatePrimitive.html
         //       GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
