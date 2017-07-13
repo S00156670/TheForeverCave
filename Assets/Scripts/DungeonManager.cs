@@ -20,8 +20,8 @@ public class DungeonManager : MonoBehaviour {
 
     public int levelStage = 1;
 
-    public Vector2 start;
-    public Vector2 end;
+    public Vector2 levelStart;
+    public Vector2 levelEnd;
 
     public List<Vector2> waypoints;
 
@@ -78,16 +78,16 @@ public class DungeonManager : MonoBehaviour {
 
         int rand;
 
-        levelSize = levelStage * 20;
+        levelSize = levelStage + 12;
 
         levelMap = new float[levelSize,levelSize];
 
         // set all to zero
         //foreach (int x in levelMap)
         //{ x = 0; }
-        for (int x = 0; x < levelSize; x++)
+        for (int x = 0; x < levelSize - 1; x++)
         {
-            for (int y = 0; y < levelSize; y++)
+            for (int y = 0; y < levelSize - 1; y++)
             {
                 levelMap[x, y] = 0;
             }
@@ -96,22 +96,20 @@ public class DungeonManager : MonoBehaviour {
         // enter = 1
         //levelMap[0, Random.Range(0, levelMap.GetLength.)] = 1;
 
-        rand = UnityEngine.Random.Range(0, levelSize);
-        start = new Vector2(0,rand);
+        rand = UnityEngine.Random.Range(0, levelSize - 1);
+        levelStart = new Vector2(0,rand);
         levelMap[0, rand] = 1;
 
-        //     start = new Vector2(0, UnityEngine.Random.Range(0, levelSize));
-        //      MapVector(start) = 0;
-
-
+        //     levelStart = new Vector2(0, UnityEngine.Random.Range(0, levelSize));
+        //      MapVector(levelStart) = 0;
 
 
         // exit = 2
         //      levelMap[levelMap.GetLength, Random.Range(0, levelMap.GetLength)] = 2;
         //    levelMap[levelSize, UnityEngine.Random.Range(0, levelSize)] = 2;
-        rand = UnityEngine.Random.Range(0, levelSize);
-        end = new Vector2(levelSize, rand);
-        levelMap[levelSize, rand] = 2;
+        rand = UnityEngine.Random.Range(0, levelSize - 1);
+        levelEnd = new Vector2(levelSize - 1, rand);
+        levelMap[levelSize - 1, rand] = 2;
 
         // pathing waypoint = 4
         //        levelMap[UnityEngine.Random.Range(5, levelSize - 5), UnityEngine.Random.Range(5, levelSize - 5)] = 4;
@@ -123,30 +121,26 @@ public class DungeonManager : MonoBehaviour {
 
         levelMap[Convert.ToInt32(way.x), Convert.ToInt32(way.y)] = 4;
 
-
+        // connection tunnels
         // path = 3
+        AddPath(levelStart, way);
+        AddPath(way, levelEnd);
 
-        // connection caves
+        // spread a bit for levelStart and levelEnd
+        ////foreach (Vector2 item in NeighbouringSections(Convert.ToInt32(levelStart.x), Convert.ToInt32(levelStart.y)))
+        ////{
+        //////        if (levelMap[Convert.ToInt32(item.x), Convert.ToInt32(item.y)] != null)
+        //////        {
+        ////    levelMap[Convert.ToInt32(item.x), Convert.ToInt32(item.y)] = 3;
+        //////      }
+        ////}
+        ////foreach (Vector2 item in NeighbouringSections(Convert.ToInt32(levelStart.x), Convert.ToInt32(levelStart.y)))
+        ////{
+        ////    levelMap[Convert.ToInt32(item.x), Convert.ToInt32(item.y)] = 3;
+        ////}
 
-
-        // spread a bit for start and end
-        foreach (Vector2 item in NeighbouringSections(Convert.ToInt32(start.x), Convert.ToInt32(start.y)))
-        {
-            if (levelMap[Convert.ToInt32(item.x), Convert.ToInt32(item.y)] != null)
-            {
-            levelMap[Convert.ToInt32(item.x), Convert.ToInt32(item.y)] = 4;
-            }
-
-
-
-        }
-
-
-
-        // add random dead ends
 
         // spawn
-
     }
 
     private float  MapVector(Vector2 position)
@@ -158,11 +152,64 @@ public class DungeonManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-	
-        // check for enter/exit
-
+    void Update ()
+    {
+	        // check for enter/exit
 	}
+
+
+    private void AddPath(Vector2 pathStart, Vector2 pathEnd)
+    {
+        foreach (Vector2 pathSection in GetPath( pathStart,  pathEnd))
+        {
+            levelMap[Convert.ToInt32(pathSection.x), Convert.ToInt32(pathSection.y)] = 3;
+        }
+    }
+
+    public List<Vector2> GetPath(Vector2 pathStart, Vector2 pathEnd)
+    {
+        List<Vector2> path = new List<Vector2>();
+        Vector2 pathSection = pathStart;
+
+        // make more random
+
+        while (pathSection != pathEnd)
+        {
+            if (pathSection.y < pathEnd.y)
+            {
+                // going up
+                pathSection.y++;
+            }
+            else
+            {
+                // going down
+                pathSection.y--;
+            }
+
+            // turn
+
+            if (pathSection.x == pathEnd.x)
+            {
+                if (pathSection.x < pathEnd.x)
+                {
+                    // going right
+                    pathSection.x++;
+                }
+                else
+                {
+                    // going left
+                    pathSection.x--;
+                }
+            }
+
+            // add random dead ends
+
+            path.Add(pathSection);
+
+        }
+
+        return path;
+    }
 
     public bool Check(int checkX, int checkY , int value)
     {
@@ -208,16 +255,29 @@ public class DungeonManager : MonoBehaviour {
     public List<Vector2> NeighbouringSections(int checkX, int checkY)
     {
 
-        //!! SHOULD HAVE A CHECK FOR IF NEIGHBOUR IS WITHIN WORLD BOUNDS BEFORE ADDING
 
         List<Vector2> neighboures = new List<Vector2>();
+
+        if (checkX > 0)
+        {
         neighboures.Add(new Vector2(checkX - 1, checkY));
+        }
+
+        if (checkX < levelSize)
+        {
         neighboures.Add(new Vector2(checkX + 1, checkY));
-        neighboures.Add(new Vector2(checkX, checkY - 1));
-        neighboures.Add(new Vector2(checkX, checkY + 1));
-        //Check();
-        //Check();
-        //Check(, value);
+        }
+
+        if (checkY > 0)
+        {
+            neighboures.Add(new Vector2(checkX, checkY - 1));
+        }
+
+        if (checkY < levelSize)
+        {
+            neighboures.Add(new Vector2(checkX, checkY + 1));
+        }
+
         return neighboures;
 
     }
