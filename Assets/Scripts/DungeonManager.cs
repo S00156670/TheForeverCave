@@ -89,7 +89,7 @@ public class DungeonManager : MonoBehaviour {
 
         // REPLACE THIS CALL LATER AFTER BASE MESH IS WORKING
         // also try make it faster
-        //      GenerateLevelMap();
+              GenerateLevelMap();
         levelSize = levelStage * 16;
 
         filter = GetComponent<MeshFilter>();
