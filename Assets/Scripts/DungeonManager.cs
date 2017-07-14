@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(MeshFilter))]
 public class DungeonManager : MonoBehaviour {
 
 
@@ -22,6 +23,8 @@ public class DungeonManager : MonoBehaviour {
 
     public int levelStage = 1;
 
+    public float sectionSize = 1;
+
     private Vector2 levelStart;
     private Vector2 levelEnd;
 
@@ -30,12 +33,17 @@ public class DungeonManager : MonoBehaviour {
 
     ////public static DungeonManager instance { get; set; }
 
+    private MeshFilter filter;
+    private MeshRenderer renderer;
+   // private BoxCollider collider;
 
     //  Vector2 gridpoint;
 
     // it will probably be simpler to take an object which already has a nav mesh, modify and then update than to generate full nav mesh on the fly
 
     // Use this for initialization
+
+
     void Start ()
     {
 
@@ -59,12 +67,10 @@ public class DungeonManager : MonoBehaviour {
 
 
         //// plan level
-
         //levelMap = new int[20,20];
         //// set all to zero
         //foreach (int x in levelMap)
         //{ x = 0; }
-
         //// enter = 1
         //levelMap[0, Random.Range(0, levelMap.GetLength.)] = 1;
         //// exit = 2
@@ -72,10 +78,6 @@ public class DungeonManager : MonoBehaviour {
         //// pathing waypoint = 4
         //levelMap[Random.Range(5, levelMap.GetLength - 5), Random.Range(5, levelMap.GetLength - 5)] = 4;
         //// path = 3
-
-
-
-
         // enter and exit
         // in between
 
@@ -83,14 +85,63 @@ public class DungeonManager : MonoBehaviour {
         // edit mesh
 
 
+// REPLACE THIS CALL LATER AFTER BASE MESH IS WORKING
+// also try make it faster
+  //      GenerateLevelMap();
 
-        GenerateLevelMap();
+
+        filter = GetComponent<MeshFilter>();
+        filter.mesh = GenerateMesh();
 
 
         // calculate nav mesh
         // spawn
 
     }
+
+
+    Mesh GenerateMesh()
+    {
+        Mesh mesh = new Mesh();
+         
+        // set vertex positions
+        mesh.SetVertices(new List<Vector3>
+        {
+            new Vector3(- sectionSize * 0.5f,0,- sectionSize * 0.5f),
+            new Vector3( sectionSize * 0.5f,0,- sectionSize * 0.5f),
+            new Vector3( sectionSize * 0.5f,0, sectionSize * 0.5f),
+            new Vector3(- sectionSize * 0.5f,0, sectionSize * 0.5f)
+        });
+
+        // group vertexes into triangles
+        mesh.SetTriangles(new List<int>()
+            {
+            3,1,0,
+            3,2,1
+            }, 
+            0); // no submesh
+
+        // set normal for each vertex
+        mesh.SetNormals(new List<Vector3>
+        {
+            Vector3.up,
+            Vector3.up,
+            Vector3.up,
+            Vector3.up
+        });
+
+        mesh.SetUVs(0, new List<Vector2>()
+        {
+            new Vector2(0,0),
+            new Vector2(1,0),
+            new Vector2(1,1),
+            new Vector2(0,1),
+        });
+
+        return mesh;
+    }
+
+
 
     private void GenerateLevelMap()
     {
