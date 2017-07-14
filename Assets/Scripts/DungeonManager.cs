@@ -21,7 +21,7 @@ public class DungeonManager : MonoBehaviour {
 
 
 
-    public int levelStage = 1;
+    private int levelStage = 1;
 
     public float sectionSize = 10;
 
@@ -89,8 +89,13 @@ public class DungeonManager : MonoBehaviour {
 
         // REPLACE THIS CALL LATER AFTER BASE MESH IS WORKING
         // also try make it faster
-              GenerateLevelMap();
+
+
+        GenerateLevelMap();
+
+
         levelSize = levelStage * 16;
+        Debug.Log("level size is : " + levelSize);
 
         filter = GetComponent<MeshFilter>();
         filter.mesh = GenerateMesh();
@@ -118,10 +123,38 @@ public class DungeonManager : MonoBehaviour {
             {
                 // could put an if{}else{} here for altitude based on weather or not vertex is in path list
 
+                bool path = false;
 
-                verticies.Add(new Vector3(-sectionSize * 0.5f + sectionSize * (x /*/ ((float)levelSize)*/),
-                                            0,
-                                         -sectionSize * 0.5f + sectionSize * (y /*/ ((float)levelSize)*/)));
+                if (walkableArea != null)// this check is just for while debugging, in final build there should always be a walkable area
+                {
+
+
+                foreach (Vector2 pathCheck  in walkableArea)
+                {
+                    if (pathCheck == new Vector2(x,y))
+                    {
+                        path = true;
+                    }
+                }
+
+
+                }
+
+
+                if (path)
+                {
+                    verticies.Add(new Vector3(-sectionSize * 0.5f + sectionSize * (x /*/ ((float)levelSize)*/),
+                                                0,
+                                             -sectionSize * 0.5f + sectionSize * (y /*/ ((float)levelSize)*/)));
+                }
+                else
+                {
+                    verticies.Add(new Vector3(-sectionSize * 0.5f + sectionSize * (x ),
+                            sectionSize * 2,
+                         -sectionSize * 0.5f + sectionSize * (y )));
+                }
+
+
                 normals.Add(Vector3.up);
                 uvs.Add(new Vector2(x / (float)levelSize ,y / (float)levelSize));
             }
@@ -198,9 +231,14 @@ public class DungeonManager : MonoBehaviour {
 
         // throw new NotImplementedException();
 
+        Debug.Log("attempting level map");
+
         int rand;
 
-        levelSize = levelStage * 20;
+        levelSize = levelStage * 16;
+
+        walkableArea = new List<Vector2>();
+
 
    //     levelMap = new float[levelSize,levelSize];
 
@@ -219,10 +257,12 @@ public class DungeonManager : MonoBehaviour {
         // enter = 1
         //levelMap[0, Random.Range(0, levelMap.GetLength.)] = 1;
 
-        rand = UnityEngine.Random.Range(0, levelSize - 1);
-        levelStart = new Vector2(0,rand);
+        rand = UnityEngine.Random.Range(1, levelSize - 1);
+        levelStart = new Vector2(1,rand);
         //        levelMap[0, rand] = 1;
         walkableArea.Add(levelStart);
+
+        Debug.Log("start position set : " + levelStart.x + " , " + levelStart.y);
 
         //     levelStart = new Vector2(0, UnityEngine.Random.Range(0, levelSize));
         //      MapVector(levelStart) = 0;
@@ -231,10 +271,13 @@ public class DungeonManager : MonoBehaviour {
         // exit = 2
         //      levelMap[levelMap.GetLength, Random.Range(0, levelMap.GetLength)] = 2;
         //    levelMap[levelSize, UnityEngine.Random.Range(0, levelSize)] = 2;
-        rand = UnityEngine.Random.Range(0, levelSize - 1);
-        levelEnd = new Vector2(levelSize - 1, rand);
-        walkableArea.Add(levelEnd);
+        rand = UnityEngine.Random.Range(1, levelSize - 1);
 
+        Debug.Log("Levelsize is" + levelSize);
+
+        levelEnd = new Vector2(/*(levelStage * 16)*/ levelSize - 1, rand);
+        walkableArea.Add(levelEnd);
+        Debug.Log("end position set : " + levelEnd.x + " , " + levelEnd.y);
         //       levelMap[levelSize - 1, rand] = 2;
 
         // pathing waypoint = 4
@@ -245,8 +288,10 @@ public class DungeonManager : MonoBehaviour {
         rand = UnityEngine.Random.Range(5, levelSize - 5);
         way.y = rand;
 
+
         //    levelMap[Convert.ToInt32(way.x), Convert.ToInt32(way.y)] = 4;
         walkableArea.Add(way);
+        Debug.Log("waypoint position set : " + way.x + " , " + way.y);
 
         // connection tunnels
         // path = 3
@@ -279,18 +324,24 @@ public class DungeonManager : MonoBehaviour {
     //}
 
     // Update is called once per frame
-    void Update ()
-    {
-	        // check for enter/exit
-	}
+ //   void Update ()
+ //   {
+	//        // check for enter/exit
+    //// no
+	//}
 
 
     private void AddPath(Vector2 pathStart, Vector2 pathEnd)
     {
+        Debug.Log("looking for path" );
+
         foreach (Vector2 pathSection in GetPath( pathStart,  pathEnd))
         {
             //  levelMap[Convert.ToInt32(pathSection.x), Convert.ToInt32(pathSection.y)] = 3;
             walkableArea.Add(pathSection);
+
+            Debug.Log("path point added to walkable area : " + pathSection.x + " , " + pathSection.y);
+
         }
     }
 
@@ -300,9 +351,11 @@ public class DungeonManager : MonoBehaviour {
         Vector2 pathSection = pathStart;
 
         // must make more random
-
         while (pathSection != pathEnd)
         {
+            Debug.Log("generating path section");
+
+
             if (pathSection.y < pathEnd.y)
             {
                 // going up
@@ -316,7 +369,7 @@ public class DungeonManager : MonoBehaviour {
 
             // turn
 
-            if (pathSection.x == pathEnd.x)
+            if (pathSection.y == pathEnd.y)
             {
                 if (pathSection.x < pathEnd.x)
                 {
@@ -330,11 +383,22 @@ public class DungeonManager : MonoBehaviour {
                 }
             }
 
-            // add random dead ends
+            if (pathSection != pathEnd && pathSection != pathStart)
+            {            // maybe should just add path straight to walkable area from here, benefit- 1 less list
 
-            path.Add(pathSection);
+                path.Add(pathSection);
+                Debug.Log("path section generated at : " + pathSection.x + " , " + pathSection.y);
+            }
+
 
         }
+
+
+            // add random dead ends
+            // add rooms
+             
+
+
 
         return path;
     }
