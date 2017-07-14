@@ -19,11 +19,13 @@ public class DungeonManager : MonoBehaviour {
 
     private List<Vector2> walkableArea;
 
-    private int levelSize;
+
 
     public int levelStage = 1;
 
-    public float sectionSize = 1;
+    public float sectionSize = 10;
+
+    private int levelSize;
 
     private Vector2 levelStart;
     private Vector2 levelEnd;
@@ -85,10 +87,10 @@ public class DungeonManager : MonoBehaviour {
         // edit mesh
 
 
-// REPLACE THIS CALL LATER AFTER BASE MESH IS WORKING
-// also try make it faster
-  //      GenerateLevelMap();
-
+        // REPLACE THIS CALL LATER AFTER BASE MESH IS WORKING
+        // also try make it faster
+        //      GenerateLevelMap();
+        levelSize = levelStage * 16;
 
         filter = GetComponent<MeshFilter>();
         filter.mesh = GenerateMesh();
@@ -103,40 +105,88 @@ public class DungeonManager : MonoBehaviour {
     Mesh GenerateMesh()
     {
         Mesh mesh = new Mesh();
-         
-        // set vertex positions
-        mesh.SetVertices(new List<Vector3>
-        {
-            new Vector3(- sectionSize * 0.5f,0,- sectionSize * 0.5f),
-            new Vector3( sectionSize * 0.5f,0,- sectionSize * 0.5f),
-            new Vector3( sectionSize * 0.5f,0, sectionSize * 0.5f),
-            new Vector3(- sectionSize * 0.5f,0, sectionSize * 0.5f)
-        });
 
-        // group vertexes into triangles
-        mesh.SetTriangles(new List<int>()
+        // set vertex positions
+
+        var verticies = new List<Vector3>();
+        var normals = new List<Vector3>();
+        var uvs = new List<Vector2>();
+
+        for (int x = 0; x < levelSize + 1; x++)
+        {
+            for (int y = 0; y < levelSize + 1; y++)
             {
-            3,1,0,
-            3,2,1
-            }, 
-            0); // no submesh
+                // could put an if{}else{} here for altitude based on weather or not vertex is in path list
+
+
+                verticies.Add(new Vector3(-sectionSize * 0.5f + sectionSize * (x /*/ ((float)levelSize)*/),
+                                            0,
+                                         -sectionSize * 0.5f + sectionSize * (y /*/ ((float)levelSize)*/)));
+                normals.Add(Vector3.up);
+                uvs.Add(new Vector2(x / (float)levelSize ,y / (float)levelSize));
+            }
+        }
+
+
+        //mesh.SetVertices(new List<Vector3>
+        //{
+        //    new Vector3(- sectionSize * 0.5f,0,- sectionSize * 0.5f),
+        //    new Vector3( sectionSize * 0.5f,0,- sectionSize * 0.5f),
+        //    new Vector3( sectionSize * 0.5f,0, sectionSize * 0.5f),
+        //    new Vector3(- sectionSize * 0.5f,0, sectionSize * 0.5f)
+        //});
+
+        
+        //// group vertexes into triangles
+        var triangles = new List<int>();
+        // (levelSize + 1 ) is number of verts in a line
+        for (int i = 0; i < ((levelSize + 1) * (levelSize + 1 ) - (levelSize + 1)); i++)
+   //         for (int i = 0; i < ((levelSize - 1) * (levelSize - 1) / 2); i++)
+        {
+            if ((i + 1) % (levelSize + 1) == 0)
+            {
+                continue;
+            }
+
+
+            triangles.AddRange(new List<int>()
+            {
+                    i + 1 + levelSize + 1,i + levelSize + 1, i,
+                    i, i + 1, i + levelSize + 1 + 1
+            });
+        }
+
+        mesh.SetVertices(verticies);
+        mesh.SetNormals(normals);
+        mesh.SetUVs(0, uvs);
+        mesh.SetTriangles(triangles,0);
+
+
+
+        //// quad data
+        //mesh.SetTriangles(new List<int>()
+        //    {
+        //    3,1,0,
+        //    3,2,1
+        //    }, 
+        //    0); // no submesh
 
         // set normal for each vertex
-        mesh.SetNormals(new List<Vector3>
-        {
-            Vector3.up,
-            Vector3.up,
-            Vector3.up,
-            Vector3.up
-        });
+        //mesh.SetNormals(new List<Vector3>
+        //{
+        //    Vector3.up,
+        //    Vector3.up,
+        //    Vector3.up,
+        //    Vector3.up
+        //});
 
-        mesh.SetUVs(0, new List<Vector2>()
-        {
-            new Vector2(0,0),
-            new Vector2(1,0),
-            new Vector2(1,1),
-            new Vector2(0,1),
-        });
+        //mesh.SetUVs(0, new List<Vector2>()
+        //{
+        //    new Vector2(0,0),
+        //    new Vector2(1,0),
+        //    new Vector2(1,1),
+        //    new Vector2(0,1),
+        //});
 
         return mesh;
     }
