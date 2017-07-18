@@ -97,13 +97,14 @@ public class PlayerWeaponController : MonoBehaviour {
         // add relevent buffs
         charachterStats.AddStatBonus(itemToEquip.Stats);
 
+        UIEventHandler.ItemEquipped(itemToEquip);
   //      Debug.Log(equippfedWeaponData.Stats[0].BaseValue);
 
-        foreach (var stat in equippfedWeaponData.Stats)
-        {
-           // print full debug of base and adjusted with stat names
+        //foreach (var stat in equippfedWeaponData.Stats)
+        //{
+        //   // print full debug of base and adjusted with stat names
 
-        }
+        //}
 
     }
 

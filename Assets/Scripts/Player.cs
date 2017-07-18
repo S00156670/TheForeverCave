@@ -7,8 +7,8 @@ public class Player : MonoBehaviour {
 
     public CharachterStats charachterStats;
 
-    public float currentHealth;
-    public float maxHealth;
+    public int currentHealth;
+    public int maxHealth;
 
 
     // Use this for initialization
@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 
         this.currentHealth = this.maxHealth;
 
+        UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
 	}
 
     public void TakeDamage(int amount)
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour {
         if (currentHealth <= 0)
             Die();
 
+        UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
 
     }
 
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour {
         this.currentHealth = maxHealth;
 
         // reset gameplay position from here
+        UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
 
     }
 
