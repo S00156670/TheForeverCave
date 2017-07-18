@@ -21,7 +21,7 @@ public class DungeonManager : MonoBehaviour {
 
 
 
-    private int levelStage = 1;
+    private int levelStage = 5;
 
     public float sectionSize = 10;
 
@@ -271,48 +271,75 @@ public class DungeonManager : MonoBehaviour {
         //      MapVector(levelStart) = 0;
 
 
+
+        ////// pathing waypoint = 4
+        //////        levelMap[UnityEngine.Random.Range(5, levelSize - 5), UnityEngine.Random.Range(5, levelSize - 5)] = 4;
+        ////rand = UnityEngine.Random.Range(8, levelSize - 8);
+        ////Vector2 way = new Vector2();
+        ////way.x = rand;
+        ////rand = UnityEngine.Random.Range(8, levelSize - 8);
+        ////way.y = rand;
+        //////    levelMap[Convert.ToInt32(way.x), Convert.ToInt32(way.y)] = 4;
+        ////// will need to be able to generate multiple waypoints
+        ////walkableArea.Add(way);
+        ////Debug.Log("waypoint position set : " + way.x + " , " + way.y);
+
+
+        for (int i = 0; i < levelStage; i++)
+        {   
+            Vector2 waypoint;
+            rand = UnityEngine.Random.Range((16 * i) + 8, (16 * i) + 24);
+            waypoint.x = rand;
+            waypoint.y = UnityEngine.Random.Range(10, levelSize - 10);
+            walkableArea.Add(waypoint);
+            Debug.Log("waypoint position set : " + waypoint.x + " , " + waypoint.y);
+        }
+
+
         // exit = 2
         //      levelMap[levelMap.GetLength, Random.Range(0, levelMap.GetLength)] = 2;
         //    levelMap[levelSize, UnityEngine.Random.Range(0, levelSize)] = 2;
         rand = UnityEngine.Random.Range(2, levelSize - 2);
 
-     //   Debug.Log("Levelsize is" + levelSize);
+        //   Debug.Log("Levelsize is" + levelSize);
 
         levelEnd = new Vector2(/*(levelStage * 16)*/ levelSize - 2, rand);
         walkableArea.Add(levelEnd);
         Debug.Log("end position set : " + levelEnd.x + " , " + levelEnd.y);
         //       levelMap[levelSize - 1, rand] = 2;
 
-        // pathing waypoint = 4
-        //        levelMap[UnityEngine.Random.Range(5, levelSize - 5), UnityEngine.Random.Range(5, levelSize - 5)] = 4;
-        rand = UnityEngine.Random.Range(8, levelSize - 8);
-        Vector2 way = new Vector2();
-        way.x = rand;
-        rand = UnityEngine.Random.Range(8, levelSize - 8);
-        way.y = rand;
 
 
-        //    levelMap[Convert.ToInt32(way.x), Convert.ToInt32(way.y)] = 4;
-        // will need to be able to generate multiple waypoints
-        walkableArea.Add(way);
-        Debug.Log("waypoint position set : " + way.x + " , " + way.y);
+        for (int i = 0; i < (levelStage + 1); i++)
+        {
+            AddPath(walkableArea[i],walkableArea[i+1]);
+        }
 
-        // connection tunnels
-        // path = 3
-        AddPath(levelStart, way);
-        AddPath(way, levelEnd);
+
+        ////// connection tunnels
+        ////// path = 3
+        ////AddPath(levelStart, way);
+        ////AddPath(way, levelEnd);
+
+
+
 
         // spread a bit for levelStart and levelEnd
         // TODO refactor this out into something that generates a room around a point
+
+        // extra space at start
         foreach (Vector2 j in NeighbouringSections(Convert.ToInt32(levelStart.x), Convert.ToInt32(levelStart.y)))
         {
             walkableArea.Add(j);
 
             foreach (Vector2 k in NeighbouringSections(Convert.ToInt32(j.x), Convert.ToInt32(j.y)))
                 if (CheckPath(k))
+                {
                     walkableArea.Add(k);
-         }
+                }
+        }
 
+        // extra space for end
         foreach (Vector2 j in NeighbouringSections(Convert.ToInt32(levelEnd.x), Convert.ToInt32(levelEnd.y)))
         {
             walkableArea.Add(j);
@@ -340,6 +367,9 @@ public class DungeonManager : MonoBehaviour {
 
         // spawn
     }
+
+
+
 
     //private float  MapVector(Vector2 position)
     //{
