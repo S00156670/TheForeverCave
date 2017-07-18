@@ -110,6 +110,20 @@ public class PlayerWeaponController : MonoBehaviour {
 
     }
 
+    public void UnequipWeapon()
+    {
+
+        if (EquippedWeapon != null)
+        {
+            // or should this also be managed from inventory?
+            InventoryController.instance.GiveItem(currentWeaponSlug);
+
+            charachterStats.RemoveStatBonus(EquippedWeapon.GetComponent<IWeapon>().Stats);
+            Destroy(playerHand.transform.GetChild(0).gameObject);
+        }
+
+    }
+
     // use 
     public void PerformAttack()
     {

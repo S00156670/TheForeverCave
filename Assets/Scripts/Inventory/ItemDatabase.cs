@@ -54,7 +54,7 @@ public class ItemDatabase : MonoBehaviour {
         List<BaseStat> weaponStats = new List<BaseStat>();
 
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Power, 6, "Power", "Your power level"));
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.AttackSpeed, 6, "Attack Speed", "Your agility in combat"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.AttackSpeed, 6, "Atk Spd", "Your agility in combat"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 6, "Toughness", "Your defensive toughness"));
 
 
@@ -69,6 +69,12 @@ public class ItemDatabase : MonoBehaviour {
         //       currentItem.ObjectSlug = "sword";
 
         Items.Add(currentItem);
+
+        weaponStats = new List<BaseStat>();
+
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Power, 5, "Power", "Your power level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.AttackSpeed, 4, "Atk Spd", "Your agility in combat"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 3, "Toughness", "Your defensive toughness"));
 
 
         currentItem = new Item(weaponStats, "staff");

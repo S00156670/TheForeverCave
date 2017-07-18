@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class CharachterPanel : MonoBehaviour {
 
-    // this call makes a 
+    // this[] call makes a private field be shown in the inspector
     [SerializeField]private Text health, level;
 
     [SerializeField]private Image HealthFill, levelFill;
@@ -19,12 +19,30 @@ public class CharachterPanel : MonoBehaviour {
     [SerializeField]
     private Transform playerStatPannel;
 
+    //Equipped Weapon
+ //   private List<Text> playerStatTexts = new List<Text>();
+    [SerializeField]
+    private Sprite defaultWeaponSprite;
+    
+    private PlayerWeaponController playerWeaponController;
+    [SerializeField]
+    private Text weaponStatPrefab;
+    [SerializeField]
+    private Transform weaponStatPannel;
+    [SerializeField]
+    private Text weaponNameText;
+    [SerializeField]
+    private Image weaponIcon;
+    private List<Text> weaponStatTexts = new List<Text>();
+
+
     //// Use this for initialization
     void Start()
     {
+        playerWeaponController = player.GetComponent<PlayerWeaponController>();
         UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
         UIEventHandler.OnStatsChanged += UpdateStats;
-        UIEventHandler.OnItemEquipped += EquipWeapon;
+        UIEventHandler.OnItemEquipped += UpdateEquippedWeapon;
 
         InitilizeStats();
     }
@@ -63,6 +81,37 @@ public class CharachterPanel : MonoBehaviour {
     {
         Debug.Log(item.ItemName + " :equip  char pannel update");
     }
+
+    void UpdateEquippedWeapon(Item item)
+    {
+        weaponIcon.sprite = Resources.Load<Sprite>("UI/Icons/Items/" + item.ObjectSlug);
+        weaponNameText.text = item.ItemName;
+
+
+        for (int i = 0; i < item.Stats.Count; i++)
+        {
+            weaponStatTexts.Add(Instantiate(weaponStatPrefab));
+            weaponStatTexts[i].transform.SetParent(weaponStatPannel);
+            weaponStatTexts[i].text = item.Stats[i].StatName
+                        + " : "
+                        + item.Stats[i].GetCalculatedStatValue().ToString();
+        }
+
+    }
+
+
+
+    public  void UnequipWeapon()
+    {
+        weaponNameText.text = "unarmed";
+        weaponIcon.sprite = defaultWeaponSprite;
+
+        weaponStatTexts.Clear();
+
+        playerWeaponController.UnequipWeapon();
+
+    }
+
 
     //// Update is called once per frame
     //void Update () {
