@@ -98,6 +98,8 @@ public class PlayerWeaponController : MonoBehaviour {
         charachterStats.AddStatBonus(itemToEquip.Stats);
 
         UIEventHandler.ItemEquipped(itemToEquip);
+
+        UIEventHandler.StatsChanged();
   //      Debug.Log(equippfedWeaponData.Stats[0].BaseValue);
 
         //foreach (var stat in equippfedWeaponData.Stats)

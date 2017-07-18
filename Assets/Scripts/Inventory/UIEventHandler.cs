@@ -36,7 +36,7 @@ public class UIEventHandler : MonoBehaviour {
         OnPlayerHealthChanged(currentHealth,maxHealth);
     }
 
-    public static void StatsChanged(Item item)
+    public static void StatsChanged()
     {
         OnStatsChanged();
     }

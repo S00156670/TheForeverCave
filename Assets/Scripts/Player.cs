@@ -14,6 +14,9 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Awake () {
 
+
+        Debug.Log("Player is created and awakened");
+
         charachterStats = new CharachterStats(5,5,5);
 
         this.currentHealth = this.maxHealth;

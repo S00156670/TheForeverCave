@@ -12,9 +12,10 @@ public class CharachterStats  {
         //  stats.Add();
         stats = new List<BaseStat>();// { new BaseStat(); };
 
+        // changed Attack Speed to Atk Speed so it fits better in ui, remember this as it may cause issues elsewhere if stat is refrenced by old name
         stats = new List<BaseStat>() {  new BaseStat( BaseStat.BaseStatType.Power, 4, "Power", "Your Power Level"),
                                         new BaseStat( BaseStat.BaseStatType.Toughness, 10, "Toughness", "Your Toughness Level"),
-                                        new BaseStat( BaseStat.BaseStatType.AttackSpeed, 2, "Attack Speed", "Your Speed Level")
+                                        new BaseStat( BaseStat.BaseStatType.AttackSpeed, 2, "Atk Speed", "Your Speed Level")
 
 
         };
