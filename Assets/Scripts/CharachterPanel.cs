@@ -106,7 +106,11 @@ public class CharachterPanel : MonoBehaviour {
         weaponNameText.text = "unarmed";
         weaponIcon.sprite = defaultWeaponSprite;
 
-        weaponStatTexts.Clear();
+        //   weaponStatTexts.Clear();
+        for (int i = 0; i < weaponStatTexts.Count; i++)
+        {
+            Destroy(weaponStatTexts[i]);
+        }
 
         playerWeaponController.UnequipWeapon();
 

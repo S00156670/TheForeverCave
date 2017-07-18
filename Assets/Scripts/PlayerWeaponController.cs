@@ -122,6 +122,9 @@ public class PlayerWeaponController : MonoBehaviour {
             Destroy(playerHand.transform.GetChild(0).gameObject);
         }
 
+        UIEventHandler.StatsChanged();
+
+
     }
 
     // use 
