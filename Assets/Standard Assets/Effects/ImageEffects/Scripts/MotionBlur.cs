@@ -21,11 +21,15 @@ namespace UnityStandardAssets.ImageEffects
 
         override protected void Start()
         {
+
+            // apparently this is always true in 5.6 so is pointless to check
             if (!SystemInfo.supportsRenderTextures)
             {
+                // this loop will never happen
                 enabled = false;
                 return;
             }
+            // luckily im not using motion blur so can just strip this out at the end 
             base.Start();
         }
 
