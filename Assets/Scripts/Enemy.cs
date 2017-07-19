@@ -15,7 +15,7 @@ using System;
     public float  power, toughness , maxHealth;
     public float currentHealth;
 
-    private NavMeshAgent navAgent;
+    private UnityEngine.AI.NavMeshAgent navAgent;
     private CharachterStats charachterStats;
 
     Collider[] aggroNavTargets;
@@ -43,7 +43,7 @@ using System;
     // Use this for initialization
     void Start () {
 
-        navAgent = GetComponent<NavMeshAgent>();
+        navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         charachterStats = new CharachterStats(9,10,2);
 
         currentHealth = maxHealth;

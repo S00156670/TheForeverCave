@@ -4,13 +4,13 @@ using System.Collections;
 public class WorldInteraction : MonoBehaviour
 {
 
-    NavMeshAgent playerAgent;
+    UnityEngine.AI.NavMeshAgent playerAgent;
     GameObject player;
 
     // Use this for initialization
     void Start()
     {// set navmesh
-        playerAgent = GetComponent<NavMeshAgent>();
+        playerAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
      //   player = GetCom
     }
 

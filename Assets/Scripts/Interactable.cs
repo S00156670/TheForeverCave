@@ -6,12 +6,12 @@ public class Interactable : MonoBehaviour {
     [HideInInspector]
 
 
-    public NavMeshAgent playerAgent;
+    public UnityEngine.AI.NavMeshAgent playerAgent;
     private bool hasInteracted;
     bool IsEnemy;
 
 
-    public virtual void MoveToInteraction(NavMeshAgent playerAgent)
+    public virtual void MoveToInteraction(UnityEngine.AI.NavMeshAgent playerAgent)
     {
         //  IsEnemy = gameObject.tag == "Enemy";
 

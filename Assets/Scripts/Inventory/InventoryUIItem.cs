@@ -31,7 +31,7 @@ public class InventoryUIItem : MonoBehaviour {
 
     void SetUpItemValues()
     {
-          this.transform.FindChild("Name").GetComponent<Text>().text = item.ItemName;
+          this.transform.Find("Name").GetComponent<Text>().text = item.ItemName;
         //    this.transform.FindChild("Item_Icon").GetComponent<Sprite>().texture = Resources.Load<Sprite>("UI/Icons/Items/" + item.ObjectSlug).texture;
         //itemText.text = item.ItemName;
         //itemImage.sprite = Resources.Load<Sprite>("UI/Icons/Items/" + item.ObjectSlug);
