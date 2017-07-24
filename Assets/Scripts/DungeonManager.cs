@@ -136,7 +136,7 @@ public class DungeonManager : MonoBehaviour {
             if (!inCave)
             {
                 Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
-                                                                            0,
+                                                                            0.1f,
                                                                         (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
 
 
