@@ -37,7 +37,12 @@ public class DungeonManager : MonoBehaviour {
 
     private MeshFilter filter;
     private MeshRenderer renderer;
-   // private BoxCollider collider;
+    // private BoxCollider collider;
+
+    Player player;
+
+
+    bool inCave = false;
 
     //  Vector2 gridpoint;
 
@@ -49,66 +54,132 @@ public class DungeonManager : MonoBehaviour {
     void Start ()
     {
 
-        ////// singelton
-        ////if (instance != null && instance != this)
-        ////{
-        ////    Destroy(gameObject);
-        ////    // there can only be only one
-        ////}
-        ////else
-        ////{
-        ////    instance = this;
-        ////}
+           GenerateCave();
+
+        player = GameObject.Find("Player").GetComponent<Player>();
+
+        //     ////// singelton
+        //     ////if (instance != null && instance != this)
+        //     ////{
+        //     ////    Destroy(gameObject);
+        //     ////    // there can only be only one
+        //     ////}
+        //     ////else
+        //     ////{
+        //     ////    instance = this;
+        //     ////}
 
 
 
-        // advice?
-        //https://docs.unity3d.com/ScriptReference/GameObject.CreatePrimitive.html
-        //       GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        //     ground = plane;
+        //     // advice?
+        //     //https://docs.unity3d.com/ScriptReference/GameObject.CreatePrimitive.html
+        //     //       GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        //     //     ground = plane;
+
+
+        //     //// plan level
+        //     //levelMap = new int[20,20];
+        //     //// set all to zero
+        //     //foreach (int x in levelMap)
+        //     //{ x = 0; }
+        //     //// enter = 1
+        //     //levelMap[0, Random.Range(0, levelMap.GetLength.)] = 1;
+        //     //// exit = 2
+        //     //levelMap[levelMap.GetLength, Random.Range(0, levelMap.GetLength)] = 2;
+        //     //// pathing waypoint = 4
+        //     //levelMap[Random.Range(5, levelMap.GetLength - 5), Random.Range(5, levelMap.GetLength - 5)] = 4;
+        //     //// path = 3
+        //     // enter and exit
+        //     // in between
+
+
+        //     // edit mesh
+
+
+        //     // REPLACE THIS CALL LATER AFTER BASE MESH IS WORKING
+        //     // also try make it faster
+
+        //     levelSize = (levelStage * 16) + 32;
+        ////     levelSize = 50;
+
+        //     GenerateLevelMap();
+
+
+        //     Debug.Log("level size is : " + levelSize);
+
+        //     filter = GetComponent<MeshFilter>();
+        //     filter.mesh = GenerateMesh();
+
+
+        //     // calculate nav mesh
+        //     // spawn
+
+    }
+
+    void Update()
+    {
+        // check for enter/exit
+        // no?
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+            GenerateCave();
+            }
+
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (!inCave)
+            {
+                Vector3 caveStart = new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
+                                                                            2,
+                                                                        (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
+
+                // send player to cave
+                //GetComponent<Player>().transform.position = new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x) ),
+                //                                                            2,
+                //                                                        (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
+
+                Debug.Log("cave start translate at " + caveStart.x + "," + caveStart.y + "," + caveStart.z );
+
+                player.transform.position = caveStart;
+
+               // player.GetComponent<NavMeshAgent>().SetDestination(caveStart);
+                inCave = true;
+
+            }
+            else
+            {
+                // send palyer back to campsite
+
+                player.transform.position = new Vector3(-6,4,1);
+
+                inCave = false;
+            }
+        }
+
+    }
+
+    private void GenerateCave()
+    {
 
 
         //// plan level
-        //levelMap = new int[20,20];
-        //// set all to zero
-        //foreach (int x in levelMap)
-        //{ x = 0; }
-        //// enter = 1
-        //levelMap[0, Random.Range(0, levelMap.GetLength.)] = 1;
-        //// exit = 2
-        //levelMap[levelMap.GetLength, Random.Range(0, levelMap.GetLength)] = 2;
-        //// pathing waypoint = 4
-        //levelMap[Random.Range(5, levelMap.GetLength - 5), Random.Range(5, levelMap.GetLength - 5)] = 4;
-        //// path = 3
-        // enter and exit
-        // in between
-
-
-        // edit mesh
-
-
-        // REPLACE THIS CALL LATER AFTER BASE MESH IS WORKING
-        // also try make it faster
 
         levelSize = (levelStage * 16) + 32;
-   //     levelSize = 50;
 
+        // decide pathing
         GenerateLevelMap();
-
 
         Debug.Log("level size is : " + levelSize);
 
         filter = GetComponent<MeshFilter>();
+        // generate cave geometry
         filter.mesh = GenerateMesh();
 
-
-        // calculate nav mesh
-        // spawn
-
+        // spawn enemies and treasure chests
+        // Spawn()
     }
-
-
-
 
     Mesh GenerateMesh()
     {
@@ -380,11 +451,6 @@ public class DungeonManager : MonoBehaviour {
     //}
 
     // Update is called once per frame
- //   void Update ()
- //   {
-	//        // check for enter/exit
-    //// no
-	//}
 
 
     private void AddPath(Vector2 pathStart, Vector2 pathEnd)
