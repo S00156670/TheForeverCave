@@ -34,7 +34,7 @@ public class WorldInteraction : MonoBehaviour
         RaycastHit interactionInfo;
 
 
-
+        // isthis ray hittig cave mesh properly?
         if (Physics.Raycast(interactionRay, out interactionInfo, Mathf.Infinity))
         {   // itterate a temporary copy of interacted object
             GameObject interactedObject = interactionInfo.collider.gameObject;

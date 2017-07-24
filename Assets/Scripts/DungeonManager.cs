@@ -43,7 +43,7 @@ public class DungeonManager : MonoBehaviour {
 
 
     bool inCave = false;
-
+    Vector3 startPos;
     //  Vector2 gridpoint;
 
     // it will probably be simpler to take an object which already has a nav mesh, modify and then update than to generate full nav mesh on the fly
@@ -129,22 +129,28 @@ public class DungeonManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            UnityEngine.AI.NavMeshAgent navAgent;
+
+            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+
             if (!inCave)
             {
-                Vector3 caveStart = new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
-                                                                            2,
+                Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
+                                                                            0,
                                                                         (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
 
-                // send player to cave
-                //GetComponent<Player>().transform.position = new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x) ),
-                //                                                            2,
-                //                                                        (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
 
                 Debug.Log("cave start translate at " + caveStart.x + "," + caveStart.y + "," + caveStart.z );
 
-                player.transform.position = caveStart;
+                   player.transform.position = caveStart;
+                //player.transform.position = startPos;
 
-               // player.GetComponent<NavMeshAgent>().SetDestination(caveStart);
+
+
+            //    navAgent.SetDestination(caveStart);
+                navAgent.destination = caveStart;
+
+                // player.GetComponent<NavMeshAgent>().SetDestination(caveStart);
                 inCave = true;
 
             }
@@ -153,6 +159,9 @@ public class DungeonManager : MonoBehaviour {
                 // send palyer back to campsite
 
                 player.transform.position = new Vector3(-6,4,1);
+
+                navAgent.SetDestination(new Vector3(-6, 4, 1));
+
 
                 inCave = false;
             }
@@ -220,6 +229,15 @@ public class DungeonManager : MonoBehaviour {
                     verticies.Add(new Vector3(-sectionSize * 0.5f + sectionSize * (x /*/ ((float)levelSize)*/),
                                                 0,
                                              -sectionSize * 0.5f + sectionSize * (y /*/ ((float)levelSize)*/)));
+
+                    if (levelStart.x == x && levelStart.y == y)
+                    {
+                        startPos = (new Vector3(-sectionSize * 0.5f + sectionSize * (x),
+                                                0,
+                                             -sectionSize * 0.5f + sectionSize * (y)));
+                    }
+
+
                 }
                 else
                 {
