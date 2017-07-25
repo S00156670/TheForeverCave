@@ -40,10 +40,10 @@ public class DungeonManager : MonoBehaviour {
     // private BoxCollider collider;
 
     Player player;
-
+    
 
     bool inCave = false;
-    Vector3 startPos;
+    public Vector3 startPos;
     //  Vector2 gridpoint;
 
     // it will probably be simpler to take an object which already has a nav mesh, modify and then update than to generate full nav mesh on the fly
@@ -51,7 +51,7 @@ public class DungeonManager : MonoBehaviour {
     // Use this for initialization
 
 
-    void Start ()
+    void Awake ()
     {
 
            GenerateCave();
