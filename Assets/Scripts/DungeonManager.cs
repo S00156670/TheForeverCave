@@ -21,7 +21,7 @@ public class DungeonManager : MonoBehaviour {
 
 
 
-    private int levelStage = 5;
+    private int levelStage;
 
     public float sectionSize = 10;
 
@@ -53,6 +53,7 @@ public class DungeonManager : MonoBehaviour {
 
     void Awake ()
     {
+        levelStage = 0;
 
            GenerateCave();
 
@@ -174,6 +175,11 @@ public class DungeonManager : MonoBehaviour {
 
 
         //// plan level
+
+        levelStage++;
+
+        if (levelStage > 5)
+            levelStage = 1;
 
         levelSize = (levelStage * 16) + 32;
 
