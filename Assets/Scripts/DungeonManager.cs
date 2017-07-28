@@ -23,7 +23,7 @@ public class DungeonManager : MonoBehaviour {
 
     private int levelStage;
 
-    public float sectionSize = 10;
+    public float sectionSize = 50;
 
     private int levelSize;
 
