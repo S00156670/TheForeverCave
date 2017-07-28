@@ -119,8 +119,6 @@ public class DungeonManager : MonoBehaviour {
 
     void Update()
     {
-        // check for enter/exit
-        // no?
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
@@ -132,16 +130,10 @@ public class DungeonManager : MonoBehaviour {
         {
             // go to waypoint island
             UnityEngine.AI.NavMeshAgent navAgent;
-
             navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
-    //        player.transform.position = new Vector3(12.6f, 4, 32.1f);
-
             navAgent.transform.position = new Vector3(12.6f, 4, 32.1f);
-
             navAgent.SetDestination(new Vector3(12.6f, 4, 32.1f));
-
-
         }
 
 
@@ -157,36 +149,34 @@ public class DungeonManager : MonoBehaviour {
                 Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
                                                                             0.1f,
                                                                         (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
-
-
                 Debug.Log("cave start translate at " + caveStart.x + "," + caveStart.y + "," + caveStart.z );
 
-     //              player.transform.position = caveStart;
-                //player.transform.position = startPos;
+                //         player.transform.position = caveStart;
 
                 navAgent.transform.position = caveStart;
-
                 navAgent.SetDestination(caveStart);
 
                 //    navAgent.SetDestination(caveStart);
-         //       navAgent.destination = caveStart;
-
+                //       navAgent.destination = caveStart;
                 // player.GetComponent<NavMeshAgent>().SetDestination(caveStart);
+
                 inCave = true;
 
             }
             else
             {
                 // send palyer back to campsite
-
-                player.transform.position = new Vector3(-6,4,1);
-
+                navAgent.transform.position = new Vector3(-6,4,1);
                 navAgent.SetDestination(new Vector3(-6, 4, 1));
-
-
                 inCave = false;
             }
+
+
         }
+
+
+        // check for victory condition here?
+
 
     }
 

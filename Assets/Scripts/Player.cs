@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
 
         charachterStats = new CharachterStats(5,5,5);
 
+        // not setting in the window at first
         this.currentHealth = this.maxHealth;
 
         UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);

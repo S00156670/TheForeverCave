@@ -53,7 +53,7 @@ public class WorldInteraction : MonoBehaviour
             }
             else
             {
-                Debug.Log("destination  click");
+                Debug.Log("destination  click : " + "x:" + interactionInfo.point.x + " y:" + interactionInfo.point.y + " z:" + interactionInfo.point.z);
                 playerAgent.stoppingDistance = 0f;
                 playerAgent.destination = interactionInfo.point;
 
