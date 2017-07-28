@@ -128,6 +128,19 @@ public class DungeonManager : MonoBehaviour {
             }
 
 
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            // go to waypoint island
+            UnityEngine.AI.NavMeshAgent navAgent;
+
+            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+
+
+
+        }
+
+
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             UnityEngine.AI.NavMeshAgent navAgent;
@@ -135,7 +148,8 @@ public class DungeonManager : MonoBehaviour {
             navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
             if (!inCave)
-            {
+            {// go to cave start
+
                 Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
                                                                             0.1f,
                                                                         (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
