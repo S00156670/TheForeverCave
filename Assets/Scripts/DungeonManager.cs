@@ -135,7 +135,11 @@ public class DungeonManager : MonoBehaviour {
 
             navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
+    //        player.transform.position = new Vector3(12.6f, 4, 32.1f);
 
+            navAgent.transform.position = new Vector3(12.6f, 4, 32.1f);
+
+            navAgent.SetDestination(new Vector3(12.6f, 4, 32.1f));
 
 
         }
@@ -157,13 +161,15 @@ public class DungeonManager : MonoBehaviour {
 
                 Debug.Log("cave start translate at " + caveStart.x + "," + caveStart.y + "," + caveStart.z );
 
-                   player.transform.position = caveStart;
+     //              player.transform.position = caveStart;
                 //player.transform.position = startPos;
 
+                navAgent.transform.position = caveStart;
 
+                navAgent.SetDestination(caveStart);
 
-            //    navAgent.SetDestination(caveStart);
-                navAgent.destination = caveStart;
+                //    navAgent.SetDestination(caveStart);
+         //       navAgent.destination = caveStart;
 
                 // player.GetComponent<NavMeshAgent>().SetDestination(caveStart);
                 inCave = true;
@@ -200,11 +206,17 @@ public class DungeonManager : MonoBehaviour {
         // decide pathing
         GenerateLevelMap();
 
+
+
         Debug.Log("level size is : " + levelSize);
 
         filter = GetComponent<MeshFilter>();
         // generate cave geometry
         filter.mesh = GenerateMesh();
+
+        // re-orientate 
+        transform.position = new Vector3(transform.position.x, transform.position.y, 32 - startPos.z);
+
 
         // spawn enemies and treasure chests
         // Spawn()
