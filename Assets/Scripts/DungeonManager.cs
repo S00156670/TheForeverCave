@@ -404,6 +404,37 @@ public class DungeonManager : MonoBehaviour {
             waypoint.y = UnityEngine.Random.Range(10, levelSize - 10);
             walkableArea.Add(waypoint);
             Debug.Log("waypoint position set : " + waypoint.x + " , " + waypoint.y);
+
+
+            // chance of detour
+ //           rand = UnityEngine.Random.Range(0, 1 * (1 / levelSize));
+
+       //     // need proper check for chance
+       ////     if (true/*rand > levelSize*/)
+       ////     {
+       //         Vector2 detour;
+       //         detour.x = waypoint.x;
+       //         if (waypoint.y < (levelSize / 2))
+       //         {
+       //             detour.y = UnityEngine.Random.Range(waypoint.y, levelSize);
+       //         }
+       //         else
+       //         {
+       //             detour.y = UnityEngine.Random.Range(0, waypoint.y);
+       //         }
+
+       //         if (detour != null)
+       //         {
+       //             AddPath(waypoint,detour);
+       //             Debug.Log("detour added to walkable area : " + detour.x + "_" + detour.y + "_");
+       //         }
+       // //    }
+
+            //if (CheckPath(k))
+            //{
+            //    walkableArea.Add(k);
+            //}
+
         }
 
 
@@ -411,9 +442,7 @@ public class DungeonManager : MonoBehaviour {
         //      levelMap[levelMap.GetLength, Random.Range(0, levelMap.GetLength)] = 2;
         //    levelMap[levelSize, UnityEngine.Random.Range(0, levelSize)] = 2;
         rand = UnityEngine.Random.Range(2, levelSize - 2);
-
         //   Debug.Log("Levelsize is" + levelSize);
-
         levelEnd = new Vector2(/*(levelStage * 16)*/ levelSize - 2, rand);
         walkableArea.Add(levelEnd);
         Debug.Log("end position set : " + levelEnd.x + " , " + levelEnd.y);
@@ -501,9 +530,31 @@ public class DungeonManager : MonoBehaviour {
         {
             //  levelMap[Convert.ToInt32(pathSection.x), Convert.ToInt32(pathSection.y)] = 3;
             if (CheckPath(pathSection))
+            {
                 walkableArea.Add(pathSection);
-
             Debug.Log("path point added to walkable area : " + pathSection.x + " , " + pathSection.y);
+            }
+
+            // need proper check for chance
+             if (true/*rand > levelSize*/)
+            {
+                Vector2 detour;
+                detour.x = pathSection.x;
+                if (pathSection.y < (levelSize / 2))
+                {
+                    detour.y = UnityEngine.Random.Range(pathSection.y, levelSize);
+                }
+                else
+                {
+                    detour.y = UnityEngine.Random.Range(0, pathSection.y);
+                }
+
+                if (detour != null)
+                {
+                    AddPath(pathSection, detour);
+                    Debug.Log("detour added to walkable area : " + detour.x + "_" + detour.y + "_");
+                }
+            }
 
         }
     }
@@ -569,7 +620,7 @@ public class DungeonManager : MonoBehaviour {
             // add random dead ends
             // add rooms
              
-
+            // THIS COULD BE A BETTER PLACE THAN WHERE DETOURS CURRENTLY BEING ADDED
 
 
         return path;
