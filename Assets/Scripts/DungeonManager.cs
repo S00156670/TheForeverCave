@@ -535,26 +535,26 @@ public class DungeonManager : MonoBehaviour {
             Debug.Log("path point added to walkable area : " + pathSection.x + " , " + pathSection.y);
             }
 
-            // need proper check for chance
-             if (true/*rand > levelSize*/)
-            {
-                Vector2 detour;
-                detour.x = pathSection.x;
-                if (pathSection.y < (levelSize / 2))
-                {
-                    detour.y = UnityEngine.Random.Range(pathSection.y, levelSize);
-                }
-                else
-                {
-                    detour.y = UnityEngine.Random.Range(0, pathSection.y);
-                }
+            //// need proper check for chance
+            // if (true/*rand > levelSize*/)
+            //{
+            //    Vector2 detour;
+            //    detour.x = pathSection.x;
+            //    if (pathSection.y < (levelSize / 2))
+            //    {
+            //        detour.y = UnityEngine.Random.Range(pathSection.y, levelSize);
+            //    }
+            //    else
+            //    {
+            //        detour.y = UnityEngine.Random.Range(0, pathSection.y);
+            //    }
 
-                if (detour != null)
-                {
-                    AddPath(pathSection, detour);
-                    Debug.Log("detour added to walkable area : " + detour.x + "_" + detour.y + "_");
-                }
-            }
+            //    if (detour != null)
+            //    {
+            //        AddPath(pathSection, detour);
+            //        Debug.Log("detour added to walkable area : " + detour.x + "_" + detour.y + "_");
+            //    }
+            //}
 
         }
     }
