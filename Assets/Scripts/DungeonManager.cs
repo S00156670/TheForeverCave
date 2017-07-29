@@ -182,8 +182,6 @@ public class DungeonManager : MonoBehaviour {
 
     private void GenerateCave()
     {
-
-
         //// plan level
 
         levelStage++;
@@ -196,17 +194,14 @@ public class DungeonManager : MonoBehaviour {
         // decide pathing
         GenerateLevelMap();
 
-
-
         Debug.Log("level size is : " + levelSize);
 
         filter = GetComponent<MeshFilter>();
         // generate cave geometry
         filter.mesh = GenerateMesh();
 
-        // re-orientate 
+        // re-orientate to line up with off-mesh-link
         transform.position = new Vector3(transform.position.x, transform.position.y, 32 - startPos.z);
-
 
         // spawn enemies and treasure chests
         // Spawn()
@@ -339,20 +334,13 @@ public class DungeonManager : MonoBehaviour {
     }
 
 
-
     private void GenerateLevelMap()
     {
-
-        // throw new NotImplementedException();
-
         Debug.Log("attempting level map");
 
         int rand;
 
-    //    levelSize = levelStage * 16;
-
         walkableArea = new List<Vector2>();
-
 
    //     levelMap = new float[levelSize,levelSize];
 
@@ -396,6 +384,7 @@ public class DungeonManager : MonoBehaviour {
         ////Debug.Log("waypoint position set : " + way.x + " , " + way.y);
 
 
+        // adding waypoints
         for (int i = 0; i < levelStage; i++)
         {   
             Vector2 waypoint;
@@ -453,6 +442,8 @@ public class DungeonManager : MonoBehaviour {
         for (int i = 0; i < (levelStage + 1); i++)
         {
             AddPath(walkableArea[i],walkableArea[i+1]);
+
+
         }
 
 
@@ -460,6 +451,9 @@ public class DungeonManager : MonoBehaviour {
         ////// path = 3
         ////AddPath(levelStart, way);
         ////AddPath(way, levelEnd);
+
+
+
 
 
 
@@ -478,6 +472,7 @@ public class DungeonManager : MonoBehaviour {
                     walkableArea.Add(k);
                 }
         }
+
 
         // extra space for end
         foreach (Vector2 j in NeighbouringSections(Convert.ToInt32(levelEnd.x), Convert.ToInt32(levelEnd.y)))
@@ -532,7 +527,7 @@ public class DungeonManager : MonoBehaviour {
             if (CheckPath(pathSection))
             {
                 walkableArea.Add(pathSection);
-            Debug.Log("path point added to walkable area : " + pathSection.x + " , " + pathSection.y);
+                Debug.Log("path point added to walkable area : " + pathSection.x + " , " + pathSection.y);
             }
 
             //// need proper check for chance
@@ -572,12 +567,12 @@ public class DungeonManager : MonoBehaviour {
 
             if (pathSection.y < pathEnd.y)
             {
-                // going up
+                // going left
                 pathSection.y++;
             }
             else
             {
-                // going down
+                // going right
                 pathSection.y--;
             }
 
@@ -587,14 +582,20 @@ public class DungeonManager : MonoBehaviour {
             {
                 if (pathSection.x < pathEnd.x)
                 {
-                    // going right
+                    // going up
                     pathSection.x++;
                 }
                 else
                 {
-                    // going left
+                    // going down
                     pathSection.x--;
                 }
+
+                if (UnityEngine.Random.Range(0, 5/*levelSize*/) == 1)
+                {
+                    // possible detour loction
+                }
+
             }
 
             if (pathSection != pathEnd && pathSection != pathStart)
@@ -605,9 +606,10 @@ public class DungeonManager : MonoBehaviour {
 
       //          List<Vector2> surroudings = NeighbouringSections(Convert.ToInt32(pathSection.x), Convert.ToInt32(pathSection.y));
 
+                //widening path
                 foreach (Vector2 neighbour in NeighbouringSections(Convert.ToInt32(pathSection.x), Convert.ToInt32(pathSection.y)))
                 {
-                //    if (CheckPath(neighbour))
+                    if (CheckPath(neighbour))
                         path.Add(neighbour);
                 }
 
