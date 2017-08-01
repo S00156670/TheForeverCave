@@ -442,11 +442,21 @@ public class DungeonManager : MonoBehaviour {
         for (int i = 0; i < (levelStage + 1); i++)
         {
             AddPath(walkableArea[i],walkableArea[i+1]);
-
-
         }
 
 
+
+            if (levelStage == 1)
+            {
+                AddDiversion(walkableArea[1]);
+            }
+            //else
+            //{
+            //    for (int i = levelStage + 10; i < walkableArea.Count; i++)// bad way to loop. seperate the count maybe?
+            //    {
+            //          //UnityEngine.Random.Range(0, 10);
+            //    }
+            //}
         ////// connection tunnels
         ////// path = 3
         ////AddPath(levelStart, way);
@@ -501,6 +511,43 @@ public class DungeonManager : MonoBehaviour {
 
 
         // spawn
+    }
+
+    private void AddDiversion(Vector2 pathSection)
+    {
+        Debug.Log("ADDING A DETOUR TO MAP");
+        Vector2 detour;
+        detour.x = pathSection.x;
+
+        double midpoint = (levelSize / 2);
+        midpoint = Math.Round(midpoint,0);
+        Debug.Log("Level midpoint" + midpoint);
+
+        //      if (pathSection.y < (levelSize / 2))
+        if (pathSection.y < midpoint)
+        {
+            //   detour.y = UnityEngine.Random.Range(pathSection.y, levelSize);
+            double DetY = UnityEngine.Random.Range(pathSection.y,( levelSize - 1));
+            DetY = Math.Round(DetY, 0);
+            detour.y = Convert.ToSingle(DetY);
+        }
+        else
+        {
+            //   detour.y = UnityEngine.Random.Range(0, pathSection.y);
+            double DetY = UnityEngine.Random.Range(1, pathSection.y);
+            DetY = Math.Round(DetY, 0);
+            detour.y = Convert.ToSingle(DetY);
+        }
+
+        //    if (detour != null)
+        //    {
+            walkableArea.Add(detour);
+
+        AddPath(pathSection,detour);
+      
+            Debug.Log("detour added to walkable area : " + detour.x + "_" + detour.y + "_");
+    //    }
+
     }
 
 
