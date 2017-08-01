@@ -446,17 +446,21 @@ public class DungeonManager : MonoBehaviour {
 
 
 
-            if (levelStage == 1)
+        if (levelStage == 1)
+        {
+            AddDiversion(walkableArea[1]);
+        }
+        else
+        {
+            for (int i = levelStage + 10; i < walkableArea.Count - 2; i+= 4)// bad way to loop. seperate the count maybe?
             {
-                AddDiversion(walkableArea[1]);
+                //UnityEngine.Random.Range(0, 10);
+                if (UnityEngine.Random.Range(0, 50) <= 2)
+                {
+                    AddDiversion(walkableArea[i]);
+                }
             }
-            //else
-            //{
-            //    for (int i = levelStage + 10; i < walkableArea.Count; i++)// bad way to loop. seperate the count maybe?
-            //    {
-            //          //UnityEngine.Random.Range(0, 10);
-            //    }
-            //}
+        }
         ////// connection tunnels
         ////// path = 3
         ////AddPath(levelStart, way);
