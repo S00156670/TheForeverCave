@@ -22,6 +22,22 @@ using System;
 
     Player player;
 
+
+    public int Experience
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
     public void PerformAttack()
     {
         player.TakeDamage(5);
@@ -36,7 +52,7 @@ using System;
         Debug.Log(this.name + " revieved " +  amount + " damage");
 
         if (currentHealth <= 0)
-            die();
+            Die();
 
     }
 
@@ -92,7 +108,7 @@ using System;
         navAgent.SetDestination(player.transform.position);
     }
 
-    public void die()
+    public void Die()
     {
         // must also drop loot from this method
         Destroy(gameObject);
