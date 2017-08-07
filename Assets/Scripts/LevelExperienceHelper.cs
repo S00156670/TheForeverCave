@@ -11,6 +11,7 @@ public class LevelExperienceHelper : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        CombatEvents.OnEnemyDeath += EnemyToExperience;
         Level = 1;
     }
 
@@ -24,6 +25,13 @@ public class LevelExperienceHelper : MonoBehaviour {
     {
         CurrentExperiene += amount;
 
+        while (CurrentExperiene >= RequiredExperience)
+        {
+            CurrentExperiene -= RequiredExperience;
+            Level++;
+        }
+
+        UIEventHandler.PlayerLevelChange();
 
     }
 
