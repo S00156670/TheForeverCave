@@ -99,7 +99,9 @@ using System;
 
     public void Die()
     {
-        // must also drop loot from this method
+
+        CombatEvents.EnemyDied(this);
+        // combat events shouldhelp trigger loot drops from here maybe
         Destroy(gameObject);
     }
 }
