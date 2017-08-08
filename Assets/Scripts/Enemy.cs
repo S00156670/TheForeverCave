@@ -22,19 +22,8 @@ using System;
 
     Player player;
 
+    public int Experience{get;set;}
 
-    public int Experience
-    {
-        get
-        {
-            throw new NotImplementedException();
-        }
-
-        set
-        {
-            throw new NotImplementedException();
-        }
-    }
 
 
 
@@ -58,7 +47,7 @@ using System;
 
     // Use this for initialization
     void Start () {
-
+        Experience = 20;
         navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         charachterStats = new CharachterStats(9,10,2);
 

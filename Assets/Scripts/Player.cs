@@ -10,20 +10,26 @@ public class Player : MonoBehaviour {
     public int currentHealth;
     public int maxHealth;
 
+    public LevelExperienceHelper PlayerLevel { get; set; }
 
     // Use this for initialization
     void Awake () {
 
 
-        Debug.Log("Player is created and awakened");
-
-        charachterStats = new CharachterStats(5,5,5);
+        PlayerLevel = GetComponent<LevelExperienceHelper>();
 
         // not setting in the window at first
         this.currentHealth = this.maxHealth;
 
+        charachterStats = new CharachterStats(5,5,5);
+
+
+
         UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
-	}
+
+        Debug.Log("Player is created and awakened");
+
+    }
 
     public void TakeDamage(int amount)
     {
