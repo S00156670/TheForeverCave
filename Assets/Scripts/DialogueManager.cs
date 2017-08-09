@@ -10,6 +10,9 @@ public class DialogueManager : MonoBehaviour {
     public string npcName;
     public GameObject dialoguePannel;
 
+    public GameObject HUD;
+
+
     Button continueButton;
     Text dialogueText;
     Text nameText;
@@ -56,6 +59,10 @@ public class DialogueManager : MonoBehaviour {
         dialogueText.text = dialogueLines[0];
         nameText.text = npcName;
         dialoguePannel.SetActive(true);
+
+
+        HUD = GameObject.Find("Panel_Charachter");
+        HUD.SetActive(false);
     }
 
     public void ContinueDialogue()
@@ -68,6 +75,10 @@ public class DialogueManager : MonoBehaviour {
         else
         {
             dialoguePannel.SetActive(false);
+            
+            HUD.SetActive(true);
+
+
         }
     }
 
