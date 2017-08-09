@@ -4,16 +4,19 @@ using System.Collections.Generic;
 
 public class PickUpItem : Interactable
 {
+    public Item ItemToPick { get; set; }
 
     public string pickUpSlug;
 
-    public List<BaseStat> Stats { get; set; }
+ //   public List<BaseStat> Stats { get; set; }
 
-    public Transform ProjectileSpawn { get; set; }
+ //   public Transform Position { get; set; }
 
     public override void Interact()
     {
         Debug.Log("interacting with pick-up Item");
+        InventoryController.instance.GiveItem(ItemToPick.ObjectSlug);
+        Destroy(gameObject);
     }
 
     // public void FadeAway()
@@ -30,7 +33,7 @@ public class PickUpItem : Interactable
 
     //// Update is called once per frame
     //void Update () {
-    ////check ofr collision here?
+    ////check ofr collision here? maybe bob upa and down 
     //}
 }
 
