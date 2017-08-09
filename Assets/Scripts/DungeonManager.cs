@@ -50,15 +50,19 @@ public class DungeonManager : MonoBehaviour {
 
     // Use this for initialization
 
+    public DungeonSpawner currentSpawn;
 
     void Awake ()
     {
         levelStage = 0;
 
-           GenerateCave();
+        currentSpawn = new DungeonSpawner();
+
+
+        GenerateCave();
 
         player = GameObject.Find("Player").GetComponent<Player>();
-
+       
         //     ////// singelton
         //     ////if (instance != null && instance != this)
         //     ////{
@@ -182,6 +186,10 @@ public class DungeonManager : MonoBehaviour {
 
     private void GenerateCave()
     {
+
+        currentSpawn = new DungeonSpawner();
+        currentSpawn.SpawnPoints = new List<Vector3>();
+
         //// plan level
 
         levelStage++;
@@ -205,7 +213,8 @@ public class DungeonManager : MonoBehaviour {
 
         // spawn enemies and treasure chests
         // Spawn()
-        DungeonSpawner currentSpawn = new DungeonSpawner();
+        Debug.Log("SPAWN ENEMY ATTEMPT");
+        currentSpawn.SpawnEnemies();
     }
 
     Mesh GenerateMesh()
@@ -263,9 +272,9 @@ public class DungeonManager : MonoBehaviour {
                             sectionSize * 2,
                          -sectionSize * 0.5f + sectionSize * (y )));
 
-                    SpawnlistChance(new Vector3(-sectionSize * 0.5f + sectionSize * (x),
-                            sectionSize * 2,
-                         -sectionSize * 0.5f + sectionSize * (y)));
+                    //SpawnlistChance(new Vector3(-sectionSize * 0.5f + sectionSize * (x),
+                    //        sectionSize * 2,
+                    //     -sectionSize * 0.5f + sectionSize * (y)));
 
                 }
 
@@ -347,6 +356,19 @@ public class DungeonManager : MonoBehaviour {
         if (UnityEngine.Random.Range(0, 20/*levelSize*/) >= 2)
         {
             // spawn loction
+            currentSpawn.SpawnPoints.Add(point);
+
+            currentSpawn.SpawnPoints.Add(new Vector3(
+                            -sectionSize * 0.5f + sectionSize * (point.x),
+                            sectionSize * 2,
+                            -sectionSize * 0.5f + sectionSize * (point.y))
+                            );
+
+
+
+            Debug.Log("Adding Spawn(ENEMY)");
+
+
         }
 
     }
@@ -411,6 +433,8 @@ public class DungeonManager : MonoBehaviour {
             walkableArea.Add(waypoint);
             Debug.Log("waypoint position set : " + waypoint.x + " , " + waypoint.y);
 
+
+            SpawnlistChance(waypoint);
 
             // chance of detour
  //           rand = UnityEngine.Random.Range(0, 1 * (1 / levelSize));

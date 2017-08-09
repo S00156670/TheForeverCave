@@ -6,7 +6,7 @@ public class DungeonSpawner : MonoBehaviour {
 
     public static DungeonSpawner instance { get; set; }
     public List<Vector3> SpawnPoints { get; set; }
-
+ //   DungeonManager dungeon { get; set; }
 
 
     // Use this for initialization
@@ -21,19 +21,21 @@ public class DungeonSpawner : MonoBehaviour {
         {
             instance = this;
         }
-        //SpawnPoints = new List<Vector3>();
+        SpawnPoints = new List<Vector3>();
 
 
     }
 
     public void SpawnEnemies()
     {
-        DungeonManager dungeon = GetComponent<DungeonManager>();
+     //    dungeon = GetComponent<DungeonManager>();
 
         foreach (Vector3 p in SpawnPoints)
         {
-            Enemy e = new Enemy();
+    //        Enemy e = new Enemy();
+            //Vector3 sp = new Vector3();
             // drop prefab in location from here
+            Debug.Log("Spawn(Enemy)- X:" + p.x + " Y:" + p.y  +" Z:" + (p.z + 1));
         }
 
     }
