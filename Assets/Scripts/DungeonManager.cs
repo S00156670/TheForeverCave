@@ -205,6 +205,7 @@ public class DungeonManager : MonoBehaviour {
 
         // spawn enemies and treasure chests
         // Spawn()
+        DungeonSpawner currentSpawn = new DungeonSpawner();
     }
 
     Mesh GenerateMesh()
@@ -261,11 +262,19 @@ public class DungeonManager : MonoBehaviour {
                     verticies.Add(new Vector3(-sectionSize * 0.5f + sectionSize * (x ),
                             sectionSize * 2,
                          -sectionSize * 0.5f + sectionSize * (y )));
+
+                    SpawnlistChance(new Vector3(-sectionSize * 0.5f + sectionSize * (x),
+                            sectionSize * 2,
+                         -sectionSize * 0.5f + sectionSize * (y)));
+
                 }
 
 
                 normals.Add(Vector3.up);
                 uvs.Add(new Vector2(x / (float)levelSize ,y / (float)levelSize));
+
+
+
             }
         }
 
@@ -333,6 +342,14 @@ public class DungeonManager : MonoBehaviour {
         return mesh;
     }
 
+    private void SpawnlistChance(Vector3 point)
+    {
+        if (UnityEngine.Random.Range(0, 20/*levelSize*/) >= 2)
+        {
+            // spawn loction
+        }
+
+    }
 
     private void GenerateLevelMap()
     {
