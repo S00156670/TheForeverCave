@@ -73,6 +73,16 @@ public class InventoryController : MonoBehaviour {
        UIEventHandler.ItemAddedToInventory(item);
     }
 
+    public void GiveItem(Item item)
+    {
+        playerItems.Add(item);
+
+        Debug.Log(item.ObjectSlug + " added to player inventory");
+        Debug.Log(playerItems.Count + " items in inventory");
+
+        UIEventHandler.ItemAddedToInventory(item);
+    }
+
     public void SetItemDetails(Item item , Button selectedButton)
     {
         inventoryDetailsPannel.SetItem(item, selectedButton);

@@ -24,7 +24,27 @@ using System;
 
     public int Experience{get;set;}
 
+    public DropTable dropTable { get; set; }
 
+    // Use this for initialization
+    void Start()
+    {
+        dropTable = new DropTable();
+        dropTable.loot = new System.Collections.Generic.List<LootDrop>
+                        {
+                            new LootDrop("sword",25),
+                             new LootDrop("staff",25),
+                      //        new LootDrop("potion",25),
+
+                        };
+
+        Experience = 20;
+        navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        charachterStats = new CharachterStats(9, 10, 2);
+
+        currentHealth = maxHealth;
+
+    }
 
 
     public void PerformAttack()
@@ -45,15 +65,6 @@ using System;
 
     }
 
-    // Use this for initialization
-    void Start () {
-        Experience = 20;
-        navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        charachterStats = new CharachterStats(9,10,2);
-
-        currentHealth = maxHealth;
-	
-	}
 
     // FixedUpdate is called less often than update but still often enough for smooth play
     void FixedUpdate () {
@@ -99,9 +110,15 @@ using System;
 
     public void Die()
     {
-
+        DropLoot();
         CombatEvents.EnemyDied(this);
         // combat events shouldhelp trigger loot drops from here maybe
         Destroy(gameObject);
     }
+
+    void DropLoot()
+    {
+
+    }
+
 }

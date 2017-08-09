@@ -6,7 +6,7 @@ public class PickUpItem : Interactable
 {
     public Item ItemToPick { get; set; }
 
-    public string pickUpSlug;
+ //   public string pickUpSlug;
 
  //   public List<BaseStat> Stats { get; set; }
 
@@ -15,7 +15,7 @@ public class PickUpItem : Interactable
     public override void Interact()
     {
         Debug.Log("interacting with pick-up Item");
-        InventoryController.instance.GiveItem(ItemToPick.ObjectSlug);
+        InventoryController.instance.GiveItem(ItemToPick);
         Destroy(gameObject);
     }
 
