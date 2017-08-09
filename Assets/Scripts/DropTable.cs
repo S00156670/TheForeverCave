@@ -8,7 +8,7 @@ public class DropTable
     public List<LootDrop> loot;
 
 
-    public Item GetDrop()
+    public  Item GetDrop()
     {
         int roll = Random.Range(0,101);
         int dropCount = 0;
@@ -21,7 +21,6 @@ public class DropTable
             {
                 return ItemDatabase.instance.GetItem(drop.ItemSlug);
             }
-
         }
         return null;
     }

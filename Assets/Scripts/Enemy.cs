@@ -26,6 +26,8 @@ using System;
 
     public DropTable dropTable { get; set; }
 
+    public PickUpItem pickUpItem;
+
     // Use this for initialization
     void Start()
     {
@@ -118,6 +120,13 @@ using System;
 
     void DropLoot()
     {
+        Item item = dropTable.GetDrop();
+
+        if (item != null)
+        {
+            PickUpItem instance = Instantiate(pickUpItem,transform.position, Quaternion.identity);
+            instance.ItemToPick = item;
+        }
 
     }
 
