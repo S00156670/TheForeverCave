@@ -82,43 +82,6 @@ public class DungeonManager : MonoBehaviour {
         //     //     ground = plane;
 
 
-        //     //// plan level
-        //     //levelMap = new int[20,20];
-        //     //// set all to zero
-        //     //foreach (int x in levelMap)
-        //     //{ x = 0; }
-        //     //// enter = 1
-        //     //levelMap[0, Random.Range(0, levelMap.GetLength.)] = 1;
-        //     //// exit = 2
-        //     //levelMap[levelMap.GetLength, Random.Range(0, levelMap.GetLength)] = 2;
-        //     //// pathing waypoint = 4
-        //     //levelMap[Random.Range(5, levelMap.GetLength - 5), Random.Range(5, levelMap.GetLength - 5)] = 4;
-        //     //// path = 3
-        //     // enter and exit
-        //     // in between
-
-
-        //     // edit mesh
-
-
-        //     // REPLACE THIS CALL LATER AFTER BASE MESH IS WORKING
-        //     // also try make it faster
-
-        //     levelSize = (levelStage * 16) + 32;
-        ////     levelSize = 50;
-
-        //     GenerateLevelMap();
-
-
-        //     Debug.Log("level size is : " + levelSize);
-
-        //     filter = GetComponent<MeshFilter>();
-        //     filter.mesh = GenerateMesh();
-
-
-        //     // calculate nav mesh
-        //     // spawn
-
     }
 
     void Update()
@@ -264,6 +227,13 @@ public class DungeonManager : MonoBehaviour {
                                              -sectionSize * 0.5f + sectionSize * (y)));
                     }
 
+                    SpawnlistChance
+                        (
+                        new Vector3(-sectionSize * 0.5f + sectionSize * (x),
+                                    2,
+                                    -sectionSize * 0.5f + sectionSize * (y))  
+                        +transform.position
+                        );
 
                 }
                 else
@@ -272,9 +242,7 @@ public class DungeonManager : MonoBehaviour {
                             sectionSize * 2,
                          -sectionSize * 0.5f + sectionSize * (y )));
 
-                    //SpawnlistChance(new Vector3(-sectionSize * 0.5f + sectionSize * (x),
-                    //        sectionSize * 2,
-                    //     -sectionSize * 0.5f + sectionSize * (y)));
+
 
                 }
 
@@ -358,16 +326,13 @@ public class DungeonManager : MonoBehaviour {
             // spawn loction
             currentSpawn.SpawnPoints.Add(point);
 
-            currentSpawn.SpawnPoints.Add(new Vector3(
-                            -sectionSize * 0.5f + sectionSize * (point.x),
-                            sectionSize * 2,
-                            -sectionSize * 0.5f + sectionSize * (point.y))
-                            );
-
-
+            //currentSpawn.SpawnPoints.Add(new Vector3(
+            //                -sectionSize * 0.5f + sectionSize * (point.x),
+            //                sectionSize * 2,
+            //                -sectionSize * 0.5f + sectionSize * (point.y))
+            //                );
 
             Debug.Log("Adding Spawn(ENEMY)");
-
 
         }
 

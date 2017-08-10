@@ -22,19 +22,15 @@ public class DungeonSpawner : MonoBehaviour {
             instance = this;
         }
         SpawnPoints = new List<Vector3>();
-
-
     }
 
     public void SpawnEnemies()
     {
-        //    dungeon = GetComponent<DungeonManager>();
+      
       GameObject enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
 
         foreach (Vector3 p in SpawnPoints)
         {
-            //        Enemy e = new Enemy();
-            //Vector3 sp = new Vector3();
             // drop prefab in location from here
 
             Instantiate(enemyToSpawn, p, Quaternion.identity);
@@ -44,11 +40,6 @@ public class DungeonSpawner : MonoBehaviour {
 
     }
 
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 
 }
