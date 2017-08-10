@@ -28,13 +28,16 @@ public class DungeonSpawner : MonoBehaviour {
 
     public void SpawnEnemies()
     {
-     //    dungeon = GetComponent<DungeonManager>();
+        //    dungeon = GetComponent<DungeonManager>();
+      GameObject enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
 
         foreach (Vector3 p in SpawnPoints)
         {
-    //        Enemy e = new Enemy();
+            //        Enemy e = new Enemy();
             //Vector3 sp = new Vector3();
             // drop prefab in location from here
+
+
             Debug.Log("Spawn(Enemy)- X:" + p.x + " Y:" + p.y  +" Z:" + (p.z + 1));
         }
 
