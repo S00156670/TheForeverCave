@@ -232,7 +232,7 @@ public class DungeonManager : MonoBehaviour {
                         new Vector3(-sectionSize * 0.5f + sectionSize * (x),
                                     2,
                                     -sectionSize * 0.5f + sectionSize * (y))  
-                        +transform.position
+                       + new Vector3(transform.position.x, transform.position.y, 32 - startPos.z)
                         );
 
                 }
@@ -321,7 +321,7 @@ public class DungeonManager : MonoBehaviour {
 
     private void SpawnlistChance(Vector3 point)
     {
-        if (UnityEngine.Random.Range(0, 20/*levelSize*/) >= 2)
+        if (UnityEngine.Random.Range(0, 20/*levelSize*/) >= 19)
         {
             // spawn loction
             currentSpawn.SpawnPoints.Add(point);
