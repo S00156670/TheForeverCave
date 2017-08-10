@@ -37,6 +37,7 @@ public class DungeonSpawner : MonoBehaviour {
             //Vector3 sp = new Vector3();
             // drop prefab in location from here
 
+            Instantiate(enemyToSpawn, p, Quaternion.identity);
 
             Debug.Log("Spawn(Enemy)- X:" + p.x + " Y:" + p.y  +" Z:" + (p.z + 1));
         }
