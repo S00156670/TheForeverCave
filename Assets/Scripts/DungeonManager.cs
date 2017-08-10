@@ -178,6 +178,9 @@ public class DungeonManager : MonoBehaviour {
         // Spawn()
         Debug.Log("SPAWN ENEMY ATTEMPT");
         currentSpawn.SpawnEnemies();
+
+        // might need to postpone this so that all enemies have had a chance to fall into place
+        currentSpawn.TrimEnemies();
     }
 
     Mesh GenerateMesh()
