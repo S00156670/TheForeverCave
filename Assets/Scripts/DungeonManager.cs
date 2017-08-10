@@ -99,8 +99,10 @@ public class DungeonManager : MonoBehaviour {
             UnityEngine.AI.NavMeshAgent navAgent;
             navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
-            navAgent.transform.position = new Vector3(12.6f, 4, 32.1f);
-            navAgent.SetDestination(new Vector3(12.6f, 4, 32.1f));
+            //navAgent.transform.position = new Vector3(12.6f, 4, 32.1f);
+            //navAgent.SetDestination(new Vector3(12.6f, 4, 32.1f));
+
+            navAgent.Warp(new Vector3(12.6f, 4, 32.1f));
         }
 
 
@@ -120,8 +122,9 @@ public class DungeonManager : MonoBehaviour {
 
                 //         player.transform.position = caveStart;
 
-                navAgent.transform.position = caveStart;
-                navAgent.SetDestination(caveStart);
+                //navAgent.transform.position = caveStart;
+                //navAgent.SetDestination(caveStart);
+                navAgent.Warp(caveStart);
 
                 //    navAgent.SetDestination(caveStart);
                 //       navAgent.destination = caveStart;
@@ -133,8 +136,9 @@ public class DungeonManager : MonoBehaviour {
             else
             {
                 // send palyer back to campsite
-                navAgent.transform.position = new Vector3(-6,4,1);
-                navAgent.SetDestination(new Vector3(-6, 4, 1));
+                //navAgent.transform.position = new Vector3(-6,4,1);
+                //navAgent.SetDestination(new Vector3(-6, 4, 1));
+                navAgent.Warp(new Vector3(-6, 4, 1));
                 inCave = false;
             }
 

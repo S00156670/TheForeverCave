@@ -42,9 +42,12 @@ public class DungeonSpawner : MonoBehaviour {
 
     public void TrimEnemies()
     {
+        //call spawnchance from a more refined subset of "middle-path" sections
+        //(Best option, this method not needed)
+        // or
         // foreach enemy in scene
         // if e.y is above dungeonFloor.y
-        // destroy e
+        // destroy(e)
     }
 
 }
