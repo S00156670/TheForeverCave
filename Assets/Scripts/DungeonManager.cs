@@ -355,18 +355,6 @@ public class DungeonManager : MonoBehaviour {
 
    //     levelMap = new float[levelSize,levelSize];
 
-        // set all to zero
-        //foreach (int x in levelMap)
-        //{ x = 0; }
-        //////for (int x = 0; x < levelSize - 1; x++)
-        //////{
-        //////    for (int y = 0; y < levelSize - 1; y++)
-        //////    {
-        //////        //   levelMap[x, y] = 0;
-        //////        walkableArea.Add(new Vector2(x,y));
-        //////    }
-        //////}
-
         // enter = 1
         //levelMap[0, Random.Range(0, levelMap.GetLength.)] = 1;
 
@@ -404,39 +392,6 @@ public class DungeonManager : MonoBehaviour {
             waypoint.y = UnityEngine.Random.Range(10, levelSize - 10);
             walkableArea.Add(waypoint);
             Debug.Log("waypoint position set : " + waypoint.x + " , " + waypoint.y);
-
-
-        //    SpawnlistChance(waypoint);
-
-            // chance of detour
- //           rand = UnityEngine.Random.Range(0, 1 * (1 / levelSize));
-
-       //     // need proper check for chance
-       ////     if (true/*rand > levelSize*/)
-       ////     {
-       //         Vector2 detour;
-       //         detour.x = waypoint.x;
-       //         if (waypoint.y < (levelSize / 2))
-       //         {
-       //             detour.y = UnityEngine.Random.Range(waypoint.y, levelSize);
-       //         }
-       //         else
-       //         {
-       //             detour.y = UnityEngine.Random.Range(0, waypoint.y);
-       //         }
-
-       //         if (detour != null)
-       //         {
-       //             AddPath(waypoint,detour);
-       //             Debug.Log("detour added to walkable area : " + detour.x + "_" + detour.y + "_");
-       //         }
-       // //    }
-
-            //if (CheckPath(k))
-            //{
-            //    walkableArea.Add(k);
-            //}
-
         }
 
 
@@ -462,6 +417,8 @@ public class DungeonManager : MonoBehaviour {
         if (levelStage == 1)
         {
             AddDiversion(walkableArea[1]);
+            GenerateRoom((walkableArea[1]),4);
+            currentSpawn.TreasurePoints.Add(walkableArea[1]);
         }
         else
         {
@@ -488,8 +445,8 @@ public class DungeonManager : MonoBehaviour {
         // spread a bit of extraspace for levelStart and levelEnd
         WidenAround(levelStart);
         WidenAround(levelEnd);
-
-
+        // to make space for boss fight
+        GenerateRoom(levelEnd,6);
     }
 
     private void WidenAround(Vector2 point)
@@ -574,7 +531,19 @@ public class DungeonManager : MonoBehaviour {
         AddPath(pathSection,detour);
       
             Debug.Log("detour added to walkable area : " + detour.x + "_" + detour.y + "_");
-    //    }
+
+        if (UnityEngine.Random.Range(0, 10) > 8)
+        {
+            GenerateRoom(detour, 5);
+        }
+
+        if (UnityEngine.Random.Range(0, 10) > 5)
+        {
+            currentSpawn.TreasurePoints.Add(detour);
+        }
+
+
+        //    }
 
     }
 
