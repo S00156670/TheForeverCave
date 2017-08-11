@@ -328,7 +328,7 @@ public class DungeonManager : MonoBehaviour {
 
     private void SpawnlistChance(Vector3 point)
     {
-        if (UnityEngine.Random.Range(0, 20/*levelSize*/) >= 19)
+        if (UnityEngine.Random.Range(0, 100/*levelSize*/) >= 95)
         {
             // spawn loction
             currentSpawn.SpawnPoints.Add(point);
@@ -406,7 +406,7 @@ public class DungeonManager : MonoBehaviour {
             Debug.Log("waypoint position set : " + waypoint.x + " , " + waypoint.y);
 
 
-            SpawnlistChance(waypoint);
+        //    SpawnlistChance(waypoint);
 
             // chance of detour
  //           rand = UnityEngine.Random.Range(0, 1 * (1 / levelSize));
@@ -485,49 +485,60 @@ public class DungeonManager : MonoBehaviour {
 
 
 
-        // spread a bit for levelStart and levelEnd
-        // TODO refactor this out into something that generates a room around a point
+        // spread a bit of extraspace for levelStart and levelEnd
+        WidenAround(levelStart);
+        WidenAround(levelEnd);
 
-        // extra space at start
-        foreach (Vector2 j in NeighbouringSections(Convert.ToInt32(levelStart.x), Convert.ToInt32(levelStart.y)))
+
+    }
+
+    private void WidenAround(Vector2 point)
+    {
+        foreach (Vector2 j in NeighbouringSections(Convert.ToInt32(point.x), Convert.ToInt32(point.y)))
         {
-            walkableArea.Add(j);
+            if (CheckPath(j))
+                walkableArea.Add(j);
 
             foreach (Vector2 k in NeighbouringSections(Convert.ToInt32(j.x), Convert.ToInt32(j.y)))
+            {
                 if (CheckPath(k))
+                    walkableArea.Add(k);
+                //is 3 times too much?
+                foreach (Vector2 l in NeighbouringSections(Convert.ToInt32(k.x), Convert.ToInt32(k.y)))
                 {
-                    walkableArea.Add(k);
+                    if (CheckPath(l))
+                        walkableArea.Add(l);
                 }
+            }
         }
+    }
 
+    private void GenerateRoom(Vector2 point, float size)
+    {
+        //// in case of odd sizes
+        //     double halfSize = Math.Round((size / 2), 0);
 
-        // extra space for end
-        foreach (Vector2 j in NeighbouringSections(Convert.ToInt32(levelEnd.x), Convert.ToInt32(levelEnd.y)))
+        Vector2 startCorner = point - new Vector2(size,size);
+        Vector2 endCorner = point + new Vector2(size, size);
+
+        Vector2 floorPoint = startCorner;
+
+        while (floorPoint.x <= endCorner.x && floorPoint.y <= endCorner.y)
         {
-            walkableArea.Add(j);
-
-            foreach (Vector2 k in NeighbouringSections(Convert.ToInt32(j.x), Convert.ToInt32(j.y)))
-                if (CheckPath(k))
-                    walkableArea.Add(k);
+            // make sure point is within the map
+            if (floorPoint.x < levelSize && floorPoint.x > 0 && floorPoint.y < levelSize && floorPoint.y > 0)
+                if (CheckPath(floorPoint))
+                    walkableArea.Add(floorPoint);
+            
+            if (floorPoint.x == endCorner.x)
+            {
+                floorPoint.x = startCorner.x;
+                floorPoint.y++;
+            }
+            else
+                floorPoint.x++;
         }
 
-    //    NeighbouringSections(Convert.ToInt32(levelStart.x), Convert.ToInt32(levelStart.y));
-
-
-        ////foreach (Vector2 item in NeighbouringSections(Convert.ToInt32(levelStart.x), Convert.ToInt32(levelStart.y)))
-        ////{
-        //////        if (levelMap[Convert.ToInt32(item.x), Convert.ToInt32(item.y)] != null)
-        //////        {
-        ////    levelMap[Convert.ToInt32(item.x), Convert.ToInt32(item.y)] = 3;
-        //////      }
-        ////}
-        ////foreach (Vector2 item in NeighbouringSections(Convert.ToInt32(levelStart.x), Convert.ToInt32(levelStart.y)))
-        ////{
-        ////    levelMap[Convert.ToInt32(item.x), Convert.ToInt32(item.y)] = 3;
-        ////}
-
-
-        // spawn
     }
 
     private void AddDiversion(Vector2 pathSection)
@@ -578,7 +589,6 @@ public class DungeonManager : MonoBehaviour {
     //    return levelMap[x,y];
     //}
 
-    // Update is called once per frame
 
 
     private void AddPath(Vector2 pathStart, Vector2 pathEnd)
@@ -593,27 +603,6 @@ public class DungeonManager : MonoBehaviour {
                 walkableArea.Add(pathSection);
                 Debug.Log("path point added to walkable area : " + pathSection.x + " , " + pathSection.y);
             }
-
-            //// need proper check for chance
-            // if (true/*rand > levelSize*/)
-            //{
-            //    Vector2 detour;
-            //    detour.x = pathSection.x;
-            //    if (pathSection.y < (levelSize / 2))
-            //    {
-            //        detour.y = UnityEngine.Random.Range(pathSection.y, levelSize);
-            //    }
-            //    else
-            //    {
-            //        detour.y = UnityEngine.Random.Range(0, pathSection.y);
-            //    }
-
-            //    if (detour != null)
-            //    {
-            //        AddPath(pathSection, detour);
-            //        Debug.Log("detour added to walkable area : " + detour.x + "_" + detour.y + "_");
-            //    }
-            //}
 
         }
     }
@@ -681,13 +670,6 @@ public class DungeonManager : MonoBehaviour {
 
 
         }
-
-
-            // add random dead ends
-            // add rooms
-             
-            // THIS COULD BE A BETTER PLACE THAN WHERE DETOURS CURRENTLY BEING ADDED
-
 
         return path;
     }

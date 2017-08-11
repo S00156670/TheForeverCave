@@ -6,7 +6,8 @@ public class DungeonSpawner : MonoBehaviour {
 
     public static DungeonSpawner instance { get; set; }
     public List<Vector3> SpawnPoints { get; set; }
- //   public List<GameObject> Enemies { get; set; }
+    public List<Vector3> TreasurePoints { get; set; }
+    //   public List<GameObject> Enemies { get; set; }
 
 
     // Use this for initialization
@@ -36,6 +37,23 @@ public class DungeonSpawner : MonoBehaviour {
             Instantiate(enemyToSpawn, p, Quaternion.identity);
 
             Debug.Log("Spawn(Enemy)- X:" + p.x + " Y:" + p.y  +" Z:" + p.z);
+        }
+
+    }
+
+
+    public void SpawnTreasure()
+    {
+
+        GameObject chest = Resources.Load<GameObject>("Prefabs/Chest");
+
+        foreach (Vector3 p in TreasurePoints)
+        {
+            // drop prefab in location from here
+            //     Enemies.Add(Instantiate(enemyToSpawn, p, Quaternion.identity));
+            Instantiate(chest, p, Quaternion.identity);
+
+            Debug.Log("Spawn(Enemy)- X:" + p.x + " Y:" + p.y + " Z:" + p.z);
         }
 
     }
