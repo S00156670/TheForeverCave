@@ -23,6 +23,7 @@ public class DungeonSpawner : MonoBehaviour {
             instance = this;
         }
         SpawnPoints = new List<Vector3>();
+        TreasurePoints = new List<Vector3>();
     }
 
     public void SpawnEnemies()
@@ -50,10 +51,9 @@ public class DungeonSpawner : MonoBehaviour {
         foreach (Vector3 p in TreasurePoints)
         {
             // drop prefab in location from here
-            //     Enemies.Add(Instantiate(enemyToSpawn, p, Quaternion.identity));
-            Instantiate(chest, p, Quaternion.identity);
-
-            Debug.Log("Spawn(Enemy)- X:" + p.x + " Y:" + p.y + " Z:" + p.z);
+  //          Instantiate(chest, p, Quaternion.identity);
+  // must build chest prefab
+            Debug.Log("Spawn(Chest)- X:" + p.x + " Y:" + p.y + " Z:" + p.z);
         }
 
     }
@@ -66,6 +66,14 @@ public class DungeonSpawner : MonoBehaviour {
         // foreach enemy in scene
         // if e.y is above dungeonFloor.y
         // destroy(e)
+
+        GameObject.Find("Enemy");
+
+        // Enemy[] AllEnemies  = FindObjectsOfType(Enemy);
+        //for (i = 0; i < AllEnemies.Length; i++)
+        //{
+        // //   Gameobject.Destroy(AllEnemies[i].);
+        //}
     }
 
 }

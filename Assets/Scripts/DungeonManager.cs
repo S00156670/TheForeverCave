@@ -418,7 +418,21 @@ public class DungeonManager : MonoBehaviour {
         {
             AddDiversion(walkableArea[1]);
             GenerateRoom((walkableArea[1]),4);
-            currentSpawn.TreasurePoints.Add(walkableArea[1]);
+
+
+
+            //currentSpawn.TreasurePoints.Add(
+            //    new Vector3(-sectionSize * 0.5f + sectionSize * (walkableArea[1].x),
+            //    2,
+            //    -sectionSize * 0.5f + sectionSize * (walkableArea[1].y))
+            //  + 
+            //    new Vector3(transform.position.x, transform.position.y, 32 - startPos.z)
+            //  );
+
+
+
+
+
         }
         else
         {
@@ -539,7 +553,7 @@ public class DungeonManager : MonoBehaviour {
 
         if (UnityEngine.Random.Range(0, 10) > 5)
         {
-            currentSpawn.TreasurePoints.Add(detour);
+   //         currentSpawn.TreasurePoints.Add(detour);
         }
 
 
