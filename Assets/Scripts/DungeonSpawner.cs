@@ -28,8 +28,10 @@ public class DungeonSpawner : MonoBehaviour {
 
     public void SpawnEnemies()
     {
-      
-      GameObject enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+ 
+     //   RemoveEnemies();
+
+        GameObject enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
 
         foreach (Vector3 p in SpawnPoints)
         {
@@ -58,22 +60,26 @@ public class DungeonSpawner : MonoBehaviour {
 
     }
 
-    public void TrimEnemies()
+    public void TrimEnemies(float floorLevel)
     {
-        //call spawnchance from a more refined subset of "middle-path" sections
-        //(Best option, this method not needed)
-        // or
-        // foreach enemy in scene
-        // if e.y is above dungeonFloor.y
-        // destroy(e)
-
-        GameObject.Find("Enemy");
-
-        // Enemy[] AllEnemies  = FindObjectsOfType(Enemy);
-        //for (i = 0; i < AllEnemies.Length; i++)
-        //{
-        // //   Gameobject.Destroy(AllEnemies[i].);
-        //}
+        foreach (Enemy e in FindObjectsOfType(typeof(Enemy)) as Enemy[])
+        {
+            if (e.transform.position.y > (floorLevel + 1))
+            {
+                Destroy(e);
+            }
+        }
     }
+
+
+    public void RemoveEnemies()
+    {
+        foreach (Enemy e in FindObjectsOfType(typeof(Enemy)) as Enemy[])
+        {
+            Destroy(e);
+        }
+    }
+
+
 
 }

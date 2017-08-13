@@ -184,7 +184,7 @@ public class DungeonManager : MonoBehaviour {
         currentSpawn.SpawnEnemies();
 
         // might need to postpone this so that all enemies have had a chance to fall into place
-        currentSpawn.TrimEnemies();
+  //      currentSpawn.TrimEnemies(this.transform.position.y);
     }
 
     Mesh GenerateMesh()
