@@ -62,9 +62,10 @@ public class DungeonSpawner : MonoBehaviour {
 
     public void TrimEnemies(float floorLevel)
     {
-        foreach (Enemy e in FindObjectsOfType(typeof(Enemy)) as Enemy[])
+        // foreach (Enemy e in FindObjectsOfType(typeof(Enemy)) as Enemy[])
+        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            if (e.transform.position.y > (floorLevel + 1))
+            if (e.transform.position.y > (floorLevel + 2))
             {
                 Destroy(e);
             }

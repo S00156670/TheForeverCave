@@ -7,49 +7,21 @@ using System.Collections.Generic;
 public class DungeonManager : MonoBehaviour {
 
 
-    //  public Plane ground;
-
- //   private MeshFilter filter;
- //   private MeshRenderer render;
- //   private BoxCollider collider;
-
     public GameObject ground { get; set; }
-
-  //  public float[,] levelMap;
-
     private List<Vector2> walkableArea;
-
-
-
     private int levelStage;
-
     public float sectionSize = 50;
-
     private int levelSize;
-
     private Vector2 levelStart;
     private Vector2 levelEnd;
-
     private List<Vector2> waypoints;
-
-
     ////public static DungeonManager instance { get; set; }
-
     private MeshFilter filter;
     private MeshRenderer renderer;
     // private BoxCollider collider;
-
     Player player;
-    
-
     bool inCave = false;
     public Vector3 startPos;
-    //  Vector2 gridpoint;
-
-    // it will probably be simpler to take an object which already has a nav mesh, modify and then update than to generate full nav mesh on the fly
-
-    // Use this for initialization
-
     public DungeonSpawner currentSpawn;
 
     void Awake ()
@@ -57,10 +29,7 @@ public class DungeonManager : MonoBehaviour {
         levelStage = 0;
 
         currentSpawn = new DungeonSpawner();
-
-
         GenerateCave();
-
         player = GameObject.Find("Player").GetComponent<Player>();
        
         //     ////// singelton
@@ -75,13 +44,10 @@ public class DungeonManager : MonoBehaviour {
         //     ////}
 
 
-
         //     // advice?
         //     //https://docs.unity3d.com/ScriptReference/GameObject.CreatePrimitive.html
         //     //       GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
         //     //     ground = plane;
-
-
     }
 
     void Update()
@@ -114,6 +80,11 @@ public class DungeonManager : MonoBehaviour {
 
             if (!inCave)
             {// go to cave start
+
+              
+                currentSpawn.TrimEnemies(this.transform.position.y);
+
+
 
                 Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
                                                                             0.1f,
@@ -162,7 +133,11 @@ public class DungeonManager : MonoBehaviour {
         levelStage++;
 
         if (levelStage > 5)
+        {
             levelStage = 1;
+            // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
+        }
+
 
         levelSize = (levelStage * 16) + 32;
 
@@ -176,15 +151,15 @@ public class DungeonManager : MonoBehaviour {
         filter.mesh = GenerateMesh();
 
         // re-orientate to line up with off-mesh-link
+        // may not be needed now im using nav.warp
         transform.position = new Vector3(transform.position.x, transform.position.y, 32 - startPos.z);
 
         // spawn enemies and treasure chests
-        // Spawn()
         Debug.Log("SPAWN ENEMY ATTEMPT");
         currentSpawn.SpawnEnemies();
 
         // might need to postpone this so that all enemies have had a chance to fall into place
-  //      currentSpawn.TrimEnemies(this.transform.position.y);
+   ////     currentSpawn.TrimEnemies(this.transform.position.y);
     }
 
     Mesh GenerateMesh()
