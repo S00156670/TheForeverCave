@@ -29,7 +29,7 @@ public class DungeonSpawner : MonoBehaviour {
     public void SpawnEnemies()
     {
  
-     //   RemoveEnemies();
+        RemoveEnemies();
 
         GameObject enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
 
@@ -74,7 +74,15 @@ public class DungeonSpawner : MonoBehaviour {
 
     public void RemoveEnemies()
     {
-        foreach (Enemy e in FindObjectsOfType(typeof(Enemy)) as Enemy[])
+        // // leaves dud cubes
+        //foreach (Enemy e in FindObjectsOfType(typeof(Enemy)) as Enemy[])
+        //{
+        //    Destroy(e);
+        //}
+ 
+        
+        //       GameObject.FindGameObjectsWithTag("Enemy")
+        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             Destroy(e);
         }
