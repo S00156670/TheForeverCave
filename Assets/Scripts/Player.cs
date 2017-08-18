@@ -15,15 +15,12 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Awake () {
 
-
         PlayerLevel = GetComponent<LevelExperienceHelper>();
 
         // not setting in the window at first
         this.currentHealth = this.maxHealth;
 
         charachterStats = new CharachterStats(5,5,5);
-
-
 
         UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
 

@@ -24,14 +24,23 @@ public class DungeonManager : MonoBehaviour {
     public Vector3 startPos;
     public DungeonSpawner currentSpawn;
 
+    Portal campPortal;
+    Portal caveStart;
+    Portal caveEnd;
+
+  //  public List<Portal> portals;
+
     void Awake ()
     {
         levelStage = 0;
-
         currentSpawn = new DungeonSpawner();
         GenerateCave();
         player = GameObject.Find("Player").GetComponent<Player>();
-       
+
+        caveStart = GameObject.Find("CaveStart").GetComponent<Portal>();
+
+
+
         //     ////// singelton
         //     ////if (instance != null && instance != this)
         //     ////{
@@ -43,7 +52,6 @@ public class DungeonManager : MonoBehaviour {
         //     ////    instance = this;
         //     ////}
 
-
         //     // advice?
         //     //https://docs.unity3d.com/ScriptReference/GameObject.CreatePrimitive.html
         //     //       GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
@@ -53,56 +61,67 @@ public class DungeonManager : MonoBehaviour {
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //// check portals
+        //foreach (GameObject g in GameObject.FindGameObjectsWithTag("Portal").GetComponent<Portal>())
+        //{
+        //    Portal p = (g);
+        //    p.CheckDistance(player.transform.position);
+        //    if (p.triggered == true)
+        //    {
+        //        // send player to destination
+        //        UnityEngine.AI.NavMeshAgent navAgent;
+        //        navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        //        navAgent.Warp(p.destination);
+        //    }
+        //}
+        caveStart.CheckDistance(player.transform.position);
+        if (caveStart.triggered == true)
+        {
+            // send player to destination
+            UnityEngine.AI.NavMeshAgent navAgent;
+            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+            navAgent.Warp(caveStart.destination);
+            caveStart.triggered = false;
+        }
+
+            // key buttons for game progression to be phased out for smooth gameplay
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
             GenerateCave();
             }
-
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             // go to waypoint island
             UnityEngine.AI.NavMeshAgent navAgent;
             navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
-
             //navAgent.transform.position = new Vector3(12.6f, 4, 32.1f);
             //navAgent.SetDestination(new Vector3(12.6f, 4, 32.1f));
-
             navAgent.Warp(new Vector3(12.6f, 4, 32.1f));
         }
-
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             UnityEngine.AI.NavMeshAgent navAgent;
-
             navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
             if (!inCave)
-            {// go to cave start
-
-              
+            {
+                // go to cave start
                 currentSpawn.TrimEnemies(this.transform.position.y);
-
-
-
                 Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
                                                                             0.1f,
                                                                         (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
                 Debug.Log("cave start translate at " + caveStart.x + "," + caveStart.y + "," + caveStart.z );
 
                 //         player.transform.position = caveStart;
-
                 //navAgent.transform.position = caveStart;
                 //navAgent.SetDestination(caveStart);
                 navAgent.Warp(caveStart);
-
                 //    navAgent.SetDestination(caveStart);
                 //       navAgent.destination = caveStart;
                 // player.GetComponent<NavMeshAgent>().SetDestination(caveStart);
-
                 inCave = true;
-
             }
             else
             {
@@ -112,14 +131,8 @@ public class DungeonManager : MonoBehaviour {
                 navAgent.Warp(new Vector3(-6, 4, 1));
                 inCave = false;
             }
-
-
         }
-
-
         // check for victory condition here?
-
-
     }
 
     private void GenerateCave()
@@ -143,7 +156,6 @@ public class DungeonManager : MonoBehaviour {
 
         // decide pathing
         GenerateLevelMap();
-
         Debug.Log("level size is : " + levelSize);
 
         filter = GetComponent<MeshFilter>();
@@ -159,7 +171,7 @@ public class DungeonManager : MonoBehaviour {
         currentSpawn.SpawnEnemies();
 
         // might need to postpone this so that all enemies have had a chance to fall into place
-   ////     currentSpawn.TrimEnemies(this.transform.position.y);
+        ////     currentSpawn.TrimEnemies(this.transform.position.y);
     }
 
     Mesh GenerateMesh()
@@ -182,17 +194,13 @@ public class DungeonManager : MonoBehaviour {
 
                 if (walkableArea != null)// this check is just for while debugging, in final build there should always be a walkable area
                 {
-
-
-                foreach (Vector2 pathCheck  in walkableArea)
-                {
-                    if (pathCheck == new Vector2(x,y))
+                    foreach (Vector2 pathCheck  in walkableArea)
                     {
-                        path = true;
+                        if (pathCheck == new Vector2(x,y))
+                        {
+                            path = true;
+                        }
                     }
-                }
-
-
                 }
 
 
@@ -211,21 +219,14 @@ public class DungeonManager : MonoBehaviour {
 
                     SpawnlistChance
                         (
-                        new Vector3(-sectionSize * 0.5f + sectionSize * (x),
-                                    2,
-                                    -sectionSize * 0.5f + sectionSize * (y))  
-                       + new Vector3(transform.position.x, transform.position.y, 32 - startPos.z)
-                        );
-
+                            new Vector3(-sectionSize * 0.5f + sectionSize * (x),2,-sectionSize * 0.5f + sectionSize * (y))  
+                          + new Vector3(transform.position.x, transform.position.y, 32 - startPos.z));
                 }
                 else
                 {
                     verticies.Add(new Vector3(-sectionSize * 0.5f + sectionSize * (x ),
                             sectionSize * 2,
                          -sectionSize * 0.5f + sectionSize * (y )));
-
-
-
                 }
 
 
