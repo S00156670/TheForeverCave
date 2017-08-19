@@ -174,7 +174,7 @@ public class DungeonManager : MonoBehaviour {
         currentSpawn.SpawnEnemies();
 
 
-        caveEnd.transform.position = endPos + this.transform.position;
+        caveEnd.transform.position = endPos + this.transform.position + new Vector3(6,0,-1.2f);
 
         // might need to postpone this so that all enemies have had a chance to fall into place
         ////     currentSpawn.TrimEnemies(this.transform.position.y);
