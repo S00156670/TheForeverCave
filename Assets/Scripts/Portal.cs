@@ -19,8 +19,26 @@ public class Portal : MonoBehaviour
 
         // debug set
         triggerRadius = 5;
-        destination = new Vector3(12.6f, 4, 32.1f); //new Vector3(30, 148, 200);
+  //      destination = new Vector3(12.6f, 4, 32.1f); //new Vector3(30, 148, 200);
     }
+
+
+
+    public void CheckDistance(Vector3 playerPos)
+    {
+        float dist = Vector3.Distance(playerPos, transform.position);
+
+        if (dist < triggerRadius && active == true && triggered == false)
+        {
+            triggered = true;
+            Debug.Log("Portal has been triggered, destination: " + destination.x + "|" + destination.y + "|" + destination.z);
+        }
+
+        if (dist > triggerRadius )
+            triggered = false;//reset
+
+    }
+
 
     //public Portal()
     //{
@@ -41,36 +59,6 @@ public class Portal : MonoBehaviour
     //       {
     //       }
     //   }
-
-    public void CheckDistance(Vector3 playerPos)
-    {
-        //float x = gameobject.transform.position.x - playerPos.x;
-        //if (x < 0)
-        //    x = (x * -1);
-
-        //float y = gameobject.transform.position.y - playerPos.y;
-        //if (y < 0)
-        //    y = (y * -1);
-
-        //float z = gameobject.transform.position.z - playerPos.z;
-        //if (z < 0)
-        //    z = (z * -1);
-
-       // Vector3 dist = new Vector3(x,y,z);
-
-        float dist = Vector3.Distance(playerPos, transform.position);
-
-        if (dist < triggerRadius && active == true && triggered == false)
-        {
-            triggered = true;
-            Debug.Log("Portal has been triggered, destination: " + destination.x + "|" + destination.y + "|" + destination.z);
-        }
-
-        if (dist > triggerRadius )
-            triggered = false;//reset
-
-        //   return dist;
-    }
 
 }
 

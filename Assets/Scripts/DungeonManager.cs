@@ -22,11 +22,12 @@ public class DungeonManager : MonoBehaviour {
     Player player;
     bool inCave = false;
     public Vector3 startPos;
+    public Vector3 endPos;
     public DungeonSpawner currentSpawn;
 
     Portal campPortal;
     //Portal caveStart;
-    //Portal caveEnd;
+    Portal caveEnd;
 
   //  public List<Portal> portals;
 
@@ -34,11 +35,12 @@ public class DungeonManager : MonoBehaviour {
     {
         levelStage = 0;
         currentSpawn = new DungeonSpawner();
-        GenerateCave();
-        player = GameObject.Find("Player").GetComponent<Player>();
 
         campPortal = GameObject.Find("CampPortal").GetComponent<Portal>();
-  //      campPortal.destination = new Vector3(12.6f, 4, 32.1f);
+        caveEnd = GameObject.Find("EndPortal").GetComponent<Portal>();
+
+        GenerateCave();
+        player = GameObject.Find("Player").GetComponent<Player>();
 
 
 
@@ -63,18 +65,7 @@ public class DungeonManager : MonoBehaviour {
     {
 
         //// check portals
-        //foreach (GameObject g in GameObject.FindGameObjectsWithTag("Portal").GetComponent<Portal>())
-        //{
-        //    Portal p = (g);
-        //    p.CheckDistance(player.transform.position);
-        //    if (p.triggered == true)
-        //    {
-        //        // send player to destination
-        //        UnityEngine.AI.NavMeshAgent navAgent;
-        //        navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
-        //        navAgent.Warp(p.destination);
-        //    }
-        //}
+
         campPortal.CheckDistance(player.transform.position);
         if (campPortal.triggered == true)
         {
@@ -85,8 +76,19 @@ public class DungeonManager : MonoBehaviour {
             campPortal.triggered = false;
         }
 
-            // key buttons for game progression to be phased out for smooth gameplay
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+        caveEnd.CheckDistance(player.transform.position);
+        if (caveEnd.triggered == true)
+        {
+            // send player to destination
+            UnityEngine.AI.NavMeshAgent navAgent;
+            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+            navAgent.Warp(caveEnd.destination);
+            caveEnd.triggered = false;
+        }
+
+
+        // key buttons for game progression to be phased out for smooth gameplay
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
             GenerateCave();
             }
@@ -171,6 +173,9 @@ public class DungeonManager : MonoBehaviour {
         Debug.Log("SPAWN ENEMY ATTEMPT");
         currentSpawn.SpawnEnemies();
 
+
+        caveEnd.transform.position = endPos + this.transform.position;
+
         // might need to postpone this so that all enemies have had a chance to fall into place
         ////     currentSpawn.TrimEnemies(this.transform.position.y);
     }
@@ -216,6 +221,17 @@ public class DungeonManager : MonoBehaviour {
                         startPos = (new Vector3(-sectionSize * 0.5f + sectionSize * (x),
                                                 0,
                                              -sectionSize * 0.5f + sectionSize * (y)));
+                    }
+
+                    if (levelEnd.x == x && levelEnd.y == y)
+                    {
+                        endPos = (new Vector3(-sectionSize * 0.5f + sectionSize * (x),
+                                                0,
+                                             -sectionSize * 0.5f + sectionSize * (y)));
+
+
+
+
                     }
 
                     SpawnlistChance
