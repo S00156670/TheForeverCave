@@ -26,7 +26,7 @@ public class DungeonManager : MonoBehaviour {
     public DungeonSpawner currentSpawn;
 
     Portal campPortal;
-    //Portal caveStart;
+    Portal caveStart;
     Portal caveEnd;
 
   //  public List<Portal> portals;
@@ -38,6 +38,7 @@ public class DungeonManager : MonoBehaviour {
 
         campPortal = GameObject.Find("CampPortal").GetComponent<Portal>();
         caveEnd = GameObject.Find("EndPortal").GetComponent<Portal>();
+        caveStart = GameObject.Find("StartPortal").GetComponent<Portal>();
 
         GenerateCave();
         player = GameObject.Find("Player").GetComponent<Player>();
@@ -84,6 +85,16 @@ public class DungeonManager : MonoBehaviour {
             navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
             navAgent.Warp(caveEnd.destination);
             caveEnd.triggered = false;
+        }
+
+        caveStart.CheckDistance(player.transform.position);
+        if (caveStart.triggered == true)
+        {
+            // send player to destination
+            UnityEngine.AI.NavMeshAgent navAgent;
+            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+            navAgent.Warp(caveStart.destination);
+            caveStart.triggered = false;
         }
 
 
