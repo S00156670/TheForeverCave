@@ -66,86 +66,112 @@ public class DungeonManager : MonoBehaviour {
     {
 
         //// check portals
-
-        campPortal.CheckDistance(player.transform.position);
-        if (campPortal.triggered == true)
+        if (!inCave)
         {
-            // send player to destination
-            UnityEngine.AI.NavMeshAgent navAgent;
-            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
-            navAgent.Warp(campPortal.destination);
-            campPortal.triggered = false;
-        }
-
-        caveEnd.CheckDistance(player.transform.position);
-        if (caveEnd.triggered == true)
-        {
-            // send player to destination
-            UnityEngine.AI.NavMeshAgent navAgent;
-            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
-            navAgent.Warp(caveEnd.destination);
-            caveEnd.triggered = false;
-        }
-
-        caveStart.CheckDistance(player.transform.position);
-        if (caveStart.triggered == true)
-        {
-            // send player to destination
-            UnityEngine.AI.NavMeshAgent navAgent;
-            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
-            navAgent.Warp(caveStart.destination);
-            caveStart.triggered = false;
-        }
-
-
-        // key buttons for game progression to be phased out for smooth gameplay
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+            campPortal.CheckDistance(player.transform.position);
+            if (campPortal.triggered == true)
             {
-            GenerateCave();
-            }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            // go to waypoint island
-            UnityEngine.AI.NavMeshAgent navAgent;
-            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
-            //navAgent.transform.position = new Vector3(12.6f, 4, 32.1f);
-            //navAgent.SetDestination(new Vector3(12.6f, 4, 32.1f));
-            navAgent.Warp(new Vector3(12.6f, 4, 32.1f));
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            UnityEngine.AI.NavMeshAgent navAgent;
-            navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
-
-            if (!inCave)
-            {
-                // go to cave start
+                // prep cave for entry
+                UnityEngine.AI.NavMeshAgent navAgent;
+                navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
                 currentSpawn.TrimEnemies(this.transform.position.y);
-                Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
-                                                                            0.1f,
-                                                                        (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
-                Debug.Log("cave start translate at " + caveStart.x + "," + caveStart.y + "," + caveStart.z );
 
-                //         player.transform.position = caveStart;
-                //navAgent.transform.position = caveStart;
-                //navAgent.SetDestination(caveStart);
-                navAgent.Warp(caveStart);
-                //    navAgent.SetDestination(caveStart);
-                //       navAgent.destination = caveStart;
-                // player.GetComponent<NavMeshAgent>().SetDestination(caveStart);
+                //Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
+                //                                                            0.1f,
+                //                                                        (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
+
+                Debug.Log("cave start translate at " + campPortal.destination.x + "," + campPortal.destination.y + "," + campPortal.destination.z);
+                // go to cave start
+                //     navAgent.Warp(caveStart);
+                navAgent.Warp(campPortal.destination);
+                campPortal.triggered = false;
                 inCave = true;
             }
-            else
+        }
+        else
+        {
+            caveEnd.CheckDistance(player.transform.position);
+            if (caveEnd.triggered == true)
             {
-                // send palyer back to campsite
-                //navAgent.transform.position = new Vector3(-6,4,1);
-                //navAgent.SetDestination(new Vector3(-6, 4, 1));
-                navAgent.Warp(new Vector3(-6, 4, 1));
+                // send player to destination
+                UnityEngine.AI.NavMeshAgent navAgent;
+                navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+                navAgent.Warp(caveEnd.destination);
                 inCave = false;
+                caveEnd.triggered = false;
+
+                levelStage++;
+                if (levelStage > 5)
+                {
+                    levelStage = 1;
+                    // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
+                }
+                GenerateCave();
+            }
+
+            caveStart.CheckDistance(player.transform.position);
+            if (caveStart.triggered == true)
+            {
+                // send player to destination
+                UnityEngine.AI.NavMeshAgent navAgent;
+                navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+                navAgent.Warp(caveStart.destination);
+                inCave = false;
+                caveStart.triggered = false;
+
+                GenerateCave();
             }
         }
+        
+        ////// key buttons for game progression to be phased out for smooth gameplay
+        ////if (Input.GetKeyDown(KeyCode.LeftArrow))
+        ////    {
+        ////    GenerateCave();
+        ////    }
+
+        ////if (Input.GetKeyDown(KeyCode.DownArrow))
+        ////{
+        ////    // go to waypoint island
+        ////    UnityEngine.AI.NavMeshAgent navAgent;
+        ////    navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        ////    //navAgent.transform.position = new Vector3(12.6f, 4, 32.1f);
+        ////    //navAgent.SetDestination(new Vector3(12.6f, 4, 32.1f));
+        ////    navAgent.Warp(new Vector3(12.6f, 4, 32.1f));
+        ////}
+
+        ////if (Input.GetKeyDown(KeyCode.RightArrow))
+        ////{
+        ////    UnityEngine.AI.NavMeshAgent navAgent;
+        ////    navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+        ////    if (!inCave)
+        ////    {
+        ////        // go to cave start
+        ////        currentSpawn.TrimEnemies(this.transform.position.y);
+        ////        Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
+        ////                                                                    0.1f,
+        ////                                                                (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
+        ////        Debug.Log("cave start translate at " + caveStart.x + "," + caveStart.y + "," + caveStart.z );
+
+        ////        //         player.transform.position = caveStart;
+        ////        //navAgent.transform.position = caveStart;
+        ////        //navAgent.SetDestination(caveStart);
+        ////        navAgent.Warp(caveStart);
+        ////        //    navAgent.SetDestination(caveStart);
+        ////        //       navAgent.destination = caveStart;
+        ////        // player.GetComponent<NavMeshAgent>().SetDestination(caveStart);
+        ////        inCave = true;
+        ////    }
+        ////    else
+        ////    {
+        ////        // send palyer back to campsite
+        ////        //navAgent.transform.position = new Vector3(-6,4,1);
+        ////        //navAgent.SetDestination(new Vector3(-6, 4, 1));
+        ////        navAgent.Warp(new Vector3(-6, 4, 1));
+        ////        inCave = false;
+        ////    }
+        ////}
+
         // check for victory condition here?
     }
 
@@ -157,13 +183,13 @@ public class DungeonManager : MonoBehaviour {
 
         //// plan level
 
-        levelStage++;
+        //levelStage++;
 
-        if (levelStage > 5)
-        {
-            levelStage = 1;
-            // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
-        }
+        //if (levelStage > 5)
+        //{
+        //    levelStage = 1;
+        //    // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
+        //}
 
 
         levelSize = (levelStage * 16) + 32;
