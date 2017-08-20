@@ -62,6 +62,18 @@ public class DungeonManager : MonoBehaviour {
         //     //     ground = plane;
     }
 
+    void TravelPortal(Portal port)
+    {
+        // prep cave for entry
+        UnityEngine.AI.NavMeshAgent navAgent;
+        navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        //Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
+        //                                                            0.1f,
+        //                                                        (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
+        navAgent.Warp(port.destination);
+        Debug.Log("portal traveled to " + port.destination.x + "," + port.destination.y + "," + port.destination.z);
+    }
+
     void Update()
     {
 
@@ -71,20 +83,8 @@ public class DungeonManager : MonoBehaviour {
             campPortal.CheckDistance(player.transform.position);
             if (campPortal.triggered == true)
             {
-                // prep cave for entry
-                UnityEngine.AI.NavMeshAgent navAgent;
-                navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
                 currentSpawn.TrimEnemies(this.transform.position.y);
-
-                //Vector3 caveStart = this.transform.position + new Vector3((-sectionSize * 0.5f + sectionSize * (levelStart.x)),
-                //                                                            0.1f,
-                //                                                        (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
-
-                Debug.Log("cave start translate at " + campPortal.destination.x + "," + campPortal.destination.y + "," + campPortal.destination.z);
-                // go to cave start
-                //     navAgent.Warp(caveStart);
-                navAgent.Warp(campPortal.destination);
-                campPortal.triggered = false;
+                TravelPortal(campPortal);
                 inCave = true;
             }
         }
@@ -93,10 +93,7 @@ public class DungeonManager : MonoBehaviour {
             caveEnd.CheckDistance(player.transform.position);
             if (caveEnd.triggered == true)
             {
-                // send player to destination
-                UnityEngine.AI.NavMeshAgent navAgent;
-                navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
-                navAgent.Warp(caveEnd.destination);
+                TravelPortal(caveEnd);
                 inCave = false;
                 caveEnd.triggered = false;
 
@@ -112,13 +109,9 @@ public class DungeonManager : MonoBehaviour {
             caveStart.CheckDistance(player.transform.position);
             if (caveStart.triggered == true)
             {
-                // send player to destination
-                UnityEngine.AI.NavMeshAgent navAgent;
-                navAgent = player.GetComponent<UnityEngine.AI.NavMeshAgent>();
-                navAgent.Warp(caveStart.destination);
+                TravelPortal(caveStart);
                 inCave = false;
                 caveStart.triggered = false;
-
                 GenerateCave();
             }
         }
