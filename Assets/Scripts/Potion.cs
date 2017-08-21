@@ -5,11 +5,19 @@ using System;
 public class Potion : MonoBehaviour , IConsumable {
     public void Consume()
     {
+        Player player;
+        player = GameObject.Find("Player").GetComponent<Player>();
+        player.currentHealth += 10;
+
         Debug.Log("You drank some potion"); 
     }
 
     public void Consume(CharachterStats stats)
     {
+        Player player;
+        player = GameObject.Find("Player").GetComponent<Player>();
+        player.currentHealth += 10;
+
         Debug.Log("You drank some stat potion ");
     }
 
