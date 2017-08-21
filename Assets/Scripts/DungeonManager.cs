@@ -100,6 +100,9 @@ public class DungeonManager : MonoBehaviour {
                 levelStage++;
                 if (levelStage > 5)
                 {
+                    GameWin();
+
+
                     levelStage = 1;
                     // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
                 }
@@ -166,6 +169,15 @@ public class DungeonManager : MonoBehaviour {
         ////}
 
         // check for victory condition here?
+    }
+
+    private void GameWin()
+    {
+        Debug.Log("Game Over");
+        string[] endgameText = new string[2];
+        endgameText[0] = "You have defeated the game.";
+        endgameText[1] = "Congradulations!!";
+        DialogueManager.Instance.AddNewDialogue(endgameText, name);
     }
 
     private void GenerateCave()
