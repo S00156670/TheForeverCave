@@ -9,6 +9,8 @@ public class Potion : MonoBehaviour , IConsumable {
         player = GameObject.Find("Player").GetComponent<Player>();
         player.currentHealth += 10;
 
+        UIEventHandler.PlayerHealthChanged(player.currentHealth, player.maxHealth);
+
         Debug.Log("You drank some potion"); 
     }
 
@@ -17,6 +19,8 @@ public class Potion : MonoBehaviour , IConsumable {
         Player player;
         player = GameObject.Find("Player").GetComponent<Player>();
         player.currentHealth += 10;
+
+        UIEventHandler.PlayerHealthChanged(player.currentHealth, player.maxHealth);
 
         Debug.Log("You drank some stat potion ");
     }
