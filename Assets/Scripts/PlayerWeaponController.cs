@@ -37,6 +37,10 @@ public class PlayerWeaponController : MonoBehaviour {
             PerformAttack();
         }
 
+        if (Input.GetMouseButton(1) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            PerformAttack();
+
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             PerformSpecialAttack();
