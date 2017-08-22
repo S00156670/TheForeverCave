@@ -8,6 +8,9 @@ public class Sword : MonoBehaviour , IWeapon {
 
     public int CurrentDamage { get; set; }
 
+    public bool IsMagic { get; set; }
+
+
     private Animator anim;
 
     // 2 reasons for this
@@ -19,6 +22,7 @@ public class Sword : MonoBehaviour , IWeapon {
     private void Start()
     {
         anim = GetComponent<Animator>();
+        IsMagic = false;
     }
 
     public void PerformAttack(int damage)

@@ -8,6 +8,8 @@ public interface IWeapon {
 
     int CurrentDamage { get; set; }
 
+    bool IsMagic { get; set; }
+
     void PerformAttack(int damage);
 
     // throw weapon? (right click) 

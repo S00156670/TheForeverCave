@@ -20,6 +20,10 @@ public class Player : MonoBehaviour {
         // not setting in the window at first
         this.currentHealth = this.maxHealth;
 
+//        charachterStats = new CharachterStats(4, 10, 2);
+        charachterStats = new CharachterStats(4, 10, 2, 5, 4, 2, 3);
+
+
 
         UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
 

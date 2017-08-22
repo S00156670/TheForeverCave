@@ -10,6 +10,8 @@ public class Staff : MonoBehaviour , IWeapon , IProjectileWeapon {
 
     public Transform ProjectileSpawn { get; set; }
 
+    public bool IsMagic { get; set; }
+
     Fireball fireball;
 
     private Animator anim;
@@ -19,6 +21,7 @@ public class Staff : MonoBehaviour , IWeapon , IProjectileWeapon {
     {
         fireball = Resources.Load<Fireball>("Weapons/Projectiles/fireball");
         anim = GetComponent<Animator>();
+        IsMagic = true;
     }
 
     public void PerformAttack(int damage)

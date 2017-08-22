@@ -29,11 +29,6 @@ public class PlayerWeaponController : MonoBehaviour {
         // attack button combos
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            //if (Input.GetKeyDown(KeyCode.X))
-            //{
-            //    PerformSpecialAttack();
-            //}
-            //else
             PerformAttack();
         }
 
@@ -147,9 +142,28 @@ public class PlayerWeaponController : MonoBehaviour {
 
     private int CallculateDamage()
     {
-        int DamageToDeal = ((charachterStats.GetStat(BaseStat.BaseStatType.Power).GetCalculatedStatValue() * 2)
-                            /*+ Random.Range(0,10)*/);
+        
+        int DamageToDeal;        
+        // DamageToDeal = ((charachterStats.GetStat(BaseStat.BaseStatType.Power).GetCalculatedStatValue() * 2));
 
+        if (EquippedWeapon.GetComponent<IProjectileWeapon>() == null)
+        {
+            DamageToDeal = ((charachterStats.GetStat(BaseStat.BaseStatType.MeleeSkill).GetCalculatedStatValue() * 2));
+            Debug.Log("melee weapon attack");
+        }
+        else
+        {
+            DamageToDeal = ((charachterStats.GetStat(BaseStat.BaseStatType.RangedSkill).GetCalculatedStatValue() * 2));
+            Debug.Log("ranged weapon attack");
+        }
+
+        if (EquippedWeapon.GetComponent<IWeapon>().IsMagic)
+        {
+            DamageToDeal += charachterStats.GetStat(BaseStat.BaseStatType.MagicSkill).GetCalculatedStatValue();
+            Debug.Log("attack has magic enhancements");
+        }
+
+        // adding chance crit
         DamageToDeal += CalculateCrit(DamageToDeal);
 
         Debug.Log("weapon controller assigning damage : " + DamageToDeal);
