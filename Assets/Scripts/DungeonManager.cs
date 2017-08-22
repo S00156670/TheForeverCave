@@ -76,7 +76,6 @@ public class DungeonManager : MonoBehaviour {
 
     void Update()
     {
-
         //// check portals
         if (!inCave)
         {
@@ -101,8 +100,6 @@ public class DungeonManager : MonoBehaviour {
                 if (levelStage > 5)
                 {
                     GameWin();
-
-
                     levelStage = 1;
                     // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
                 }

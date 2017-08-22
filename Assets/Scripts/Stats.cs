@@ -7,8 +7,8 @@ public class BaseStat {
 
     public enum BaseStatType
     {
-  //      melee,ranged,magic,agility,toughness,level,exp
-            Power,Toughness,AttackSpeed
+         Health,Vitality,Toughness,MeleeSkill,RangedSkill,Agility,MagicSkill
+            ,Power,/*Toughness,*/AttackSpeed
     }
 
     public List<StatBonus> BaseAdditives { get; set; }

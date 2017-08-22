@@ -21,6 +21,20 @@ public class CharachterStats  {
         };
     }
 
+    public CharachterStats(int health,int vitality , int toughness,int meleeSkill,int rangedSkill, int agility, int magicSkill)
+    {
+        stats = new List<BaseStat>();
+
+       stats = new List<BaseStat>() {  new BaseStat( BaseStat.BaseStatType.Health, 4, "Health", "Your Health Level"),
+                                        new BaseStat( BaseStat.BaseStatType.Vitality, 4, "Vitality", "Your Recovery Rate"),
+                                        new BaseStat( BaseStat.BaseStatType.Toughness, 10, "Toughness", "Your Defensive Ability"),
+                                        new BaseStat( BaseStat.BaseStatType.MeleeSkill, 4, "Melee", "Close Combat Skill"),
+                                        new BaseStat( BaseStat.BaseStatType.RangedSkill, 4, "Ranged", "Ranged Combat skill"),
+                                        new BaseStat( BaseStat.BaseStatType.Agility, 2, "Agility", "Your Speed Level"),
+                                        new BaseStat( BaseStat.BaseStatType.MagicSkill, 4, "Magic", "Your Magic Level")
+        };
+    }
+
     private void Start()
     {
         // set up stats here
@@ -43,7 +57,6 @@ public class CharachterStats  {
     public BaseStat GetStat(BaseStat.BaseStatType stat)
     {
         return this.stats.Find(x => x.StatType == stat);
-
     }
 
 
