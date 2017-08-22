@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class DropTable
 {
-
     public List<LootDrop> loot;
-
 
     public  Item GetDrop()
     {

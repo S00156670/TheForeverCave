@@ -13,25 +13,23 @@ public class CharachterStats  {
         stats = new List<BaseStat>();// { new BaseStat(); };
 
         // maybe change Attack Speed to Atk Spd so it fits better in ui, remember this as it may cause issues elsewhere if stat is refrenced by old name
-        stats = new List<BaseStat>() {  new BaseStat( BaseStat.BaseStatType.Power, 4, "Power", "Your Power Level"),
-                                        new BaseStat( BaseStat.BaseStatType.Toughness, 10, "Toughness", "Your Toughness Level"),
-                                        new BaseStat( BaseStat.BaseStatType.AttackSpeed, 2, "Atk Spd", "Your Speed Level")
-
-
+        stats = new List<BaseStat>() {  new BaseStat( BaseStat.BaseStatType.Power, power, "Power", "Your Power Level"),
+                                        new BaseStat( BaseStat.BaseStatType.Toughness, toughness, "Toughness", "Your Toughness Level"),
+                                        new BaseStat( BaseStat.BaseStatType.AttackSpeed, attachSpeed, "Atk Spd", "Your Speed Level")
         };
     }
 
     public CharachterStats(int health,int vitality , int toughness,int meleeSkill,int rangedSkill, int agility, int magicSkill)
     {
-        stats = new List<BaseStat>();
+       stats = new List<BaseStat>();
 
-       stats = new List<BaseStat>() {  new BaseStat( BaseStat.BaseStatType.Health, 4, "Health", "Your Health Level"),
-                                        new BaseStat( BaseStat.BaseStatType.Vitality, 4, "Vitality", "Your Recovery Rate"),
-                                        new BaseStat( BaseStat.BaseStatType.Toughness, 10, "Toughness", "Your Defensive Ability"),
-                                        new BaseStat( BaseStat.BaseStatType.MeleeSkill, 4, "Melee", "Close Combat Skill"),
-                                        new BaseStat( BaseStat.BaseStatType.RangedSkill, 4, "Ranged", "Ranged Combat skill"),
-                                        new BaseStat( BaseStat.BaseStatType.Agility, 2, "Agility", "Your Speed Level"),
-                                        new BaseStat( BaseStat.BaseStatType.MagicSkill, 4, "Magic", "Your Magic Level")
+       stats = new List<BaseStat>() {  new BaseStat( BaseStat.BaseStatType.Health, health, "Health", "Your Health Level"),
+                                        new BaseStat( BaseStat.BaseStatType.Vitality, vitality, "Vitality", "Your Recovery Rate"),
+                                        new BaseStat( BaseStat.BaseStatType.Toughness, toughness, "Toughness", "Your Defensive Ability"),
+                                        new BaseStat( BaseStat.BaseStatType.MeleeSkill, meleeSkill, "Melee", "Close Combat Skill"),
+                                        new BaseStat( BaseStat.BaseStatType.RangedSkill, rangedSkill, "Ranged", "Ranged Combat skill"),
+                                        new BaseStat( BaseStat.BaseStatType.Agility, agility, "Agility", "Your Speed Level"),
+                                        new BaseStat( BaseStat.BaseStatType.MagicSkill, magicSkill, "Magic", "Your Magic Level")
         };
     }
 
