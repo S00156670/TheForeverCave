@@ -61,7 +61,6 @@ public class ItemDatabase : MonoBehaviour {
         //weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 6, "Toughness", "Your defensive toughness"));
 
 
-
         Item currentItem = new Item(weaponStats, "sword");
         currentItem.ItemType = Item.ItemTypes.Weapon;
         currentItem.ItemName = "sword";
@@ -76,9 +75,9 @@ public class ItemDatabase : MonoBehaviour {
         weaponStats = new List<BaseStat>();
 
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.RangedSkill, 5, "Power", "Your power level"));
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility, 2, "Atk Spd", "Your agility in combat"));
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 3, "Toughness", "Your defensive toughness"));
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MagicSkill, 7, "Magic", "Your magic ability level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility,     2, "Atk Spd", "Your agility in combat"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness,   3, "Toughness", "Your defensive toughness"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MagicSkill,  7, "Magic", "Your magic ability level"));
 
 
         currentItem = new Item(weaponStats, "staff");
@@ -118,13 +117,12 @@ public class ItemDatabase : MonoBehaviour {
             Debug.Log("DB List, item added : " + i.ObjectSlug + " - " + i.ItemType);
 
         }
-   
+
     }
 
 
     public Item GetItem(string itemSlug)
     {
-
         foreach (Item i in Items)
         {
             if (i.ObjectSlug == itemSlug)
@@ -132,12 +130,10 @@ public class ItemDatabase : MonoBehaviour {
                 Debug.Log("found : " + i.ItemName);
                 return i;
             }
-
         }
 
         Debug.Log("could not find item : " + itemSlug);
         return null;
-
     }
 
 }

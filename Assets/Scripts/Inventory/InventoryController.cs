@@ -104,7 +104,7 @@ public class InventoryController : MonoBehaviour {
 
     public void ConsumeItem(Item itemToConsume)
     {
-        playerConsumableController.ConsumeItem(itemToConsume);
+        playerConsumableController.ConsumeItem(itemToConsume, (GameObject.Find("Player").transform.position + new Vector3(0,2,0)));
     }
 
     ////test code for hardcoded items
