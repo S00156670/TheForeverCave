@@ -210,7 +210,7 @@ public class DungeonManager : MonoBehaviour {
 
         // spawn enemies and treasure chests
         Debug.Log("SPAWN ENEMY ATTEMPT");
-        currentSpawn.SpawnEnemies();
+        currentSpawn.SpawnEnemies(levelStage);
 
 
         caveEnd.transform.position = endPos + this.transform.position + new Vector3(6,0,-1.2f);
@@ -354,6 +354,8 @@ public class DungeonManager : MonoBehaviour {
         //    new Vector2(1,1),
         //    new Vector2(0,1),
         //});
+
+        
 
         return mesh;
     }

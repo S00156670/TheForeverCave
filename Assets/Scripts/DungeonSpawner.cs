@@ -26,12 +26,34 @@ public class DungeonSpawner : MonoBehaviour {
         TreasurePoints = new List<Vector3>();
     }
 
-    public void SpawnEnemies()
+    public void SpawnEnemies(int dungeonLevel)
     {
  
         RemoveEnemies();
 
         GameObject enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+
+        switch (dungeonLevel)
+        {
+            case 1:
+                enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+                break;
+            case 2:
+                enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+                break;
+            case 3:
+                enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+                break;
+            case 4:
+                enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+                break;
+            case 5:
+                enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+                break;
+            default:
+                enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+                break;
+        }
 
         foreach (Vector3 p in SpawnPoints)
         {
