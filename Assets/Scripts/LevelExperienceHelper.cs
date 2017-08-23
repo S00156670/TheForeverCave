@@ -29,11 +29,9 @@ public class LevelExperienceHelper : MonoBehaviour {
         {
             CurrentExperiene -= RequiredExperience;
             Level++;
+            Debug.Log("PLAYER UI LEVEL UP");
         }
 
         UIEventHandler.PlayerLevelChange();
-
     }
-
-
 }
