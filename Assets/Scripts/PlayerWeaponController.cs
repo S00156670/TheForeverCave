@@ -77,8 +77,6 @@ public class PlayerWeaponController : MonoBehaviour {
         // set stats of equipped weapon
         // should be remembered so you know what to remove when you unequip
         //     EquippedWeapon.GetComponent<IWeapon>().Stats = itemToEquip.Stats;
-      
-        //<< THIS MIGHT BE STILL NEEDED
 
 
         // set projectile spawn point if weapon has the IProjectileWeapon signature 
@@ -123,7 +121,6 @@ public class PlayerWeaponController : MonoBehaviour {
 
         UIEventHandler.StatsChanged();
 
-
     }
 
     // use 
@@ -131,7 +128,6 @@ public class PlayerWeaponController : MonoBehaviour {
     {
         //   EquippedWeapon.GetComponent<IWeapon>().PerformAttack();
         equippfedWeaponData.PerformAttack(CallculateDamage());
-
     }
 
     public void PerformSpecialAttack()

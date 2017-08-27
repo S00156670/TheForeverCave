@@ -36,13 +36,13 @@ using System;
                         {
                             new LootDrop("sword",25),
                              new LootDrop("staff",25),
-                      //        new LootDrop("potion",25),
-
+                            new LootDrop("potion",25),
                         };
 
         Experience = 20;
         navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        charachterStats = new CharachterStats(9, 10, 2);
+        //     charachterStats = new CharachterStats(9, 10, 2);
+        charachterStats = new CharachterStats(7, 1, 4, 5, 5, 4, 2);
 
         currentHealth = maxHealth;
 

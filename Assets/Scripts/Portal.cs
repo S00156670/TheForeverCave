@@ -34,7 +34,7 @@ public class Portal : MonoBehaviour
             Debug.Log("Portal has been triggered, destination: " + destination.x + "|" + destination.y + "|" + destination.z);
         }
 
-        if (dist > triggerRadius )
+        if (dist > triggerRadius || active == false )
             triggered = false;//reset
 
     }

@@ -90,21 +90,27 @@ public class DungeonManager : MonoBehaviour {
         else
         {
             caveEnd.CheckDistance(player.transform.position);
-            if (caveEnd.triggered == true)
-            {
-                TravelPortal(caveEnd);
-                inCave = false;
-                caveEnd.triggered = false;
-
-                levelStage++;
-                if (levelStage > 5)
+            //if (
+            //    GameObject.Find("EnemyBoss(Clone)").GetComponent<IEnemy>() == null
+            //    )
+            //{
+                if (caveEnd.triggered == true)
                 {
-                    GameWin();
-                    levelStage = 1;
-                    // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
+                    TravelPortal(caveEnd);
+                    inCave = false;
+                    caveEnd.triggered = false;
+
+                    levelStage++;
+                    if (levelStage > 5)
+                    {
+                        GameWin();
+                        levelStage = 1;
+                        // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
+                    }
+                    GenerateCave();
                 }
-                GenerateCave();
-            }
+      //      }
+
 
             caveStart.CheckDistance(player.transform.position);
             if (caveStart.triggered == true)
@@ -207,10 +213,10 @@ public class DungeonManager : MonoBehaviour {
         // re-orientate to line up with off-mesh-link
         // may not be needed now im using nav.warp
         transform.position = new Vector3(transform.position.x, transform.position.y, 32 - startPos.z);
-
+        
         // spawn enemies and treasure chests
         Debug.Log("SPAWN ENEMY ATTEMPT");
-        currentSpawn.SpawnEnemies(levelStage);
+        currentSpawn.SpawnEnemies(levelStage,endPos + this.transform.position);
 
 
         caveEnd.transform.position = endPos + this.transform.position + new Vector3(6,0,-1.2f);
