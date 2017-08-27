@@ -29,6 +29,8 @@ public class DungeonManager : MonoBehaviour {
     Portal caveStart;
     Portal caveEnd;
 
+    Enemy boss;
+
   //  public List<Portal> portals;
 
     void Awake ()
@@ -90,10 +92,8 @@ public class DungeonManager : MonoBehaviour {
         else
         {
             caveEnd.CheckDistance(player.transform.position);
-            //if (
-            //    GameObject.Find("EnemyBoss(Clone)").GetComponent<IEnemy>() == null
-            //    )
-            //{
+            if (boss == null)
+            {
                 if (caveEnd.triggered == true)
                 {
                     TravelPortal(caveEnd);
@@ -109,7 +109,7 @@ public class DungeonManager : MonoBehaviour {
                     }
                     GenerateCave();
                 }
-      //      }
+            }
 
 
             caveStart.CheckDistance(player.transform.position);
@@ -220,6 +220,8 @@ public class DungeonManager : MonoBehaviour {
 
 
         caveEnd.transform.position = endPos + this.transform.position + new Vector3(6,0,-1.2f);
+
+        boss = GameObject.Find("EnemyBoss(Clone)").GetComponent<Enemy>();
 
         // might need to postpone this so that all enemies have had a chance to fall into place
         ////     currentSpawn.TrimEnemies(this.transform.position.y);
