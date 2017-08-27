@@ -38,12 +38,13 @@ public class DungeonSpawner : MonoBehaviour {
         {
             case 1:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
-                enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, 7, 5, 4, 2);
+ //               enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, 7, 5, 4, 2);
                 levelBoss = Resources.Load<GameObject>("Charachters/EnemyBoss");
 
                 break;
             case 2:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+  //              enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, 7, 5, 4, 2);
                 levelBoss = Resources.Load<GameObject>("Charachters/EnemyBoss");
 
                 break;
@@ -63,6 +64,20 @@ public class DungeonSpawner : MonoBehaviour {
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
                 levelBoss = Resources.Load<GameObject>("Charachters/EnemyBoss");
                 break;
+        }
+
+        enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, 7, 5, 4, 2);
+        levelBoss.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 3, 1, 4, 7, 5, 4, 2);
+
+        Debug.Log("Cave enemy");
+        foreach ( BaseStat s in enemyToSpawn.GetComponent<Enemy>().charachterStats.stats)
+        {
+            Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
+        }
+        Debug.Log("Cave Boss");
+        foreach (BaseStat s in levelBoss.GetComponent<Enemy>().charachterStats.stats)
+        {
+            Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
         }
 
         foreach (Vector3 p in SpawnPoints)
