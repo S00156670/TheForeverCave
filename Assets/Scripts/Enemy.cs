@@ -10,13 +10,14 @@ using System;
 
     public class Enemy : Interactable, IEnemy
     {
-
     public LayerMask aggroLayerMask;
-    public float  power, toughness , maxHealth;
-    public float currentHealth;
+  //  public float power;
+ //   public float toughness;
+    private float maxHealth;
+    private float currentHealth;
 
     private UnityEngine.AI.NavMeshAgent navAgent;
-    private CharachterStats charachterStats;
+    public CharachterStats charachterStats;
 
     Collider[] aggroNavTargets;
 
@@ -42,7 +43,9 @@ using System;
         Experience = 20;
         navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         //     charachterStats = new CharachterStats(9, 10, 2);
-        charachterStats = new CharachterStats(7, 1, 4, 5, 5, 4, 2);
+        charachterStats = new CharachterStats(3, 1, 4, 5, 7, 4, 2);
+
+        maxHealth = charachterStats.GetStat(BaseStat.BaseStatType.Health).GetCalculatedStatValue() * 10;
 
         currentHealth = maxHealth;
 
@@ -51,13 +54,16 @@ using System;
 
     public void PerformAttack()
     {
-        player.TakeDamage(5);
+        //  player.TakeDamage(5);
+        player.TakeDamage(charachterStats.GetStat(BaseStat.BaseStatType.MeleeSkill).GetCalculatedStatValue());
         Debug.Log(this.name + "is attacking player");
     }
 
     public void TakeDamage(int amount)
     {
-   
+        amount -= charachterStats.GetStat(BaseStat.BaseStatType.Toughness).GetCalculatedStatValue();
+
+        if (amount > 0)
         currentHealth = currentHealth - amount;
 
         Debug.Log(this.name + " revieved " +  amount + " damage");

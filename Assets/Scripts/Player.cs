@@ -31,11 +31,27 @@ public class Player : MonoBehaviour {
         // not setting in the window at first
         UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
 
+    //    InvokeRepeating("Regen", 5f, 5f);
+
         Debug.Log("Player is created and awakened");
+    }
+
+    void Regen()
+    {
+        Debug.Log("Regen : " + charachterStats.GetStat(BaseStat.BaseStatType.Vitality).GetCalculatedStatValue());
+        currentHealth += charachterStats.GetStat(BaseStat.BaseStatType.Vitality).GetCalculatedStatValue();
+
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
+        UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
     }
 
     public void TakeDamage(int amount)
     {
+        amount -=  charachterStats.GetStat(BaseStat.BaseStatType.Toughness).GetCalculatedStatValue();
+
+        if (amount > 0)
         currentHealth -= amount;
 
         Debug.Log(amount + " damage recieved by player");
@@ -52,8 +68,6 @@ public class Player : MonoBehaviour {
     {
         Debug.Log("Player is dead , resetting health");
         this.currentHealth = maxHealth;
-
-        // reset gameplay position from here
         UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
 
     }

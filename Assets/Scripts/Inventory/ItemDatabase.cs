@@ -55,7 +55,7 @@ public class ItemDatabase : MonoBehaviour {
 
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MeleeSkill, 6, "Power", "Your power level"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility, 5, "Atk Spd", "Your agility in combat"));
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 3, "Toughness", "Your defensive toughness"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 2, "Toughness", "Your defensive toughness"));
         //weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Power, 6, "Power", "Your power level"));
         //weaponStats.Add(new BaseStat(BaseStat.BaseStatType.AttackSpeed, 6, "Atk Spd", "Your agility in combat"));
         //weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 6, "Toughness", "Your defensive toughness"));
@@ -76,7 +76,7 @@ public class ItemDatabase : MonoBehaviour {
 
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.RangedSkill, 5, "Power", "Your power level"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility,     2, "Atk Spd", "Your agility in combat"));
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness,   3, "Toughness", "Your defensive toughness"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness,   1, "Toughness", "Your defensive toughness"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MagicSkill,  7, "Magic", "Your magic ability level"));
 
 

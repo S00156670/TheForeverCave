@@ -38,6 +38,7 @@ public class DungeonSpawner : MonoBehaviour {
         {
             case 1:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
+                enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, 7, 5, 4, 2);
                 levelBoss = Resources.Load<GameObject>("Charachters/EnemyBoss");
 
                 break;
