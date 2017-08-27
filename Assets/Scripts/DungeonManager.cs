@@ -644,7 +644,7 @@ public class DungeonManager : MonoBehaviour {
         // must make more random
         while (pathSection != pathEnd)
         {
-            Debug.Log("generating path section");
+    //        Debug.Log("generating path section");
 
 
             if (pathSection.y < pathEnd.y)
@@ -684,7 +684,7 @@ public class DungeonManager : MonoBehaviour {
             {            // maybe should just add path straight to walkable area from here, benefit- 1 less list
 
                 path.Add(pathSection);
-                Debug.Log("path section generated at : " + pathSection.x + " , " + pathSection.y);
+          //      Debug.Log("path section generated at : " + pathSection.x + " , " + pathSection.y);
 
       //          List<Vector2> surroudings = NeighbouringSections(Convert.ToInt32(pathSection.x), Convert.ToInt32(pathSection.y));
 

@@ -43,7 +43,7 @@ using System;
         Experience = 20;
         navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         //     charachterStats = new CharachterStats(9, 10, 2);
-        charachterStats = new CharachterStats(3, 1, 4, 5, 7, 4, 2);
+        charachterStats = new CharachterStats(3, 1, 2, 5, 7, 4, 2);
 
         maxHealth = charachterStats.GetStat(BaseStat.BaseStatType.Health).GetCalculatedStatValue() * 10;
 

@@ -15,9 +15,12 @@ public class Fireball : MonoBehaviour {
 
         spawnPosition = transform.position;
         Range = 20f;
-        Damage = 8;
-
+   //     Damage = 8;
+        Damage =    GameObject.Find("Player").GetComponent<Player>().charachterStats.GetStat(BaseStat.BaseStatType.RangedSkill).GetCalculatedStatValue()
+                  + GameObject.Find("Player").GetComponent<Player>().charachterStats.GetStat(BaseStat.BaseStatType.MagicSkill).GetCalculatedStatValue();
         // 50f can be replaced later by a speed value
+        Debug.Log("Fireball Burning at " + Damage);
+
         GetComponent<Rigidbody>().AddForce(Direction * 10f);
     }
 
