@@ -35,7 +35,7 @@ public class DungeonManager : MonoBehaviour {
 
     void Awake ()
     {
-        levelStage = 0;
+        levelStage = 1;
         currentSpawn = new DungeonSpawner();
 
         campPortal = GameObject.Find("CampPortal").GetComponent<Portal>();
@@ -99,7 +99,7 @@ public class DungeonManager : MonoBehaviour {
                     TravelPortal(caveEnd);
                     inCave = false;
                     caveEnd.triggered = false;
-
+                    currentSpawn.RemovePickups();
                     levelStage++;
                     if (levelStage > 5)
                     {
@@ -118,6 +118,7 @@ public class DungeonManager : MonoBehaviour {
                 TravelPortal(caveStart);
                 inCave = false;
                 caveStart.triggered = false;
+                currentSpawn.RemovePickups();
                 GenerateCave();
             }
         }
@@ -189,6 +190,8 @@ public class DungeonManager : MonoBehaviour {
         currentSpawn = new DungeonSpawner();
         currentSpawn.SpawnPoints = new List<Vector3>();
 
+        Debug.Log("Generating stage " + levelStage + "cave");
+
         //// plan level
 
         //levelStage++;
@@ -223,6 +226,7 @@ public class DungeonManager : MonoBehaviour {
 
         boss = GameObject.Find("EnemyBoss(Clone)").GetComponent<Enemy>();
 
+        Debug.Log("Finished stage " + levelStage + "cave");
         // might need to postpone this so that all enemies have had a chance to fall into place
         ////     currentSpawn.TrimEnemies(this.transform.position.y);
     }
@@ -626,7 +630,7 @@ public class DungeonManager : MonoBehaviour {
             if (CheckPath(pathSection))
             {
                 walkableArea.Add(pathSection);
-                Debug.Log("path point added to walkable area : " + pathSection.x + " , " + pathSection.y);
+             //   Debug.Log("path point added to walkable area : " + pathSection.x + " , " + pathSection.y);
             }
 
         }

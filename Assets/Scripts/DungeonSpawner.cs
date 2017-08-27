@@ -39,10 +39,12 @@ public class DungeonSpawner : MonoBehaviour {
             case 1:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
                 levelBoss = Resources.Load<GameObject>("Charachters/EnemyBoss");
+
                 break;
             case 2:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
                 levelBoss = Resources.Load<GameObject>("Charachters/EnemyBoss");
+
                 break;
             case 3:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
@@ -54,7 +56,7 @@ public class DungeonSpawner : MonoBehaviour {
                 break;
             case 5:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
-                levelBoss = Resources.Load<GameObject>("Charachters/EnemyBoss");
+                levelBoss = Resources.Load<GameObject>("Charachters/Level5/EnemyBoss");
                 break;
             default:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/EnemyCube");
@@ -118,7 +120,14 @@ public class DungeonSpawner : MonoBehaviour {
             Destroy(e);
         }
     }
-
+    public void RemovePickups()
+    {
+        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Interactible Object"))
+        {
+            if (p.name == "PickUp(Clone)")
+            { Destroy(p); }
+        }
+    }
 
 
 }
