@@ -49,6 +49,8 @@ public class InventoryController : MonoBehaviour {
         Debug.Log("got potions");
 
 
+        GiveItem("ball");
+
         //// generating test hardcoded objects
         //List<BaseStat> swordStats = new List<BaseStat>();
         //swordStats.Add(new BaseStat(6, "Power","Your Power Level"));
@@ -57,7 +59,6 @@ public class InventoryController : MonoBehaviour {
         //sword = new Item(swordStats, "staff");
 
         //potion = new Item(new List<BaseStat>(), "potion","drink this to test potipn drinking","Drink","PotionTest",false);
-
     }
 
     public void GiveItem(string itemSlug)

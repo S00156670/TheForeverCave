@@ -49,10 +49,9 @@ public class ItemDatabase : MonoBehaviour {
 
         Debug.Log("BUILDING GAME ITEM LIST");
 
-        // weapons
-
+        // Weapons
+        //sword
         List<BaseStat> weaponStats = new List<BaseStat>();
-
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MeleeSkill, 6, "Power", "Your power level"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility, 5, "Atk Spd", "Your agility in combat"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 2, "Toughness", "Your defensive toughness"));
@@ -60,38 +59,38 @@ public class ItemDatabase : MonoBehaviour {
         //weaponStats.Add(new BaseStat(BaseStat.BaseStatType.AttackSpeed, 6, "Atk Spd", "Your agility in combat"));
         //weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 6, "Toughness", "Your defensive toughness"));
 
-
         Item currentItem = new Item(weaponStats, "sword");
         currentItem.ItemType = Item.ItemTypes.Weapon;
         currentItem.ItemName = "sword";
-
         currentItem.Description = "a sharp blade, good for cutting";
         currentItem.ActionName = "Equip";
-
-        //       currentItem.ObjectSlug = "sword";
-
         Items.Add(currentItem);
 
+        //staff
         weaponStats = new List<BaseStat>();
-
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.RangedSkill, 5, "Power", "Your power level"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility,     2, "Atk Spd", "Your agility in combat"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness,   1, "Toughness", "Your defensive toughness"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MagicSkill,  7, "Magic", "Your magic ability level"));
 
-
         currentItem = new Item(weaponStats, "staff");
         currentItem.ItemName = "staff";
-
         currentItem.Description = "a magic staff of conjuration";
         currentItem.ActionName = "Equip";
-
-        //  currentItem.ObjectSlug = "staff";
-
         Items.Add(currentItem);
 
-        //Items.Add(new Item(weaponStats, "sword"));
-        //Items.Add(new Item(weaponStats, "staff"));
+        //ball
+        weaponStats = new List<BaseStat>();
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.RangedSkill, 5, "Power", "Your power level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility, 2, "Atk Spd", "Your agility in combat"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 2, "Toughness", "Your defensive toughness"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MagicSkill, 17, "Magic", "Your magic ability level"));
+
+        currentItem = new Item(weaponStats, "ball");
+        currentItem.ItemName = "ball";
+        currentItem.Description = "a leather ball made from the flayed skin of a fallen angel, it eminates a holy aura";
+        currentItem.ActionName = "Equip";
+        Items.Add(currentItem);
 
 
         Debug.Log(" weapons added");

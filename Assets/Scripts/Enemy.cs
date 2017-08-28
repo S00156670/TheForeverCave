@@ -36,8 +36,9 @@ using System;
         dropTable.loot = new System.Collections.Generic.List<LootDrop>
                         {
                             new LootDrop("sword",25),
-                             new LootDrop("staff",25),
+                            new LootDrop("staff",25),
                             new LootDrop("potion",25),
+                            new LootDrop("ball",25),
                         };
 
         Experience = 20;

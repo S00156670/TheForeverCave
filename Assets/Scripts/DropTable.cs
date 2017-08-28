@@ -22,7 +22,6 @@ public class DropTable
         }
         return null;
     }
-
 }
 
 public class LootDrop

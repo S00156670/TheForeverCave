@@ -31,7 +31,7 @@ public class DungeonManager : MonoBehaviour {
 
     Enemy boss;
 
-  //  public List<Portal> portals;
+    //  public List<Portal> portals;
 
     void Awake ()
     {
@@ -220,6 +220,51 @@ public class DungeonManager : MonoBehaviour {
         // spawn enemies and treasure chests
         Debug.Log("SPAWN ENEMY ATTEMPT");
         currentSpawn.SpawnEnemies(levelStage,endPos + this.transform.position);
+
+
+        currentSpawn.SpawnBall(endPos + this.transform.position);//new Vector3(40,150,20));
+        if (levelStage == 4)
+        {
+    //        currentSpawn.SpawnBall();
+
+
+        //ItemDatabase x = new ItemDatabase();
+        //Item ball = x.GetItem("ball");
+        //PickUpItem ballPickUp = new PickUpItem();
+        //ballPickUp.ItemToPick = ball;
+        //Instantiate(ballPickUp, transform.position, Quaternion.identity);
+
+
+
+    //////      //  Item ball;
+    //////        PickUpItem pickUpItem = new PickUpItem(ItemDatabase.GetItem("ball"));
+
+    ////////        LootDrop ballDrop = new LootDrop("PickUpBall", 100);
+    ////////        Item ball = ballDrop.GetDrop();
+
+
+    //////        PickUpItem ballDrop = Instantiate(pickUpItem, transform.position, Quaternion.identity);
+    //////        ballDrop.ItemToPick = ball;
+
+            //LootDrop ballDrop = new LootDrop("PickUpBall", 100);
+            //ItemDatabase.instance.GetItem(ballDrop.ItemSlug);   //.("PickUpBall"));
+
+            //Instantiate(enemyToSpawn, p, Quaternion.identity);
+
+
+            //Item item = ballDrop.GetDrop();
+
+            //if (item != null)
+            //{
+            //    PickUpItem instance = Instantiate(pickUpItem, transform.position, Quaternion.identity);
+            //    instance.ItemToPick = item;
+            //}
+
+
+            //PickUpItem instance = Instantiate(pickUpItem, transform.position, Quaternion.identity);
+            //instance.ItemToPick = item;
+
+        }
 
 
         caveEnd.transform.position = endPos + this.transform.position + new Vector3(6,0,-1.2f);

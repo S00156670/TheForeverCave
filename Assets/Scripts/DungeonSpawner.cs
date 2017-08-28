@@ -26,6 +26,31 @@ public class DungeonSpawner : MonoBehaviour {
         TreasurePoints = new List<Vector3>();
     }
 
+    public void SpawnBall(Vector3 ballPos)
+    {
+        Debug.Log("spawning ball at " + ballPos.x + "-" + ballPos.y + "-" + ballPos.z);
+        //ItemDatabase db = GameObject.Find("Inventory").GetComponent<ItemDatabase>();
+        //Item ball = db.GetItem("ball");
+
+        Item ball = ItemDatabase.instance.GetItem("ball");
+
+        //PickUpItem ballPickUp = new PickUpItem();
+        //ballPickUp.ItemToPick = ball;
+
+
+        //PickUpItem instance =   Instantiate(ballPickUp, ballPos, Quaternion.identity);
+  
+
+        //instance.ItemToPick = ball;
+
+
+        GameObject enemyToSpawn = Resources.Load<GameObject>("PickUpBall");
+        enemyToSpawn.GetComponent<PickUpItem>().ItemToPick = ball;
+        Instantiate(enemyToSpawn, ballPos, Quaternion.identity);
+
+    }
+
+
     public void SpawnEnemies(int dungeonLevel,Vector3 endPos)
     {
  
@@ -69,6 +94,7 @@ public class DungeonSpawner : MonoBehaviour {
         enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, 7, 5, 4, 2);
         levelBoss.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 3, 1, 4, 7, 5, 4, 2);
 
+        // print enemy stats
         Debug.Log("Cave enemy");
         foreach ( BaseStat s in enemyToSpawn.GetComponent<Enemy>().charachterStats.stats)
         {
