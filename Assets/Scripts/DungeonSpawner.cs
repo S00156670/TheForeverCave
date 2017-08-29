@@ -45,7 +45,7 @@ public class DungeonSpawner : MonoBehaviour {
 
 
         GameObject enemyToSpawn = Resources.Load<GameObject>("PickUpBall");
-        enemyToSpawn.GetComponent<PickUpItem>().ItemToPick = ball;
+     //   enemyToSpawn.GetComponent<PickUpItem>().ItemToPick = ball;
         Instantiate(enemyToSpawn, ballPos, Quaternion.identity);
 
     }

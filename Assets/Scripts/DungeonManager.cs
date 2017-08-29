@@ -21,6 +21,7 @@ public class DungeonManager : MonoBehaviour {
     // private BoxCollider collider;
     Player player;
     bool inCave = false;
+    bool ChestDropped = false;
     public Vector3 startPos;
     public Vector3 endPos;
     public DungeonSpawner currentSpawn;
@@ -94,6 +95,13 @@ public class DungeonManager : MonoBehaviour {
             caveEnd.CheckDistance(player.transform.position);
             if (boss == null)
             {
+                if (ChestDropped == false)
+                {
+                    // drop chest
+                    currentSpawn.SpawnBall(endPos + transform.position + new Vector3(0,1,0));
+                    ChestDropped = true;
+                }
+
                 if (caveEnd.triggered == true)
                 {
                     TravelPortal(caveEnd);
@@ -108,6 +116,7 @@ public class DungeonManager : MonoBehaviour {
                         // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
                     }
                     GenerateCave();
+                    ChestDropped = false;
                 }
             }
 
@@ -120,6 +129,7 @@ public class DungeonManager : MonoBehaviour {
                 caveStart.triggered = false;
                 currentSpawn.RemovePickups();
                 GenerateCave();
+                ChestDropped = false;
             }
         }
         
@@ -222,49 +232,49 @@ public class DungeonManager : MonoBehaviour {
         currentSpawn.SpawnEnemies(levelStage,endPos + this.transform.position);
 
 
-    //    currentSpawn.SpawnBall(endPos + this.transform.position);//new Vector3(40,150,20));
-        if (levelStage == 4)
-        {
-    //        currentSpawn.SpawnBall();
+    //////    currentSpawn.SpawnBall(endPos + this.transform.position);//new Vector3(40,150,20));
+    ////    if (levelStage == 4)
+    ////    {
+    //////        currentSpawn.SpawnBall();
 
 
-        //ItemDatabase x = new ItemDatabase();
-        //Item ball = x.GetItem("ball");
-        //PickUpItem ballPickUp = new PickUpItem();
-        //ballPickUp.ItemToPick = ball;
-        //Instantiate(ballPickUp, transform.position, Quaternion.identity);
+    ////    //ItemDatabase x = new ItemDatabase();
+    ////    //Item ball = x.GetItem("ball");
+    ////    //PickUpItem ballPickUp = new PickUpItem();
+    ////    //ballPickUp.ItemToPick = ball;
+    ////    //Instantiate(ballPickUp, transform.position, Quaternion.identity);
 
 
 
-    //////      //  Item ball;
-    //////        PickUpItem pickUpItem = new PickUpItem(ItemDatabase.GetItem("ball"));
+    //////////      //  Item ball;
+    //////////        PickUpItem pickUpItem = new PickUpItem(ItemDatabase.GetItem("ball"));
 
-    ////////        LootDrop ballDrop = new LootDrop("PickUpBall", 100);
-    ////////        Item ball = ballDrop.GetDrop();
-
-
-    //////        PickUpItem ballDrop = Instantiate(pickUpItem, transform.position, Quaternion.identity);
-    //////        ballDrop.ItemToPick = ball;
-
-            //LootDrop ballDrop = new LootDrop("PickUpBall", 100);
-            //ItemDatabase.instance.GetItem(ballDrop.ItemSlug);   //.("PickUpBall"));
-
-            //Instantiate(enemyToSpawn, p, Quaternion.identity);
+    ////////////        LootDrop ballDrop = new LootDrop("PickUpBall", 100);
+    ////////////        Item ball = ballDrop.GetDrop();
 
 
-            //Item item = ballDrop.GetDrop();
+    //////////        PickUpItem ballDrop = Instantiate(pickUpItem, transform.position, Quaternion.identity);
+    //////////        ballDrop.ItemToPick = ball;
 
-            //if (item != null)
-            //{
-            //    PickUpItem instance = Instantiate(pickUpItem, transform.position, Quaternion.identity);
-            //    instance.ItemToPick = item;
-            //}
+    ////        //LootDrop ballDrop = new LootDrop("PickUpBall", 100);
+    ////        //ItemDatabase.instance.GetItem(ballDrop.ItemSlug);   //.("PickUpBall"));
+
+    ////        //Instantiate(enemyToSpawn, p, Quaternion.identity);
 
 
-            //PickUpItem instance = Instantiate(pickUpItem, transform.position, Quaternion.identity);
-            //instance.ItemToPick = item;
+    ////        //Item item = ballDrop.GetDrop();
 
-        }
+    ////        //if (item != null)
+    ////        //{
+    ////        //    PickUpItem instance = Instantiate(pickUpItem, transform.position, Quaternion.identity);
+    ////        //    instance.ItemToPick = item;
+    ////        //}
+
+
+    ////        //PickUpItem instance = Instantiate(pickUpItem, transform.position, Quaternion.identity);
+    ////        //instance.ItemToPick = item;
+
+    ////    }
 
 
         caveEnd.transform.position = endPos + this.transform.position + new Vector3(6,0,-1.2f);
