@@ -32,7 +32,7 @@ public class DungeonSpawner : MonoBehaviour {
         //ItemDatabase db = GameObject.Find("Inventory").GetComponent<ItemDatabase>();
         //Item ball = db.GetItem("ball");
 
-        Item ball = ItemDatabase.instance.GetItem("ball");
+ //       Item ball = ItemDatabase.instance.GetItem("ball");
 
         //PickUpItem ballPickUp = new PickUpItem();
         //ballPickUp.ItemToPick = ball;
@@ -44,9 +44,9 @@ public class DungeonSpawner : MonoBehaviour {
         //instance.ItemToPick = ball;
 
 
-        GameObject enemyToSpawn = Resources.Load<GameObject>("PickUpBall");
+        GameObject ball = Resources.Load<GameObject>("PickUpBall");
      //   enemyToSpawn.GetComponent<PickUpItem>().ItemToPick = ball;
-        Instantiate(enemyToSpawn, ballPos, Quaternion.identity);
+        Instantiate(ball, ballPos, Quaternion.identity);
 
     }
 
@@ -132,6 +132,12 @@ public class DungeonSpawner : MonoBehaviour {
             Debug.Log("Spawn(Chest)- X:" + p.x + " Y:" + p.y + " Z:" + p.z);
         }
 
+    }
+
+    public void SpawnTreasure(Vector3 point)
+    {
+        GameObject chest = Resources.Load<GameObject>("TreasureChest");
+        Instantiate(chest, point, Quaternion.identity);
     }
 
     public void TrimEnemies(float floorLevel)

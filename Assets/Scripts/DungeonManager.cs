@@ -88,6 +88,7 @@ public class DungeonManager : MonoBehaviour {
                 currentSpawn.TrimEnemies(this.transform.position.y);
                 TravelPortal(campPortal);
                 inCave = true;
+                ChestDropped = false;
             }
         }
         else
@@ -97,8 +98,16 @@ public class DungeonManager : MonoBehaviour {
             {
                 if (ChestDropped == false)
                 {
-                    // drop chest
-                    currentSpawn.SpawnBall(endPos + transform.position + new Vector3(0,1,0));
+                   // drop reward
+                    if (levelStage == 4)
+                    {
+                        currentSpawn.SpawnBall(endPos + transform.position + new Vector3(0, 1, 0));
+                    }
+                    else
+                    {
+                        currentSpawn.SpawnTreasure(endPos + transform.position /*+ new Vector3(0, 1, 0)*/);
+                    }
+
                     ChestDropped = true;
                 }
 
@@ -116,7 +125,7 @@ public class DungeonManager : MonoBehaviour {
                         // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
                     }
                     GenerateCave();
-                    ChestDropped = false;
+                    ChestDropped = true;
                 }
             }
 
@@ -129,7 +138,7 @@ public class DungeonManager : MonoBehaviour {
                 caveStart.triggered = false;
                 currentSpawn.RemovePickups();
                 GenerateCave();
-                ChestDropped = false;
+                ChestDropped = true;
             }
         }
         

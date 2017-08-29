@@ -13,7 +13,11 @@ public class Chest : ActionItem {
         inventory = GameObject.Find("Player").GetComponent<InventoryController>();
 
         ItemDatabase db = GameObject.Find("Inventory").GetComponent<ItemDatabase>();
-        chestItems.Add(db.GetItem("ball"));
+        chestItems.Add(db.GetItem("potion"));
+        chestItems.Add(db.GetItem("potion"));
+        chestItems.Add(db.GetItem("potion"));
+        chestItems.Add(db.GetItem("potion"));
+        chestItems.Add(db.GetItem("potion"));
     }
 
 
@@ -26,7 +30,7 @@ public class Chest : ActionItem {
             Debug.Log("Item from chest is " + item.ItemName);
             inventory.GiveItem(item);
         }
-    //    GameObject.Destroy(this);
+        Destroy(gameObject);
     }
 
     public void StoreItem(Item item)
