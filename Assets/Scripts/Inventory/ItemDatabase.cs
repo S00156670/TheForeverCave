@@ -88,7 +88,7 @@ public class ItemDatabase : MonoBehaviour {
 
         currentItem = new Item(weaponStats, "ball");
         currentItem.ItemName = "ball";
-        currentItem.Description = "a leather ball made from the flayed skin of a fallen angel, it eminates a holy aura";
+        currentItem.Description = "a leather ball made from the flayed skin of a fallen angel, it eminates a divine aura";
         currentItem.ActionName = "Equip";
         Items.Add(currentItem);
 

@@ -222,7 +222,7 @@ public class DungeonManager : MonoBehaviour {
         currentSpawn.SpawnEnemies(levelStage,endPos + this.transform.position);
 
 
-        currentSpawn.SpawnBall(endPos + this.transform.position);//new Vector3(40,150,20));
+    //    currentSpawn.SpawnBall(endPos + this.transform.position);//new Vector3(40,150,20));
         if (levelStage == 4)
         {
     //        currentSpawn.SpawnBall();

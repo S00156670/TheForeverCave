@@ -1,0 +1,174 @@
+fileFormatVersion: 2
+guid: 24521b02d998ef94190d9d26beb2b121
+timeCreated: 1503969736
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: objbag
+    100002: objbook
+    100004: objBox06
+    100006: objclavicule
+    100008: objForearm_L
+    100010: objForearm_R
+    100012: objObject02
+    100014: objObject03
+    100016: objObject05
+    100018: objPelvis
+    100020: objribs
+    100022: objrobe
+    100024: objshoulders
+    100026: objskull
+    100028: objskull_1
+    100030: objspine
+    100032: objUpperArm_L
+    100034: objUpperArm_R
+    100036: objwaist
+    100038: //RootNode
+    400000: objbag
+    400002: objbook
+    400004: objBox06
+    400006: objclavicule
+    400008: objForearm_L
+    400010: objForearm_R
+    400012: objObject02
+    400014: objObject03
+    400016: objObject05
+    400018: objPelvis
+    400020: objribs
+    400022: objrobe
+    400024: objshoulders
+    400026: objskull
+    400028: objskull_1
+    400030: objspine
+    400032: objUpperArm_L
+    400034: objUpperArm_R
+    400036: objwaist
+    400038: //RootNode
+    2300000: objbag
+    2300002: objbook
+    2300004: objBox06
+    2300006: objclavicule
+    2300008: objForearm_L
+    2300010: objForearm_R
+    2300012: objObject02
+    2300014: objObject03
+    2300016: objObject05
+    2300018: objPelvis
+    2300020: objribs
+    2300022: objrobe
+    2300024: objshoulders
+    2300026: objskull
+    2300028: objskull_1
+    2300030: objspine
+    2300032: objUpperArm_L
+    2300034: objUpperArm_R
+    2300036: objwaist
+    3300000: objbag
+    3300002: objbook
+    3300004: objBox06
+    3300006: objclavicule
+    3300008: objForearm_L
+    3300010: objForearm_R
+    3300012: objObject02
+    3300014: objObject03
+    3300016: objObject05
+    3300018: objPelvis
+    3300020: objribs
+    3300022: objrobe
+    3300024: objshoulders
+    3300026: objskull
+    3300028: objskull_1
+    3300030: objspine
+    3300032: objUpperArm_L
+    3300034: objUpperArm_R
+    3300036: objwaist
+    4300000: objbag
+    4300002: objbook
+    4300004: objBox06
+    4300006: objclavicule
+    4300008: objForearm_L
+    4300010: objForearm_R
+    4300012: objObject02
+    4300014: objObject03
+    4300016: objObject05
+    4300018: objPelvis
+    4300020: objribs
+    4300022: objrobe
+    4300024: objshoulders
+    4300026: objskull
+    4300028: objskull_1
+    4300030: objspine
+    4300032: objUpperArm_L
+    4300034: objUpperArm_R
+    4300036: objwaist
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
