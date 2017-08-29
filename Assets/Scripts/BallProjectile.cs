@@ -38,6 +38,18 @@ public class BallProjectile : MonoBehaviour
         {
             other.transform.GetComponent<IEnemy>().TakeDamage(Damage);
             Debug.Log("ball damage = " + Damage);
+
+            // divine touch
+            if (other.transform.GetComponent<SpecialAllegience>() != null)
+            {
+
+                //if (other.transform.GetComponent<SpecialAllegience>().MainAllegience == SpecialAllegience.MainAllegience.Heathen)
+                //{
+                //Destroy(other.transform);
+                //}
+
+            }
+
         }
         else
         {

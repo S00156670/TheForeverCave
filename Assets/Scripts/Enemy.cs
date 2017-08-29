@@ -71,7 +71,6 @@ using System;
 
         if (currentHealth <= 0)
             Die();
-
     }
 
 

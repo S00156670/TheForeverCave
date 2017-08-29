@@ -14,7 +14,4 @@ public interface IWeapon {
 
     // throw weapon? (right click) 
     void PerformSpecialAttack();
-
-
-
 }

@@ -113,6 +113,11 @@ public class DungeonManager : MonoBehaviour {
 
                 if (caveEnd.triggered == true)
                 {
+                    //if (levelStage == 4 && !hasball)
+                    //{
+                    //    break;
+                    //}
+
                     TravelPortal(caveEnd);
                     inCave = false;
                     caveEnd.triggered = false;
