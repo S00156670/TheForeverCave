@@ -49,16 +49,64 @@ using System;
         currentHealth = maxHealth;
 
         dropTable = new DropTable();
-        dropTable.loot = new System.Collections.Generic.List<LootDrop>
+
+        //dropTable.loot = new System.Collections.Generic.List<LootDrop>
+        //                {
+        //                    new LootDrop("sword",25),
+        //                    new LootDrop("staff",25),
+        //                    new LootDrop("potion",25),
+        //                    new LootDrop("ball",25),
+        //                };
+
+
+        switch (level)
+        {
+            case 1:
+                dropTable.loot = new System.Collections.Generic.List<LootDrop>
                         {
-                            new LootDrop("sword",25),
-                            new LootDrop("staff",25),
-                            new LootDrop("potion",25),
-                            new LootDrop("ball",25),
+                            new LootDrop("potion",50),
                         };
+                break;
+            case 2:
+                dropTable.loot = new System.Collections.Generic.List<LootDrop>
+                        {
+                            new LootDrop("potion",45),
+                            new LootDrop("staff",10),
+                        };
+                break;
+            case 3:
+                dropTable.loot = new System.Collections.Generic.List<LootDrop>
+                        {
+                            new LootDrop("potion",40),
+                            new LootDrop("staff",20),
+                            new LootDrop("sword",10),
+                        };
+                break;
+            case 4:
+                dropTable.loot = new System.Collections.Generic.List<LootDrop>
+                        {
+                            new LootDrop("potion",30),
+                            new LootDrop("staff",20),
+                            new LootDrop("sword",25),
+                        };
+                break;
+            case 5:
+                dropTable.loot = new System.Collections.Generic.List<LootDrop>
+                        {
+                            new LootDrop("potion",40),
+                            new LootDrop("staff",10),
+                            new LootDrop("sword",10),
+                        };
+                break;
+            default:
+                dropTable.loot = new System.Collections.Generic.List<LootDrop>
+                        {
+                            new LootDrop("potion",20),
+                        };
+                break;
+        }
 
-
-
+        // debug data
         Debug.Log("### Stat Check for level " + level);
         foreach (BaseStat s in charachterStats.stats)
         {
@@ -66,16 +114,6 @@ using System;
         }
         Debug.Log(" : : max health is " + maxHealth);
         Debug.Log("############################");
-
-
-        //int level = GameObject.Find("DungeonGenerator").GetComponent<DungeonManager>().levelStage;
-        //charachterStats = new CharachterStats((level * 2), 1, 4, (level * 7), 5, 4, 2);
-
-        //Debug.Log("### Stat Check for level " + level);
-        //foreach (BaseStat s in charachterStats.stats)
-        //{
-        //    Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
-        //}
 
     }
 
