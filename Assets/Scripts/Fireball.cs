@@ -21,7 +21,7 @@ public class Fireball : MonoBehaviour {
         // 50f can be replaced later by a speed value
         Debug.Log("Fireball Burning at " + Damage);
 
-        GetComponent<Rigidbody>().AddForce(Direction * 10f);
+        GetComponent<Rigidbody>().AddForce(Direction * 20f);
     }
 
     private void Update()
@@ -39,7 +39,7 @@ public class Fireball : MonoBehaviour {
 
         if (other.transform.tag == "Enemy")
         {
-            other.transform.GetComponent<IEnemy>().TakeDamage(Damage);
+            other.transform.GetComponent<IEnemy>().TakeDamage(Damage, global::Damage.DamageType.Fire);
             Debug.Log("Fireball damage = " + Damage);
         }
         else

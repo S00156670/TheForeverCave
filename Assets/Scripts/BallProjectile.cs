@@ -36,19 +36,11 @@ public class BallProjectile : MonoBehaviour
 
         if (other.transform.tag == "Enemy")
         {
-            other.transform.GetComponent<IEnemy>().TakeDamage(Damage);
+            //        other.transform.GetComponent<IEnemy>().TakeDamage(Damage);
+            other.transform.GetComponent<IEnemy>().TakeDamage(Damage, global::Damage.DamageType.Divine);
             Debug.Log("ball damage = " + Damage);
 
-            // divine touch
-            if (other.transform.GetComponent<SpecialAllegience>() != null)
-            {
 
-                //if (other.transform.GetComponent<SpecialAllegience>().MainAllegience == SpecialAllegience.MainAllegience.Heathen)
-                //{
-                //Destroy(other.transform);
-                //}
-
-            }
 
         }
         else

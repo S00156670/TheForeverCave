@@ -60,14 +60,30 @@ using System;
         Debug.Log(this.name + "is attacking player");
     }
 
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         amount -= charachterStats.GetStat(BaseStat.BaseStatType.Toughness).GetCalculatedStatValue();
 
         if (amount > 0)
-        currentHealth = currentHealth - amount;
+            currentHealth = currentHealth - amount;
 
-        Debug.Log(this.name + " revieved " +  amount + " damage");
+        Debug.Log(this.name + " revieved " + amount + " damage");
+
+        if (currentHealth <= 0)
+            Die();
+    }
+
+    public virtual void TakeDamage(int amount , Damage.DamageType type)
+    {
+
+        Debug.Log(type.ToString() + " damage recieved");
+
+        amount -= charachterStats.GetStat(BaseStat.BaseStatType.Toughness).GetCalculatedStatValue();
+
+        if (amount > 0)
+            currentHealth = currentHealth - amount;
+
+        Debug.Log(this.name + " revieved " + amount + " damage");
 
         if (currentHealth <= 0)
             Die();
