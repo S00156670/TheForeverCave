@@ -17,7 +17,7 @@ using System;
     private float currentHealth;
 
     private UnityEngine.AI.NavMeshAgent navAgent;
-    public CharachterStats charachterStats;
+    public CharachterStats charachterStats { get; set; }
 
     Collider[] aggroNavTargets;
 
@@ -46,18 +46,23 @@ using System;
         //     charachterStats = new CharachterStats(9, 10, 2);
         charachterStats = new CharachterStats(3, 1, 2, 5, 7, 4, 2);
 
+        RenewHealth();
+
+    }
+
+    public void RenewHealth()
+    {
         maxHealth = charachterStats.GetStat(BaseStat.BaseStatType.Health).GetCalculatedStatValue() * 10;
 
         currentHealth = maxHealth;
-
     }
 
 
     public void PerformAttack()
     {
-        //  player.TakeDamage(5);
-        player.TakeDamage(charachterStats.GetStat(BaseStat.BaseStatType.MeleeSkill).GetCalculatedStatValue());
-        Debug.Log(this.name + "is attacking player");
+        int damage = charachterStats.GetStat(BaseStat.BaseStatType.MeleeSkill).GetCalculatedStatValue();
+        player.TakeDamage(damage);
+        Debug.Log(this.name + "is attacking player for " + damage);
     }
 
     public virtual void TakeDamage(int amount)
@@ -67,7 +72,7 @@ using System;
         if (amount > 0)
             currentHealth = currentHealth - amount;
 
-        Debug.Log(this.name + " revieved " + amount + " damage");
+        Debug.Log(this.name + " revieved " + amount + " current health is " + currentHealth);
 
         if (currentHealth <= 0)
             Die();
@@ -75,7 +80,6 @@ using System;
 
     public virtual void TakeDamage(int amount , Damage.DamageType type)
     {
-
         Debug.Log(type.ToString() + " damage recieved");
 
         amount -= charachterStats.GetStat(BaseStat.BaseStatType.Toughness).GetCalculatedStatValue();
@@ -83,7 +87,7 @@ using System;
         if (amount > 0)
             currentHealth = currentHealth - amount;
 
-        Debug.Log(this.name + " revieved " + amount + " damage");
+        Debug.Log(this.name + " revieved " + amount + " current health is " + currentHealth);
 
         if (currentHealth <= 0)
             Die();

@@ -70,6 +70,16 @@ public class Player : MonoBehaviour {
 
     }
 
+    private void Update()
+    {
+
+        if (currentHealth > maxHealth)
+        {
+        currentHealth = maxHealth;
+        UIEventHandler.PlayerHealthChanged(currentHealth, maxHealth);
+        }
+
+    }
 
 
     public void LevelUpStats(int level)// might be better to just add a listener onto expHelper
@@ -82,8 +92,15 @@ public class Player : MonoBehaviour {
             int luckyStat = UnityEngine.Random.Range(0, charachterStats.stats.Count);
             charachterStats.stats[luckyStat].BaseValue ++;
             UIEventHandler.StatsChanged();
-            Debug.Log("PLAYER RECIEVED BASE STAT INCREACE");
+            Debug.Log("PLAYER RECIEVED BASE STAT INCREACE:" + charachterStats.stats[luckyStat].StatName);
         }
+
+        maxHealth = (charachterStats.GetStat(BaseStat.BaseStatType.Health).GetCalculatedStatValue() * 10)
+        + charachterStats.GetStat(BaseStat.BaseStatType.Vitality).GetCalculatedStatValue();
+
+        currentHealth = maxHealth;
+
+        UIEventHandler.PlayerHealthChanged(currentHealth,maxHealth);
 
     }
 }

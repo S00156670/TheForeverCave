@@ -34,5 +34,6 @@ public class LevelExperienceHelper : MonoBehaviour {
         }
 
         UIEventHandler.PlayerLevelChange();
+        
     }
 }

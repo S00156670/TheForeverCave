@@ -94,8 +94,10 @@ public class DungeonSpawner : MonoBehaviour {
                 break;
         }
 
-        enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, 7, 5, 4, 2);
-        levelBoss.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 3, 1, 4, 7, 5, 4, 2);
+        enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, dungeonLevel * 7, 5, 4, 2);
+        enemyToSpawn.GetComponent<Enemy>().RenewHealth();
+        levelBoss.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 5, 2, 4, (dungeonLevel * 7) + 3, 5, 4, 2);
+        levelBoss.GetComponent<Enemy>().RenewHealth();
 
         // print enemy stats
         Debug.Log("Cave enemy");
