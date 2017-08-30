@@ -5,7 +5,7 @@ using UnityEngine;
 public class Damage  {
 
     public int Amount;
-    public enum DamageType { Divine, Heathen, Fire, Ice, Earth, Wind, Spirit, Physical };
+    public enum DamageType { Divine, Heathen, Fire, Ice, Earth, Wind, Spirit, Corporeal, Poisin };
     public DamageType Type;
 
     public Damage(int amount, DamageType type)

@@ -9,7 +9,7 @@ public class DungeonManager : MonoBehaviour {
 
     public GameObject ground { get; set; }
     private List<Vector2> walkableArea;
-    private int levelStage;
+    public int levelStage;
     public float sectionSize = 50;
     private int levelSize;
     private Vector2 levelStart;

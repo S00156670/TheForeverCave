@@ -17,7 +17,7 @@ using System;
     private float currentHealth;
 
     private UnityEngine.AI.NavMeshAgent navAgent;
-    public CharachterStats charachterStats { get; set; }
+    public CharachterStats charachterStats;
 
     Collider[] aggroNavTargets;
 
@@ -43,10 +43,37 @@ using System;
 
         Experience = 20;
         navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        //     charachterStats = new CharachterStats(9, 10, 2);
-        charachterStats = new CharachterStats(3, 1, 2, 5, 7, 4, 2);
 
-        RenewHealth();
+
+        //SetEnemyStats();
+        int level = GameObject.Find("DungeonGenerator").GetComponent<DungeonManager>().levelStage;
+        charachterStats = new CharachterStats((level * 2), 1, 4, (level * 7), 5, 4, 2);
+
+        Debug.Log("### Stat Check for level " + level);
+        foreach (BaseStat s in charachterStats.stats)
+        {
+            Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
+        }        //     charachterStats = new CharachterStats(9, 10, 2);
+        //    charachterStats = new CharachterStats(3, 1, 2, 5, 7, 4, 2);
+
+
+        maxHealth = charachterStats.GetStat(BaseStat.BaseStatType.Health).GetCalculatedStatValue() * 10;
+        currentHealth = maxHealth;
+        Debug.Log(" : : max health is " + maxHealth);
+        Debug.Log("############################");
+    }
+
+
+    void SetEnemyStats()
+    {
+        int level = GameObject.Find("DungeonGenerator").GetComponent<DungeonManager>().levelStage;
+        charachterStats = new CharachterStats((level * 2), 1, 4, (level * 7), 5, 4, 2);
+
+        Debug.Log("### Stat Check for level " + level);
+        foreach (BaseStat s in charachterStats.stats)
+        {
+            Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
+        }
 
     }
 
@@ -55,6 +82,13 @@ using System;
         maxHealth = charachterStats.GetStat(BaseStat.BaseStatType.Health).GetCalculatedStatValue() * 10;
 
         currentHealth = maxHealth;
+
+        Debug.Log("Stat Check");
+        foreach (BaseStat s in charachterStats.stats)
+        {
+            Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
+        }
+        Debug.Log(" : : max health is " + maxHealth);
     }
 
 
@@ -157,3 +191,25 @@ using System;
     }
 
 }
+
+
+
+//public class Rat : Enemy
+//{
+
+//    private void Start()
+//    {
+//        dropTable = new DropTable();
+//        dropTable.loot = new System.Collections.Generic.List<LootDrop>
+//                        {
+//                            new LootDrop("potion",100)
+//                        };
+
+//  //      Experience = 20;
+// //       navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+//        //     charachterStats = new CharachterStats(9, 10, 2);
+//        charachterStats = new CharachterStats(10, 1, 2, 5, 7, 4, 2);
+//        RenewHealth();
+//    }
+
+//}

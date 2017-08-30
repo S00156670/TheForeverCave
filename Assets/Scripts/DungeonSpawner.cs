@@ -62,8 +62,10 @@ public class DungeonSpawner : MonoBehaviour {
         switch (dungeonLevel)
         {
             case 1:
+                Debug.Log("Cave enemy");
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/Level1/EnemyCube");
- //               enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, 7, 5, 4, 2);
+                //               enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, 7, 5, 4, 2);
+                Debug.Log("Cave boss");
                 levelBoss = Resources.Load<GameObject>("Charachters/Level1/EnemyBoss");
 
                 break;
@@ -74,7 +76,9 @@ public class DungeonSpawner : MonoBehaviour {
 
                 break;
             case 3:
+                Debug.Log("Cave enemy");
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/Level3/EnemyCube");
+                Debug.Log("Cave boss");
                 levelBoss = Resources.Load<GameObject>("Charachters/Level3/EnemyBoss");
                 break;
             case 4:
@@ -94,22 +98,26 @@ public class DungeonSpawner : MonoBehaviour {
                 break;
         }
 
-        enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, dungeonLevel * 7, 5, 4, 2);
-        enemyToSpawn.GetComponent<Enemy>().RenewHealth();
-        levelBoss.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 5, 2, 4, (dungeonLevel * 7) + 3, 5, 4, 2);
-        levelBoss.GetComponent<Enemy>().RenewHealth();
+        //enemyToSpawn.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 2, 1, 4, dungeonLevel * 7, 5, 4, 2);
+        //enemyToSpawn.GetComponent<Enemy>().RenewHealth();
+        //levelBoss.GetComponent<Enemy>().charachterStats = new CharachterStats(dungeonLevel * 5, 2, 4, (dungeonLevel * 8) + 3, 5, 4, 2);
+        //levelBoss.GetComponent<Enemy>().RenewHealth();
+            
+        //enemyToSpawn.GetComponent<Enemy>().charachterStats.stats[0].BaseValue = dungeonLevel * 20;
+        //enemyToSpawn.GetComponent<Enemy>().charachterStats.stats[3].BaseValue = dungeonLevel * 7;
+        //enemyToSpawn.GetComponent<Enemy>().RenewHealth();
 
         // print enemy stats
-        Debug.Log("Cave enemy");
-        foreach ( BaseStat s in enemyToSpawn.GetComponent<Enemy>().charachterStats.stats)
-        {
-            Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
-        }
-        Debug.Log("Cave Boss");
-        foreach (BaseStat s in levelBoss.GetComponent<Enemy>().charachterStats.stats)
-        {
-            Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
-        }
+  //      Debug.Log("Cave enemy");
+        //foreach ( BaseStat s in enemyToSpawn.GetComponent<Enemy>().charachterStats.stats)
+        //{
+        //    Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
+        //}
+  //      Debug.Log("Cave Boss");
+        //foreach (BaseStat s in levelBoss.GetComponent<Enemy>().charachterStats.stats)
+        //{
+        //    Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
+        //}
 
         foreach (Vector3 p in SpawnPoints)
         {
