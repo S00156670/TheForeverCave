@@ -534,24 +534,17 @@ public class DungeonManager : MonoBehaviour {
             AddDiversion(walkableArea[1]);
             GenerateRoom((walkableArea[1]),4);
 
-
-
             //currentSpawn.TreasurePoints.Add(
             //    new Vector3(-sectionSize * 0.5f + sectionSize * (walkableArea[1].x),
             //    2,
             //    -sectionSize * 0.5f + sectionSize * (walkableArea[1].y))
-            //  + 
+            //  +
             //    new Vector3(transform.position.x, transform.position.y, 32 - startPos.z)
             //  );
-
-
-
-
-
         }
         else
         {
-            for (int i = levelStage + 10; i < walkableArea.Count - 2; i+= 4)// bad way to loop. seperate the count maybe?
+            for (int i = levelStage + 10; i < walkableArea.Count - 2; i+= 4)
             {
                 //UnityEngine.Random.Range(0, 10);
                 if (UnityEngine.Random.Range(0, 50) <= 2)
@@ -560,16 +553,6 @@ public class DungeonManager : MonoBehaviour {
                 }
             }
         }
-        ////// connection tunnels
-        ////// path = 3
-        ////AddPath(levelStart, way);
-        ////AddPath(way, levelEnd);
-
-
-
-
-
-
 
         // spread a bit of extraspace for levelStart and levelEnd
         WidenAround(levelStart);

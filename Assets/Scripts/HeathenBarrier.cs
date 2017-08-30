@@ -27,7 +27,7 @@ public class HeathenBarrier : Interactable, IEnemy
     // Use this for initialization
     void Start()
     {
-        Experience = 20;
+        Experience = 30;
     }
 
 

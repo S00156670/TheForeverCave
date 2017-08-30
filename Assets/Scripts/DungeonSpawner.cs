@@ -80,6 +80,9 @@ public class DungeonSpawner : MonoBehaviour {
             case 4:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/Level4/EnemyCube");
                 levelBoss = Resources.Load<GameObject>("Charachters/Level4/EnemyBoss");
+
+                SpawnBarrier(endPos + new Vector3(1.5f, 1, 0));
+
                 break;
             case 5:
                 enemyToSpawn = Resources.Load<GameObject>("Charachters/Level5/EnemyCube");
@@ -121,14 +124,11 @@ public class DungeonSpawner : MonoBehaviour {
 
     public void SpawnTreasure()
     {
-
         GameObject chest = Resources.Load<GameObject>("Prefabs/Chest");
 
         foreach (Vector3 p in TreasurePoints)
         {
-            // drop prefab in location from here
-  //          Instantiate(chest, p, Quaternion.identity);
-  // must build chest prefab
+            Instantiate(chest, p, Quaternion.identity);
             Debug.Log("Spawn(Chest)- X:" + p.x + " Y:" + p.y + " Z:" + p.z);
         }
 
@@ -152,6 +152,11 @@ public class DungeonSpawner : MonoBehaviour {
         }
     }
 
+    public void SpawnBarrier(Vector3 point)
+    {
+        GameObject barrier = Resources.Load<GameObject>("HBarrier");
+        Instantiate(barrier, point, Quaternion.identity);
+    }
 
     public void RemoveEnemies()
     {
