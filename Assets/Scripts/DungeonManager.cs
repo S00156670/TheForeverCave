@@ -46,7 +46,12 @@ public class DungeonManager : MonoBehaviour {
         GenerateCave();
         player = GameObject.Find("Player").GetComponent<Player>();
 
-
+        Debug.Log("Game starting with initial dialogue");
+        string[] speach = new string[3];
+        speach[0] = "Oh no, the football rolled away!";
+        speach[1] = "It went into that cave, ill have a look.";
+        speach[2] = "Good thing I can: press i for inventory, Lclick is move, Rclick is attack. That will come in handy";
+        DialogueManager.Instance.AddNewDialogue(speach, "Player");
 
         //     ////// singelton
         //     ////if (instance != null && instance != this)
@@ -92,7 +97,7 @@ public class DungeonManager : MonoBehaviour {
             }
         }
         else
-        {
+        {   // while in the cave
             caveEnd.CheckDistance(player.transform.position);
             if (boss == null)
             {
@@ -122,6 +127,8 @@ public class DungeonManager : MonoBehaviour {
                     inCave = false;
                     caveEnd.triggered = false;
                     currentSpawn.RemovePickups();
+
+                    // refactor as ChangeLevelStage(){}
                     levelStage++;
                     if (levelStage > 5)
                     {
@@ -129,11 +136,49 @@ public class DungeonManager : MonoBehaviour {
                         levelStage = 1;
                         // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
                     }
+                    else if (levelStage == 5)
+                    {
+                        Debug.Log("Next Level is end level");
+                        string[] speach = new string[3];
+                        speach[0] = "So, you have managed to get your toy back. I'll take something else then....";
+                        speach[1] = "..Hypnotize .. hypnoootiize hYpnoTiSe!!";
+                        speach[2] = "Your friend is mine and will never leave alive!";
+                        DialogueManager.Instance.AddNewDialogue(speach, "Mysterious Voice");
+
+                        //speach[0] = "What? How? NO!";
+                        //speach[1] = "...Juust fantastic.";
+                        //speach[2] = "Dad will kill me if we don't make it back together.";
+                        //DialogueManager.Instance.AddNewDialogue(speach, "Internal Monologue");
+                    }
+                    else
+                    {
+                        Debug.Log("Next Level");
+                        string[] speach = new string[3];
+                        speach[0] = "Wow, you made it past level " + (levelStage - 1) + ".";
+                        speach[1] = "You still havn't found the ball though!";
+                        switch (levelStage)
+                        {
+                            case 2:
+                                speach[2] = "Dad made that ball special for us, try looking again.";
+                                break;
+                            case 3:
+                                speach[2] = "I miss the ball. It might look tatty but it's very soft. I was planning to use it as a pillow while we camped out here.";
+                                break;
+                            case 4:
+                                speach[2] = "I just remembered before we came here, mom wrote the passcode for the city gates on the side of that ball. If we dont find it we can't get back in.";
+                                break;
+                            default:
+                                speach[2] = "This is bad";
+                                break;
+                        }
+                        DialogueManager.Instance.AddNewDialogue(speach, "Sally");
+                    }
+
+
                     GenerateCave();
                     ChestDropped = true;
                 }
             }
-
 
             caveStart.CheckDistance(player.transform.position);
             if (caveStart.triggered == true)
@@ -144,6 +189,11 @@ public class DungeonManager : MonoBehaviour {
                 currentSpawn.RemovePickups();
                 GenerateCave();
                 ChestDropped = true;
+
+                Debug.Log("Back to camp");
+                string[] speach = new string[1];
+                speach[0] = "Back already? you can't have checked everywhere in that time";
+                DialogueManager.Instance.AddNewDialogue(speach, "Sally");
             }
         }
         
@@ -196,7 +246,6 @@ public class DungeonManager : MonoBehaviour {
         ////    }
         ////}
 
-        // check for victory condition here?
     }
 
     private void GameWin()
