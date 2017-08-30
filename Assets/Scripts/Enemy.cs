@@ -32,6 +32,22 @@ using System;
     // Use this for initialization
     void Start()
     {
+        navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        SetEnemyData();
+
+    }
+
+
+    void SetEnemyData()
+    {
+        Experience = 20;
+        int level = GameObject.Find("DungeonGenerator").GetComponent<DungeonManager>().levelStage;
+        charachterStats = new CharachterStats((level * 2), 1, 4, (level * 7), 5, 4, 2);
+        //     charachterStats = new CharachterStats(9, 10, 2);
+        //    charachterStats = new CharachterStats(3, 1, 2, 5, 7, 4, 2);
+        maxHealth = charachterStats.GetStat(BaseStat.BaseStatType.Health).GetCalculatedStatValue() * 10;
+        currentHealth = maxHealth;
+
         dropTable = new DropTable();
         dropTable.loot = new System.Collections.Generic.List<LootDrop>
                         {
@@ -41,39 +57,25 @@ using System;
                             new LootDrop("ball",25),
                         };
 
-        Experience = 20;
-        navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
-
-        //SetEnemyStats();
-        int level = GameObject.Find("DungeonGenerator").GetComponent<DungeonManager>().levelStage;
-        charachterStats = new CharachterStats((level * 2), 1, 4, (level * 7), 5, 4, 2);
-
-        Debug.Log("### Stat Check for level " + level);
-        foreach (BaseStat s in charachterStats.stats)
-        {
-            Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
-        }        //     charachterStats = new CharachterStats(9, 10, 2);
-        //    charachterStats = new CharachterStats(3, 1, 2, 5, 7, 4, 2);
-
-
-        maxHealth = charachterStats.GetStat(BaseStat.BaseStatType.Health).GetCalculatedStatValue() * 10;
-        currentHealth = maxHealth;
-        Debug.Log(" : : max health is " + maxHealth);
-        Debug.Log("############################");
-    }
-
-
-    void SetEnemyStats()
-    {
-        int level = GameObject.Find("DungeonGenerator").GetComponent<DungeonManager>().levelStage;
-        charachterStats = new CharachterStats((level * 2), 1, 4, (level * 7), 5, 4, 2);
 
         Debug.Log("### Stat Check for level " + level);
         foreach (BaseStat s in charachterStats.stats)
         {
             Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
         }
+        Debug.Log(" : : max health is " + maxHealth);
+        Debug.Log("############################");
+
+
+        //int level = GameObject.Find("DungeonGenerator").GetComponent<DungeonManager>().levelStage;
+        //charachterStats = new CharachterStats((level * 2), 1, 4, (level * 7), 5, 4, 2);
+
+        //Debug.Log("### Stat Check for level " + level);
+        //foreach (BaseStat s in charachterStats.stats)
+        //{
+        //    Debug.Log(" : " + s.StatName + " : " + s.BaseValue);
+        //}
 
     }
 
