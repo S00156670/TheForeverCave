@@ -10,15 +10,13 @@ public class Player : MonoBehaviour {
     public int maxHealth;
 
     public LevelExperienceHelper PlayerLevel { get; set; }
-    public int currentLevel;
- //   public int rewardsWaiting;
+
 
     // Use this for initialization
     void Awake () {
 
         PlayerLevel = GetComponent<LevelExperienceHelper>();
-        currentLevel = 0; // PlayerLevel.Level;
-        //      rewardsWaiting = 0;
+
 
         //        charachterStats = new CharachterStats(4, 10, 2);
         charachterStats = new CharachterStats(4, 5, 2, 5, 4, 2, 3);
@@ -72,22 +70,14 @@ public class Player : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (currentLevel != PlayerLevel.Level)
-        {
-            Debug.Log("PLAYER LEVEL UP");
-            LevelUpStats();
-        }
-	}
 
-    void LevelUpStats()// might be better to just add a listener onto expHelper
+
+    public void LevelUpStats(int level)// might be better to just add a listener onto expHelper
     {
-        currentLevel++;
+
      //   rewardsWaiting += currentLevel;
 
-        for (int i = 0; i < currentLevel; i++)
+        for (int i = 0; i < level; i++)
         {
             int luckyStat = UnityEngine.Random.Range(0, charachterStats.stats.Count);
             charachterStats.stats[luckyStat].BaseValue ++;

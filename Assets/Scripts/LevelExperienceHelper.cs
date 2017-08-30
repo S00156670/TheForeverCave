@@ -29,6 +29,7 @@ public class LevelExperienceHelper : MonoBehaviour {
         {
             CurrentExperiene -= RequiredExperience;
             Level++;
+            GameObject.Find("Player").GetComponent<Player>().LevelUpStats(Level);
             Debug.Log("PLAYER UI LEVEL UP");
         }
 
