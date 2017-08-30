@@ -16,6 +16,8 @@ using System;
     private float maxHealth;
     private float currentHealth;
 
+    public bool IsBoss;
+
     private UnityEngine.AI.NavMeshAgent navAgent;
     public CharachterStats charachterStats;
 
@@ -42,14 +44,25 @@ using System;
     {
         Experience = 20;
         int level = GameObject.Find("DungeonGenerator").GetComponent<DungeonManager>().levelStage;
-        charachterStats = new CharachterStats((level * 2), 1, 4, (level * 7), 5, 4, 2);
+
+        if (IsBoss)
+        {
+            Debug.Log(("### LevelBoss ##"));
+            charachterStats = new CharachterStats((level * 3), 2, (5 + level), (level * 8), 5, 4, 2);
+            Experience = 50;
+        }
+        else
+        {
+            charachterStats = new CharachterStats((level * 2), 1, 2 + level, (level * 7), 5, 4, 2);
+        }
+        //        charachterStats = new CharachterStats((level * 2), 1, 4, (level * 7), 5, 4, 2);
         //     charachterStats = new CharachterStats(9, 10, 2);
         //    charachterStats = new CharachterStats(3, 1, 2, 5, 7, 4, 2);
+
         maxHealth = charachterStats.GetStat(BaseStat.BaseStatType.Health).GetCalculatedStatValue() * 10;
         currentHealth = maxHealth;
 
         dropTable = new DropTable();
-
         //dropTable.loot = new System.Collections.Generic.List<LootDrop>
         //                {
         //                    new LootDrop("sword",25),
@@ -57,8 +70,6 @@ using System;
         //                    new LootDrop("potion",25),
         //                    new LootDrop("ball",25),
         //                };
-
-
         switch (level)
         {
             case 1:
