@@ -32,10 +32,17 @@ public class DungeonManager : MonoBehaviour {
 
     Enemy boss;
 
+
+    //AudioSource song;
+    //AudioClip currentSong;
     //  public List<Portal> portals;
 
     void Awake ()
     {
+        //song = new AudioSource();//GetComponent<AudioSource>();
+        //song.clip = Resources.Load<AudioClip>("Sound/CampSong");
+        //song.Play();
+
         levelStage = 1;
         currentSpawn = new DungeonSpawner();
 
@@ -109,6 +116,18 @@ public class DungeonManager : MonoBehaviour {
                 TravelPortal(campPortal);
                 inCave = true;
                 ChestDropped = false;
+
+                if (levelStage == 5)
+                {
+                    GameObject.Find("Music").GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Sound/FinalSong");
+                    GameObject.Find("Music").GetComponent<AudioSource>().Play();
+                }
+                else
+                {
+                GameObject.Find("Music").GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Sound/CaveSong");
+                GameObject.Find("Music").GetComponent<AudioSource>().Play();
+                }
+
             }
         }
         else
@@ -128,30 +147,23 @@ public class DungeonManager : MonoBehaviour {
                         currentSpawn.SpawnTreasure(endPos + transform.position /*+ new Vector3(0, 1, 0)*/);
                     }
 
-                if (levelStage == 5)
-                {
+                    if (levelStage == 5)
+                    {
                         GameObject.Find("Sally").GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(caveEnd.transform.position);
-                }
-
+                    }
                     ChestDropped = true;
                 }
 
-
-
-
                 if (caveEnd.triggered == true)
                 {
-                    //if (levelStage == 4 && !hasball)
-                    //{
-                    //    break;
-                    //}
-
                     TravelPortal(caveEnd);
                     player.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(new Vector3(-9, 4, 4));
                     inCave = false;
                     caveEnd.triggered = false;
                     currentSpawn.RemovePickups();
 
+                    GameObject.Find("Music").GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Sound/CampSong");
+                    GameObject.Find("Music").GetComponent<AudioSource>().Play();
 
                     // refactor as ChangeLevelStage(){}
                     levelStage++;
@@ -160,7 +172,6 @@ public class DungeonManager : MonoBehaviour {
                         GameWin();
                         GameObject.Find("Sally").GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(campPortal.transform.position);
                         GameObject.Find("Sally").GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(new Vector3(-9,3.5f,3));
-
                         levelStage = 1;
                         // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
                     }
@@ -220,6 +231,9 @@ public class DungeonManager : MonoBehaviour {
                 currentSpawn.RemovePickups();
                 GenerateCave();
                 ChestDropped = true;
+
+                GameObject.Find("Music").GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Sound/CampSong");
+                GameObject.Find("Music").GetComponent<AudioSource>().Play();
 
                 Debug.Log("Back to camp");
                 string[] speach = new string[1];
