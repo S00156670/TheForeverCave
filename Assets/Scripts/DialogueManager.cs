@@ -60,9 +60,16 @@ public class DialogueManager : MonoBehaviour {
         nameText.text = npcName;
         dialoguePannel.SetActive(true);
 
-
+        GameObject HUDbackup = HUD;
         HUD = GameObject.Find("Panel_Charachter");
+        if (HUD == null)
+        {
+            HUD = HUDbackup;
+            Debug.Log("current dialogue replaced with new speach chain");
+        }
         HUD.SetActive(false);
+
+
     }
 
     public void ContinueDialogue()
@@ -76,6 +83,7 @@ public class DialogueManager : MonoBehaviour {
         {
             dialoguePannel.SetActive(false);
             
+            // activating hud
             HUD.SetActive(true);
 
 
