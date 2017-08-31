@@ -128,8 +128,16 @@ public class DungeonManager : MonoBehaviour {
                         currentSpawn.SpawnTreasure(endPos + transform.position /*+ new Vector3(0, 1, 0)*/);
                     }
 
+                if (levelStage == 5)
+                {
+                        GameObject.Find("Sally").GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(caveEnd.transform.position);
+                }
+
                     ChestDropped = true;
                 }
+
+
+
 
                 if (caveEnd.triggered == true)
                 {
@@ -139,15 +147,20 @@ public class DungeonManager : MonoBehaviour {
                     //}
 
                     TravelPortal(caveEnd);
+                    player.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(new Vector3(-9, 4, 4));
                     inCave = false;
                     caveEnd.triggered = false;
                     currentSpawn.RemovePickups();
+
 
                     // refactor as ChangeLevelStage(){}
                     levelStage++;
                     if (levelStage > 5)
                     {
                         GameWin();
+                        GameObject.Find("Sally").GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(campPortal.transform.position);
+                        GameObject.Find("Sally").GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(new Vector3(-9,3.5f,3));
+
                         levelStage = 1;
                         // looped for testing purpouses, in fanal game  if (levelStage > 5){YouWin();}
                     }
@@ -159,6 +172,8 @@ public class DungeonManager : MonoBehaviour {
                         speach[1] = "..Hypnotize .. hypnoootiize hYpnoTiSe!!";
                         speach[2] = "Your friend is mine and will never leave alive!";
                         DialogueManager.Instance.AddNewDialogue(speach, "Mysterious Voice");
+
+                        GameObject.Find("Sally").GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(campPortal.transform.position);
 
                         //speach[0] = "What? How? NO!";
                         //speach[1] = "...Juust fantastic.";
@@ -199,6 +214,7 @@ public class DungeonManager : MonoBehaviour {
             if (caveStart.triggered == true)
             {
                 TravelPortal(caveStart);
+                player.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(new Vector3(-9, 4, 4));
                 inCave = false;
                 caveStart.triggered = false;
                 currentSpawn.RemovePickups();
@@ -358,6 +374,12 @@ public class DungeonManager : MonoBehaviour {
         caveEnd.transform.position = endPos + this.transform.position + new Vector3(6,0,-1.2f);
 
         boss = GameObject.Find("EnemyBoss(Clone)").GetComponent<Enemy>();
+
+        if (levelStage == 5)
+        {
+            GameObject.Find("Sally").GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(endPos + this.transform.position);
+        }
+
 
         Debug.Log("Finished stage " + levelStage + "cave");
         // might need to postpone this so that all enemies have had a chance to fall into place

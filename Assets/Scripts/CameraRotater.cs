@@ -36,7 +36,6 @@ public class CameraRotater : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-
             if (rotStage > 0)
             {
                 transform.Rotate(Vector3.up * Time.deltaTime * 175);
@@ -51,7 +50,6 @@ public class CameraRotater : MonoBehaviour {
                 rotStage--;
                 Debug.Log("Rotation stage " + rotStage);
             }
-
 
             //      transform.Rotate(Vector3.right * Time.deltaTime * -675);
             //transform.rotation = new Quaternion
@@ -72,10 +70,7 @@ public class CameraRotater : MonoBehaviour {
         {
             Reset();
         }
-
-
     }
-
     private void Reset()
     {
         GameObject.Find("Main Camera").GetComponent<CameraController>().RotOffset = Vector3.zero;
