@@ -21,7 +21,7 @@ public class Fireball : MonoBehaviour {
         // 50f can be replaced later by a speed value
         Debug.Log("Fireball Burning at " + Damage);
 
-        GetComponent<Rigidbody>().AddForce(Direction * 20f);
+        GetComponent<Rigidbody>().AddForce(Direction * 50f);
     }
 
     private void Update()
