@@ -11,12 +11,18 @@ public class CameraController : MonoBehaviour {
 
     float zoomSpeed = 25f;
 
-    float rotation = 0f;
+    //float rotation = 0f;
+
+    public Vector3 RotOffset;
+
+
     // Use this for initialization
     void Start () {
 
         PlayerCameraDistance = 7f;
         playerCamera = GetComponent<Camera>();
+
+        RotOffset = Vector3.zero;
 
 
 	}
@@ -44,11 +50,44 @@ public class CameraController : MonoBehaviour {
             }
 
         }
+
+
+  //      if (Input.GetKeyDown(KeyCode.LeftArrow))
+  //      {
+  //          //     transform.Rotate(Vector3.up * Time.deltaTime * 100);
+  //          //      transform.Rotate(Vector3.right * Time.deltaTime * -675);
+  //          //transform.rotation = new Quaternion
+  //          //    (transform.rotation.x,
+  //          //    transform.rotation.y,
+  //          //    transform.rotation.z,
+  //          //    transform.rotation.w + 0.2f);
+
+  //          // transform.rotation.z += 0.1f;
+
+
+  //          float tiltAroundZ = 5f;
+  ////          float tiltAroundX = 0;
+  //          Quaternion target = Quaternion.Euler(transform.rotation.x, 0, tiltAroundZ);
+  //          transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 0.2f);
+
+
+  //          //           transform.rotation = Quaternion.Euler(new Vector3(0, 30, 0));
+
+  //      }
+
+        //if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    transform.Rotate(Vector3.down * Time.deltaTime * 100);
+        //    transform.Rotate(Vector3.right * Time.deltaTime * 100);
+
+
+        //}
+
         // update position
         transform.position = new Vector3
-           (cameraTarget.position.x ,
+           (cameraTarget.position.x + RotOffset.x,
             cameraTarget.position.y + PlayerCameraDistance, 
-            cameraTarget.position.z + PlayerCameraDistance );
+            cameraTarget.position.z + PlayerCameraDistance + RotOffset.z);
 
 
 	}

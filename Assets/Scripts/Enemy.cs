@@ -76,13 +76,15 @@ using System;
                 dropTable.loot = new System.Collections.Generic.List<LootDrop>
                         {
                             new LootDrop("potion",50),
+                            new LootDrop("shuriken",2),
                         };
                 break;
             case 2:
                 dropTable.loot = new System.Collections.Generic.List<LootDrop>
                         {
                             new LootDrop("potion",45),
-                            new LootDrop("staff",10),
+                            new LootDrop("staff",15),
+                            new LootDrop("shuriken",2),
                         };
                 break;
             case 3:
@@ -91,6 +93,7 @@ using System;
                             new LootDrop("potion",40),
                             new LootDrop("staff",20),
                             new LootDrop("sword",10),
+                            new LootDrop("shuriken",5),
                         };
                 break;
             case 4:
@@ -99,6 +102,7 @@ using System;
                             new LootDrop("potion",30),
                             new LootDrop("staff",20),
                             new LootDrop("sword",25),
+                            new LootDrop("shuriken",5),
                         };
                 break;
             case 5:
@@ -107,6 +111,7 @@ using System;
                             new LootDrop("potion",40),
                             new LootDrop("staff",10),
                             new LootDrop("sword",10),
+                            new LootDrop("shuriken",5),
                         };
                 break;
             default:
