@@ -52,7 +52,7 @@ public class ItemDatabase : MonoBehaviour {
         // Weapons
         //sword
         List<BaseStat> weaponStats = new List<BaseStat>();
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MeleeSkill, 6, "Power", "Your power level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MeleeSkill, 6, "Melee", "Your melee level"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility, 4, "Atk Spd", "Your agility in combat"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 5, "Toughness", "Your defensive toughness"));
         //weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Power, 6, "Power", "Your power level"));
@@ -68,7 +68,7 @@ public class ItemDatabase : MonoBehaviour {
 
         ////knife
         weaponStats = new List<BaseStat>();
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MeleeSkill, 5, "Power", "Your power level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MeleeSkill, 5, "Melee", "Your melee level"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility, 5, "Atk Spd", "Your agility in combat"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 3, "Toughness", "Your defensive toughness"));
 
@@ -80,7 +80,7 @@ public class ItemDatabase : MonoBehaviour {
 
         //staff
         weaponStats = new List<BaseStat>();
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.RangedSkill, 5, "Power", "Your power level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.RangedSkill, 5, "Melee", "Your melee level"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility,     2, "Atk Spd", "Your agility in combat"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness,   1, "Toughness", "Your defensive toughness"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MagicSkill,  7, "Magic", "Your magic ability level"));
@@ -93,10 +93,10 @@ public class ItemDatabase : MonoBehaviour {
 
         //ball
         weaponStats = new List<BaseStat>();
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.RangedSkill, 5, "Power", "Your power level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.RangedSkill, 5, "Melee", "Your melee level"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility, 2, "Atk Spd", "Your agility in combat"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Vitality, 2, "Toughness", "Your defensive toughness"));
-        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 1, "Toughness", "Your defensive toughness"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Toughness, 1, "Toughness", "Your regeneration"));
         weaponStats.Add(new BaseStat(BaseStat.BaseStatType.MagicSkill, -3, "Magic", "Your magic ability level"));
 
         currentItem = new Item(weaponStats, "ball");
@@ -105,6 +105,19 @@ public class ItemDatabase : MonoBehaviour {
         currentItem.ActionName = "Equip";
         Items.Add(currentItem);
 
+
+        //shuriken
+        weaponStats = new List<BaseStat>();
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.RangedSkill, 5, "Melee", "Your melee level"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Agility, 2, "Atk Spd", "Your agility in combat"));
+        weaponStats.Add(new BaseStat(BaseStat.BaseStatType.Vitality, 2, "Vitality", "Your regeneration"));
+
+
+        currentItem = new Item(weaponStats, "shuriken");
+        currentItem.ItemName = "shuriken";
+        currentItem.Description = "a single use thrown weapon with fearsome damage";
+        currentItem.ActionName = "Equip";
+        Items.Add(currentItem);
 
         Debug.Log(" weapons added");
 

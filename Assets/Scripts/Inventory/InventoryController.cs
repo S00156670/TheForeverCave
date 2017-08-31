@@ -45,6 +45,12 @@ public class InventoryController : MonoBehaviour {
         GiveItem("knife");
         Debug.Log("got knife");
 
+        GiveItem("shuriken");
+        GiveItem("shuriken");
+        GiveItem("shuriken");
+        GiveItem("shuriken");
+        Debug.Log("got shuriken");
+
         //      GiveItem("potion");
         GiveItem("potion");
         GiveItem("potion");

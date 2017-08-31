@@ -1,8 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class BallProjectile : MonoBehaviour
-{
+public class shurikenProjectile : MonoBehaviour {
+
+
     public Vector3 Direction { get; set; }
     public float Range { get; set; }
     public int Damage { get; set; }
@@ -13,11 +15,7 @@ public class BallProjectile : MonoBehaviour
     {
         spawnPosition = transform.position;
         Range = 20f;
-        Damage = GameObject.Find("Player").GetComponent<Player>().charachterStats.GetStat(BaseStat.BaseStatType.RangedSkill).GetCalculatedStatValue()
-                  + GameObject.Find("Player").GetComponent<Player>().charachterStats.GetStat(BaseStat.BaseStatType.MagicSkill).GetCalculatedStatValue();
-        // 50f can be replaced later by a speed value
-        Debug.Log("ball(Holy) Burning at " + Damage);
-
+        Damage = GameObject.Find("Player").GetComponent<Player>().charachterStats.GetStat(BaseStat.BaseStatType.RangedSkill).GetCalculatedStatValue() * 3;
         GetComponent<Rigidbody>().AddForce(Direction * 10f);
     }
 
@@ -25,7 +23,7 @@ public class BallProjectile : MonoBehaviour
     {
         if (Vector3.Distance(spawnPosition, transform.position) > Range)
         {
-            Debug.Log("ball throw max distance");
+            Debug.Log("shuriken throw max distance");
             Extinguish();
         }
     }
@@ -38,11 +36,11 @@ public class BallProjectile : MonoBehaviour
         {
             //        other.transform.GetComponent<IEnemy>().TakeDamage(Damage);
             other.transform.GetComponent<IEnemy>().TakeDamage(Damage, global::Damage.DamageType.Divine);
-            Debug.Log("ball damage = " + Damage);
+            Debug.Log("shuriken damage = " + Damage);
         }
         else
         {
-            Debug.Log("ball hit not registered as valid enemy");
+            Debug.Log("shuriken hit not registered as valid enemy");
         }
 
 
@@ -54,7 +52,7 @@ public class BallProjectile : MonoBehaviour
         //GameObject ballDrop = Resources.Load<GameObject>("Charachters/EnemyCube");
         //Instantiate(ballDrop, transform.position, Quaternion.identity);
 
-        Debug.Log("ball extinguished");
+        Debug.Log("shuriken used");
         Destroy(gameObject);
     }
 }
