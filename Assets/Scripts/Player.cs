@@ -62,8 +62,11 @@ public class Player : MonoBehaviour {
 
     }
 
-    private void Die()
+    public void Die()
     {
+        Debug.Log("Player is dead , returning to campsite");
+        GameObject.Find("DungeonGenerator").GetComponent<DungeonManager>().ExitFail();
+
         Debug.Log("Player is dead , resetting health");
         this.currentHealth = maxHealth;
         UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);

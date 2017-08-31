@@ -70,6 +70,21 @@ public class DungeonManager : MonoBehaviour {
         //     //     ground = plane;
     }
 
+    public void ExitFail()
+    {
+        TravelPortal(caveStart);
+        inCave = false;
+        caveStart.triggered = false;
+        currentSpawn.RemovePickups();
+        GenerateCave();
+        ChestDropped = true;
+
+        Debug.Log("Back to camp");
+        string[] speach = new string[1];
+        speach[0] = "Back already? you can't have checked everywhere in that time";
+        DialogueManager.Instance.AddNewDialogue(speach, "Sally");
+    }
+
     void TravelPortal(Portal port)
     {
         // prep cave for entry
