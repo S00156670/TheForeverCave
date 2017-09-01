@@ -18,16 +18,16 @@ public class CameraRotater : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
 
-            if (rotStage < 0)
+            if (rotStage <= 0)
             {
-                transform.Rotate(Vector3.up * Time.deltaTime * -175);
-                GameObject.Find("Main Camera").GetComponent<CameraController>().RotOffset += new Vector3(-1, 0, 2);
+                transform.Rotate(Vector3.up * Time.deltaTime * -450);
+                GameObject.Find("Main Camera").GetComponent<CameraController>().RotOffset += new Vector3(-1, 0, 1);
                 rotStage++;
                 Debug.Log("Rotation stage " + rotStage);
             }
-            else if (rotStage < 5)
+            else if (rotStage <= 5)
             {
-                transform.Rotate(Vector3.up * Time.deltaTime * -175);
+                transform.Rotate(Vector3.up * Time.deltaTime * -450);
                 GameObject.Find("Main Camera").GetComponent<CameraController>().RotOffset += new Vector3(-1, 0, -1);
                 rotStage++;
                 Debug.Log("Rotation stage " + rotStage);
@@ -36,16 +36,16 @@ public class CameraRotater : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (rotStage > 0)
+            if (rotStage >= 0)
             {
-                transform.Rotate(Vector3.up * Time.deltaTime * 175);
-                GameObject.Find("Main Camera").GetComponent<CameraController>().RotOffset += new Vector3(1, 0, 2);
+                transform.Rotate(Vector3.up * Time.deltaTime * 450);
+                GameObject.Find("Main Camera").GetComponent<CameraController>().RotOffset += new Vector3(1, 0, 1);
                 rotStage--;
                 Debug.Log("Rotation stage " + rotStage);
             }
-            else if (rotStage > -5)
+            else if (rotStage >= -5)
             {
-                transform.Rotate(Vector3.up * Time.deltaTime * 175);
+                transform.Rotate(Vector3.up * Time.deltaTime * 450);
                 GameObject.Find("Main Camera").GetComponent<CameraController>().RotOffset += new Vector3(1, 0, -1);
                 rotStage--;
                 Debug.Log("Rotation stage " + rotStage);

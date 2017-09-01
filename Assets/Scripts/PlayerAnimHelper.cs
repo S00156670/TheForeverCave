@@ -11,7 +11,9 @@ public class PlayerAnimHelper : MonoBehaviour {
 	void Start ()
     {
             previousPos = GameObject.Find("Player").transform.position;
-            anim = GameObject.Find("brother").GetComponent<Animator>();
+            anim = /*GameObject.Find("brother").*/GetComponent<Animator>();
+
+        Debug.Log(anim.name + " is ANIM for " + anim.gameObject);
 	}
 	
 	// Update is called once per frame
