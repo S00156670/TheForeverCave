@@ -45,19 +45,19 @@ public class InventoryController : MonoBehaviour {
         GiveItem("potion");
         Debug.Log("got potions");
 
-        //GiveItem("sword");
+     //   GiveItem("sword");
         //Debug.Log("got sword");
 
-        //GiveItem("staff");
+    //    GiveItem("staff");
         //Debug.Log("got staff");
 
         //GiveItem("shuriken");
         //GiveItem("shuriken");
-        //GiveItem("shuriken");
+    //    GiveItem("shuriken");
         //GiveItem("shuriken");
         //Debug.Log("got shuriken");
 
-        //GiveItem("ball");
+  //      GiveItem("ball");
         //Debug.Log("got ball");
 
         //// generating test hardcoded objects

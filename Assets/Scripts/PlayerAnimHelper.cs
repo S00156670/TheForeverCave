@@ -19,17 +19,17 @@ public class PlayerAnimHelper : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (previousPos != GameObject.Find("Player").transform.position)
-        {
-            anim.SetBool("isMoving", true);
-            previousPos = GameObject.Find("Player").transform.position;
-         //   Debug.Log("walking");
-        }
-        else
-        {
-            anim.SetBool("isMoving", false);
-         //   Debug.Log("idle");
-        }
+        //if (previousPos != GameObject.Find("Player").transform.position)
+        //{
+        //    anim.SetBool("isMoving", true);
+        //    previousPos = GameObject.Find("Player").transform.position;
+        // //   Debug.Log("walking");
+        //}
+        //else
+        //{
+        //    anim.SetBool("isMoving", false);
+        // //   Debug.Log("idle");
+        //}
 
     }
 }
