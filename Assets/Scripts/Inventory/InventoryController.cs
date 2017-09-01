@@ -36,20 +36,8 @@ public class InventoryController : MonoBehaviour {
         Debug.Log("trying to add items to inventory");
 
         // adding test items
-        GiveItem("sword");
-        Debug.Log("got sword");
-
-        GiveItem("staff");
-        Debug.Log("got staff");
-
         GiveItem("knife");
         Debug.Log("got knife");
-
-        GiveItem("shuriken");
-        GiveItem("shuriken");
-        GiveItem("shuriken");
-        GiveItem("shuriken");
-        Debug.Log("got shuriken");
 
         //      GiveItem("potion");
         GiveItem("potion");
@@ -57,8 +45,20 @@ public class InventoryController : MonoBehaviour {
         GiveItem("potion");
         Debug.Log("got potions");
 
+        //GiveItem("sword");
+        //Debug.Log("got sword");
 
-        GiveItem("ball");
+        //GiveItem("staff");
+        //Debug.Log("got staff");
+
+        //GiveItem("shuriken");
+        //GiveItem("shuriken");
+        //GiveItem("shuriken");
+        //GiveItem("shuriken");
+        //Debug.Log("got shuriken");
+
+        //GiveItem("ball");
+        //Debug.Log("got ball");
 
         //// generating test hardcoded objects
         //List<BaseStat> swordStats = new List<BaseStat>();

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
 
     public LevelExperienceHelper PlayerLevel { get; set; }
 
+ //   static Animator anim;
 
     // Use this for initialization
     void Awake () {
@@ -29,7 +30,11 @@ public class Player : MonoBehaviour {
         // not setting in the window at first
         UIEventHandler.PlayerHealthChanged(this.currentHealth, this.maxHealth);
 
-    //    InvokeRepeating("Regen", 5f, 5f);
+        //    InvokeRepeating("Regen", 5f, 5f);
+
+   //     anim = GetComponent<Animator>();
+
+
 
         Debug.Log("Player is created and awakened");
     }
@@ -82,14 +87,18 @@ public class Player : MonoBehaviour {
         UIEventHandler.PlayerHealthChanged(currentHealth, maxHealth);
         }
 
-    }
+        //if (Input.GetKeyDown(KeyCode.DownArrow))
+        //{
+        //    Debug.Log("switching to walk animation");
+        //    anim.SetTrigger("isMoving");
+        //}
 
+    }
 
     public void LevelUpStats(int level)// might be better to just add a listener onto expHelper
     {
 
      //   rewardsWaiting += currentLevel;
-
         for (int i = 0; i < level; i++)
         {
             int luckyStat = UnityEngine.Random.Range(0, charachterStats.stats.Count);
