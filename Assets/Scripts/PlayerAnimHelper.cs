@@ -5,26 +5,29 @@ using UnityEngine;
 public class PlayerAnimHelper : MonoBehaviour {
 
     static Animator anim;
+    Vector3 previousPos;
 
 	// Use this for initialization
 	void Start ()
     {
-		    anim = GameObject.Find("brother").GetComponent<Animator>();
+            previousPos = GameObject.Find("Player").transform.position;
+            anim = GameObject.Find("brother").GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (previousPos != GameObject.Find("Player").transform.position)
         {
-            Debug.Log("switching to walk animation");
-            anim.SetTrigger("isMoving");
-
-            if (anim = null)
-            {
-                Debug.Log("cant find anim component");
-            }
-
+            anim.SetBool("isMoving", true);
+            previousPos = GameObject.Find("Player").transform.position;
+         //   Debug.Log("walking");
         }
+        else
+        {
+            anim.SetBool("isMoving", false);
+         //   Debug.Log("idle");
+        }
+
     }
 }
