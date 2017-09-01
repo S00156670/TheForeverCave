@@ -16,7 +16,7 @@ public class DialogueManager : MonoBehaviour {
     Button continueButton;
     Text dialogueText;
     Text nameText;
-    int dialogueIndex;
+    public int dialogueIndex;
 
  private void Awake()
     {

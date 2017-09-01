@@ -102,6 +102,22 @@ public class DungeonManager : MonoBehaviour {
         //                                                        (-sectionSize * 0.5f + sectionSize * (levelStart.y)));
         navAgent.Warp(port.destination);
         Debug.Log("portal traveled to " + port.destination.x + "," + port.destination.y + "," + port.destination.z);
+
+
+        DialogueManager.Instance.HUD.SetActive(true);
+
+        int remainingLines = DialogueManager.Instance.dialogueLines.Count - DialogueManager.Instance.dialogueIndex;
+
+        for (int i = 0; i < remainingLines; i++)
+        {
+            DialogueManager.Instance.ContinueDialogue();
+        }
+
+        //if (/*GameObject.Find("").*/GetComponent<DialogueManager>().HUD != null)
+        //{
+        //    /*GameObject.Find("").*/GetComponent<DialogueManager>().HUD.SetActive(true);
+        //}
+
     }
 
     void Update()
