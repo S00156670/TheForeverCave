@@ -122,6 +122,12 @@ public class DungeonManager : MonoBehaviour {
 
     void Update()
     {
+        // if esc is pressed, exit the game
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         //// check portals
         if (!inCave)
         {
