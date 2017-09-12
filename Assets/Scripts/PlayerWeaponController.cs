@@ -26,20 +26,20 @@ public class PlayerWeaponController : MonoBehaviour {
 
     void Update()
     {
-        // attack button combos
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            PerformAttack();
-        }
+        //// attack button combos
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //{
+        //    PerformAttack();
+        //}
 
         if (Input.GetMouseButton(1) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             PerformAttack();
 
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            PerformSpecialAttack();
-        }
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    PerformSpecialAttack();
+        //}
     } 
 
     //equip 

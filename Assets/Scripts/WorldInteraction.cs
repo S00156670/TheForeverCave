@@ -25,6 +25,27 @@ public class WorldInteraction : MonoBehaviour
                                             // check to make sure we are not clicking in UI
         if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             GetInteraction();
+
+        // ensure look direction for Rclick to assist aiming
+        if (Input.GetMouseButton(1) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            // get click point
+            Vector3 clickPoint = Vector3.zero;
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log("The ray hit at: " + hit.point);
+
+                clickPoint = hit.point;
+            }
+            // set looking at
+            playerAgent.updateRotation = false;
+            Vector3 lookDirection = new Vector3(clickPoint.x, playerAgent.transform.position.y, clickPoint.z);
+            playerAgent.transform.LookAt(lookDirection);
+            playerAgent.updateRotation = true;
+        }
+
     }
 
     void GetInteraction()
