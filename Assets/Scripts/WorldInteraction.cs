@@ -17,12 +17,7 @@ public class WorldInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // set up wasd option
-       // if (Input.GetKeyDown("W"))
-       // {
-       ////     playerAgent.destination = Player
-       // }
-                                            // check to make sure we are not clicking in UI
+        // check to make sure we are not clicking in UI
         if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             GetInteraction();
 

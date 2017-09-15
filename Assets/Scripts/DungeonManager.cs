@@ -54,10 +54,11 @@ public class DungeonManager : MonoBehaviour {
         player = GameObject.Find("Player").GetComponent<Player>();
 
         Debug.Log("Game starting with initial dialogue");
-        string[] speach = new string[3];
+        string[] speach = new string[4];
         speach[0] = "Oh no, the football rolled away!";
         speach[1] = "It went into that cave, ill have a look.";
         speach[2] = "Good thing I can: press i for inventory, Lclick is move, Rclick is attack. That will come in handy";
+        speach[3] = "I can now also try to use left and right arrows to rotate camera view";
         DialogueManager.Instance.AddNewDialogue(speach, "Player");
 
         //     ////// singelton
