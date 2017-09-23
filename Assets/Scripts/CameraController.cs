@@ -83,6 +83,8 @@ public class CameraController : MonoBehaviour {
 
         //}
 
+
+
         // update position
         transform.position = new Vector3
            (cameraTarget.position.x + RotOffset.x,
