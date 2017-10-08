@@ -51,10 +51,11 @@ public class CameraSpin : MonoBehaviour {
 
     private void GetNewY()
     {
-        // see the function of a circle as a line for this to make sense
+        // see the formula of function of a circle as a line
         float xSquared = transform.position.x * transform.position.x;
+        float newY = (float)Math.Round((double)Math.Sqrt((double)(49 - xSquared)));
 
-        float newY = (float)Math.Sqrt((double)(49 - xSquared));
+        //(float)Math.Sqrt((double)(49 - xSquared));
 
         if (Flipside)
         {
